@@ -2,7 +2,7 @@ import userIcon from '../assets/user-icon.png'
 import lockIcon from '../assets/lock-icon.png'
 import eyeIcon from '../assets/eye-icon.png'
 import hiddenEyeIcon from '../assets/hidden-eye-icon.png'
-import './authenticate.css'
+//import './authenticate.css'
 
 function Login() {
   return (

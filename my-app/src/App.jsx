@@ -1,7 +1,8 @@
-//import logo from './logo.svg';
-import SignUp from './components/SignUp.jsx';
-import LogIn from './components/Login.jsx';
-import './App.css';
+//import logo from './logo.svg'
+import SignUp from './components/SignUp.jsx'
+import LogIn from './components/Login.jsx'
+import SongCard from './components/Song Card.jsx'
+import './App.css'
 
 function App() {
   // return (
