@@ -11,8 +11,6 @@ import lockIcon from '../assets/lock-icon.png'
 import eyeIcon from '../assets/eye-icon.png'
 import hiddenEyeIcon from '../assets/hidden-eye-icon.png'
 import bckgroundImg from '../assets/main-background.gif'
-//import './authenticate.css'
-//import { GlobalStyles } from '@mui/material'
 
 const GlobalStyles = css
     `
@@ -21,7 +19,7 @@ const GlobalStyles = css
             margin: 0;
             box-sizing: border-box;
             text-transform: uppercase;
-        };
+        }
     `
 
 const Container = styled.div
@@ -152,7 +150,7 @@ const Icon = styled.button
     `    
         background-color: transparent;
         border: none;
-                
+
         &.left {
             position: absolute;
             top: 3px;

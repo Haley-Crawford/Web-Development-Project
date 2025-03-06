@@ -24,7 +24,7 @@ function App() {
   //   </div>
   // );
   return (
-    <SignUp/>
+    <SongCard/>
   )
 }
 
