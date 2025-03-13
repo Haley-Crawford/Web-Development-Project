@@ -254,4 +254,25 @@ function signUp() {
     </>
   )
 }
+
+// class PwdElem extends HTMLInputElement {
+//     constructor() {
+//         super()
+//         this.attachShadow({ mode: 'open' })
+//         this.shadowRoot.getElementById('password').addEventListener('input', this.handleClick.bind(this))
+//   }
+    
+// }
+
+// customElements.define('my-password', PwdElem)
+
+// const pswdElem = document.getElementById('password')
+// pswdElem.addEventListener('input', function(e) {
+//     console.log(e.target.value)
+// })
+// console.log(pswdElem)
+// console.log(pswdElem.value || 'empty')
+//pswdElem.addEventListener('input', () => console.log(this.value))
+// let checkPswdElem = document.getElementById('check-password')
+// checkPswdElem.addEventListener('input', passwordMatch)
 export default signUp
