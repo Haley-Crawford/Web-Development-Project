@@ -184,31 +184,6 @@ ol, li {
   animation-name: none;
 }
 
-.carousel__navigation {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  text-align: center;
-}
-
-.carousel__navigation-list,
-.carousel__navigation-item {
-  display: inline-block;
-}
-
-.carousel__navigation-button {
-  display: inline-block;
-  width: 1.5rem;
-  height: 1.5rem;
-  background-color: #333;
-  background-clip: content-box;
-  border: 0.25rem solid transparent;
-  border-radius: 50%;
-  font-size: 0;
-  transition: transform 0.1s;
-}
-
 .carousel::before,
 .carousel::after,
 .prev,
