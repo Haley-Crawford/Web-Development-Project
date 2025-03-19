@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Global, css } from '@emotion/react'
 import styled from '@emotion/styled'
 //import { createGlobalStyle } from 'styled-components'
@@ -179,7 +179,24 @@ const Submit = styled.div
         margin: 35px;
     `
 
-function signUp() {
+export default function SignUp() {
+
+    const [form, setForm] = useState({})
+
+    const handleInputChange = (e) => { 
+        const name = e.target.name
+        const value = e.target.value
+        setForm(values => ({...form, [name]: value}))
+        if (name === 'password') handlePasswordChange(value)
+        if (name == 'check_password') handleCheckPassword()
+        console.log(form)
+    }
+
+    const handlePasswordChange = (data) => console.log(data)
+    const handleCheckPassword = (data) => {
+        const password = document.getElementById('password')
+    }
+
   return (
     <>
         <Global styles={GlobalStyles} />
@@ -187,23 +204,23 @@ function signUp() {
             <Form>
                 <Title>CREATE ACCOUNT</Title>
                 <InputBlock> 
-                    <Label for='fname'>First name</Label>
+                    <Label htmlFor='fname'>First name</Label>
                     <Wrapper>
-                        <Input type='text' id='fname' name='fname' className='form-info'/>
+                        <Input type='text' id='fname' name='fname' className='form-info' value={form.fname || ''} onInput={handleInputChange}/>
                     </Wrapper>
                 </InputBlock>
 
                 <InputBlock>
-                    <Label for="lname">Last name</Label>
+                    <Label htmlFor="lname">Last name</Label>
                     <Wrapper>
-                        <Input type='text' id='lname' name='lname' className='form-info' />
+                        <Input type='text' id='lname' name='lname' className='form-info' value={form.lname || ''} onInput={handleInputChange}/>
                     </Wrapper>
                 </InputBlock>
 
                 <InputBlock>
-                    <Label for='username'>Username</Label>
+                    <Label htmlFor='username'>Username</Label>
                     <Wrapper>
-                        <Input type='text' id='username' name='username' className='form-info indent' />
+                        <Input type='text' id='username' name='username' className='form-info indent' value={form.username || ''} onInput={handleInputChange}/>
                         
                         <Icon className='icon left'>
                             <Img className='user-logo' src={userIcon} alt='User Icon' />
@@ -213,9 +230,9 @@ function signUp() {
                 </InputBlock>
 
                 <InputBlock>
-                    <Label for='password'>Password</Label>
+                    <Label htmlFor='password'>Password</Label>
                     <Wrapper>
-                        <Input type='password' id='password' name='password' className='form-info indent' />
+                        <Input type='password' id='password' name='password' className='form-info indent' value={form.password || ''} onInput={handleInputChange}/>
                         <Icon className='icon left'>
                             <Img className='lock-logo' src={lockIcon} alt='Lock Icon' />
                         </Icon>
@@ -226,9 +243,9 @@ function signUp() {
                 </InputBlock>
 
                 <InputBlock>
-                    <Label for='check-password'>Retype Your Password</Label>
+                    <Label htmlFor='check-password'>Retype Your Password</Label>
                     <Wrapper>
-                        <Input type='password' id='check-password' name='password' className='form-info indent' />
+                        <Input type='password' id='check-password' name='check_password' className='form-info indent' value={form.check_password || ''} onInput={handleInputChange}/>
                         <Icon className='icon left'>
                             <Img className='lock-logo' src={lockIcon} alt='Lock Icon' />
                         </Icon>
@@ -254,25 +271,3 @@ function signUp() {
     </>
   )
 }
-
-// class PwdElem extends HTMLInputElement {
-//     constructor() {
-//         super()
-//         this.attachShadow({ mode: 'open' })
-//         this.shadowRoot.getElementById('password').addEventListener('input', this.handleClick.bind(this))
-//   }
-    
-// }
-
-// customElements.define('my-password', PwdElem)
-
-// const pswdElem = document.getElementById('password')
-// pswdElem.addEventListener('input', function(e) {
-//     console.log(e.target.value)
-// })
-// console.log(pswdElem)
-// console.log(pswdElem.value || 'empty')
-//pswdElem.addEventListener('input', () => console.log(this.value))
-// let checkPswdElem = document.getElementById('check-password')
-// checkPswdElem.addEventListener('input', passwordMatch)
-export default signUp

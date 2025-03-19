@@ -87,7 +87,7 @@ function addImage(n) {
     return images 
 }
 
-const Func = () => {
+export default function() {
     const images = addImage(10)
     //Todo: scroll
     //Todo: arrow functions
@@ -103,5 +103,3 @@ const Func = () => {
         </>
     )
 }
-
-export default Func
