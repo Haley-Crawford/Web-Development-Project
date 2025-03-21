@@ -22,22 +22,25 @@ const my_styles = css
             width: 20%;
             display: flex;
             flex-direction: column;
+            justify-content: space-evenly;
         }
 
-        .image {
-            width: 50%;
+        .artist-img-div {
+            width: 40%;
             background-color: chartreuse;
             border-radius: 10px;
         }
 
+        .artist-img {
+            height: 100%;
+        }
+
         .artist-like {
-            height: 50%;
             background-color: red;
             border-radius: 10px;
         }
 
-        .follow {
-            height: 50%;
+        .artist-follow {
             background-color: lightblue;
             border-radius: 10px;
         }
@@ -51,7 +54,7 @@ const my_styles = css
             justify-content: center;
         }
 
-        .info {
+        .artist-info {
             width: 30%;
             background-color: violet;
             border-radius: 10px;
@@ -70,7 +73,9 @@ const my_styles = css
 
 function createImage() {
     return [
-        <div className='image'>Artist Image</div>
+        <div className='artist-img-div'>Artist Image
+            <img src='https://picsum.photos/150' alt='' className='artist-img'/>
+        </div>
     ]
 }
 
@@ -86,7 +91,7 @@ function like() {
 
 function follow() {
     return [
-        <div className='follow'>Click here to follow!
+        <div className='artist-follow'>Click here to follow!
             <button>
                 <Like />
             </button>
@@ -96,7 +101,7 @@ function follow() {
 
 function info() {
     return [
-        <div className='info'>
+        <div className='artist-info'>
             <p className='artist-name'>Artist Name</p>
             <p className='artist-info-text'>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>

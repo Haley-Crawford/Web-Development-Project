@@ -16,6 +16,11 @@ const my_styles = css
             background-color: lightgrey;
             border-radius: 10px;
             padding: 3px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            overflow: auto;
+            height: 80%;
         }
 
         .title {
@@ -32,34 +37,32 @@ const my_styles = css
         .song {
             display: flex;
             margin: 10px;
+            column-gap: 10px;
         }
 
         .img-div {
-            flex-basis: 10%;
             display: flex;
             justify-content: center;
+            width: 50px;
         } 
 
-        img {
+        .song-img {
             border-radius: 10px;
-        }
-            
-        .song-info {
-            flex-basis: 70%;
+            width: 100%;
         }
 
         .song-choices {
-            flex-basis: 20%;
+            margin-left: 5px;
             display: flex;
             justify-content: flex-end;
         }
 
-        button {
+        .choice-btn {
             background: transparent;
             border: none;
         }
 
-        button > * {
+        .choice-btn > * {
             height: 70%;
             width: 70%;
         }
@@ -68,7 +71,7 @@ const my_styles = css
 function generateSong(n) {
     let songs = []
 
-    for (let i = 0; i < n; i++) {
+    for (let _ = 0; _ < n; _++) {
         songs.push(
             <div className='song'>
                 <div className='img-div'>
@@ -79,10 +82,10 @@ function generateSong(n) {
                     <p className='album-info'>Album Name • Mar 2025</p>
                 </div>
                 <div className='song-choices'>
-                    <button className='song-like'>
+                    <button className='song-like choice-btn'>
                         <Like />
                     </button>
-                    <button className='song-favorite'>
+                    <button className='song-favorite choice-btn'>
                         <Heart />
                     </button>
                 </div>
@@ -95,13 +98,13 @@ function generateSong(n) {
 
 
 export default function SongsComponent() {
-    const songs = generateSong(3)
+    const songs = generateSong(12)
     return (
         <>
             <Global styles={my_styles} />
             <div className='song-container'>
-                <div className='song-list'>
-                    <p className='title'>Popular Songs</p>
+                <p className='title'>Popular Songs</p>
+                <div className='song-list'>    
                     {songs}
                 </div>
             </div>

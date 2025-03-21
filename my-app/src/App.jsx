@@ -5,7 +5,7 @@ import SongCard from './components/song card.jsx'
 import Carousel from './components/song carousel.jsx'
 import ArtistInfo from './components/artist info.jsx'
 import ArtistPage from './components/artist page.jsx'
-import SongsComponent from './components/songs.jsx'
+import SongsComponent from './components/artist page - songs.jsx'
 import './App.css'
 
 function App() {
