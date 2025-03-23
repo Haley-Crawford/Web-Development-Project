@@ -1,0 +1,118 @@
+body {
+    background-color: #000;
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.player-container {
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.album-info img {
+    width: 150px;
+    height: 150px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.album-info h2 {
+    margin: 5px 0;
+    font-size: 1.5rem;
+}
+
+.album-info p {
+    margin: 0;
+    font-size: 1rem;
+    color: #b3b3b3;
+}
+
+.time-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin: 10px 0;
+    color: #b3b3b3;
+}
+
+.progress-bar {
+    width: 100%;
+    appearance: none;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    outline: none;
+    transition: background 0.3s;
+}
+
+.progress-bar:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.progress-bar::-webkit-slider-thumb {
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+    transition: transform 0.1s;
+}
+
+.progress-bar::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.play-pause-btn {
+    padding: 8px 16px;
+    background-color: #1DB954;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.play-pause-btn:hover {
+    background-color: #14833b;
+}
+
+.play-pause-btn:active {
+    transform: scale(0.95);
+}
+
+.volume-control {
+    margin-left: 20px;
+}
+
+.volume-bar {
+    width: 100px;
+    appearance: none;
+    background-color: #555;
+    border-radius: 5px;
+    height: 4px;
+    cursor: pointer;
+}
+
+.volume-bar::-webkit-slider-thumb {
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+}
