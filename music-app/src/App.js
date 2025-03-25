@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useRef} from "react"
 import './App.css';
 import Soundbar from "./Soundbar.jsx"
 
@@ -7,6 +7,8 @@ const apiKey = process.env.REACT_APP_JAMENDO_KEY;
 function App() {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [audioPlaying, setAudioPlaying] = useState(false);
+  const audioRef = useRef(new Audio());
 
   const handleInputChange = (e) => {
 
@@ -34,18 +36,31 @@ function App() {
 
   };
 
+  const handleSongPlay = (trackUrl) => {
+
+    if(audioPlaying){
+
+      audioRef.current.pause();
+    };
+
+    audioRef.current.src = trackUrl;
+    audioRef.current.play();
+    setAudioPlaying(true);
+
+  };
+
 
   return (
     <div className="App">
       <div id="searchDiv">
-        <input id="searchBar" onChange={handleInputChange}></input>
+        <input id="searchBar" value={searchInput} onChange={handleInputChange}></input>
         <button onClick={handleSearchClick}>Search</button>
       </div>
       
       <div id="searchResults">
         {searchResults.map((track) => (
           <div key={track.name + "|" + track.artist_id}>
-            {track.name}
+            <span>{track.name} by {track.artist_name} <button onClick={handleSongPlay(`${track.audio}`)}>Play</button> <button>Queue</button></span>
           </div>
         ))}
       </div>
