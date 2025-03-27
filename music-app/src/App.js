@@ -60,7 +60,7 @@ function App() {
       <div id="searchResults">
         {searchResults.map((track) => (
           <div key={track.name + "|" + track.artist_id}>
-            <span>{track.name} by {track.artist_name} <button onClick={handleSongPlay(`${track.audio}`)}>Play</button> <button>Queue</button></span>
+            <span>{track.name} by {track.artist_name} <button onClick={() => handleSongPlay(`${track.audio}`)}>Play</button> <button>Queue</button></span>
           </div>
         ))}
       </div>
