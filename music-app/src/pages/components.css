@@ -1,0 +1,214 @@
+/*Nav Bar*/
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100vh;
+    background-color: #242424;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-left: 10px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 10px 0;
+    padding: 10px;
+    display: block;
+}
+
+.navbar a:hover {
+    background-color: #535bf2;
+    color: white;
+}
+
+.playlist {
+    position: relative;
+    margin: 10px 0;
+}
+
+.playlist-title {
+    color: white;
+    font-size: 1rem;
+    margin-left: 10px;
+    margin-right: 75px;
+    display: inline-block;
+}
+
+
+.dropdown-icon {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.dropdown-icon:focus {
+    outline: none;
+}
+
+.playlist-content {
+    display: flex;
+    flex-direction: column;
+    background-color: #242424; 
+    width: 100%; 
+    z-index: 1;
+    margin-top: 10px;
+}
+
+.playlist-content a {
+    color: white;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.playlist-content a:hover {
+    background-color: #535bf2; 
+    color: white;
+}
+
+button:focus,
+button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+}
+
+ /*Top Nav Bar*/
+
+.top-navbar {
+
+    position: fixed;
+    top: 0;
+    left: 210px; 
+    width: calc(100% - 250px);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-button {
+    background: #535bf2;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.nav-button:hover {
+    background: #747bff;
+}
+
+ /*Search Bar*/
+
+.search-bar-container {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    justify-content: center;
+    align-items: center;
+    z-index: 500; 
+
+  }
+
+  .main-content {
+    margin-left: 200px; 
+    padding: 50px;
+   
+  }
+  
+  .search-input {
+    padding: 8px;
+    width: 200px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .search-button {
+    padding: 8px 12px;
+    cursor: pointer;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+  }
+
+  /*Music Carousel*/
+
+.carousel-title{
+    font-size: 24px;
+    font-weight: bold;
+    min-width: 200px;
+    text-align: left;
+}
+
+.music-carousel {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+.slick-list {
+    overflow: visible;
+}
+  
+.carousel-item {
+    transform: scale(0.8);
+    transition: transform 0.3s ease-in-out;
+    opacity: 0.6;
+    position: relative;
+}
+
+.slick-center .carousel-item{
+    transform: scale(1);
+    z-index: 2;
+    opacity: 1;
+}
+
+.slick-slide:nth-child(3), .slick-slide:nth-child(4) {
+  z-index: 2; 
+}
+  
+.carousel-image {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+  
+.song-info {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
+}
+
+
