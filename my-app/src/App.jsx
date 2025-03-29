@@ -2,7 +2,7 @@
 import SignUp from './components/sign up.jsx'
 import LogIn from './components/Login.jsx'
 import SongCard from './components/Song Card.jsx'
-import Carousel from './components/song carousel.jsx'
+import Carousel from './components/Carousel.jsx'
 import ArtistInfo from './components/artist info.jsx'
 import ArtistPage from './components/artist page.jsx'
 import SongsComponent from './components/artist page - songs.jsx'
@@ -17,7 +17,7 @@ function App() {
       <div className="main-content">
         <TopNavBar />
         <div className="content-area">
-        <ArtistPage />
+        <ArtistPage/>
         </div>
       </div>
     </div>

@@ -1,3 +1,5 @@
+/*Nav Bar*/
+
 .navbar {
     position: fixed;
     top: 0;
@@ -80,9 +82,10 @@ button:focus,
 button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
 }
+
  /*Top Nav Bar*/
 
- .top-navbar {
+.top-navbar {
 
     position: fixed;
     top: 0;
@@ -156,3 +159,54 @@ button:focus-visible {
     border: none;
     border-radius: 4px;
   }
+
+  /*Music Carousel*/
+
+.carousel-title{
+    font-size: 24px;
+    font-weight: bold;
+    min-width: 200px;
+    text-align: left;
+}
+
+.music-carousel {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+.slick-list {
+    overflow: visible;
+}
+  
+.carousel-item {
+    transform: scale(0.8);
+    transition: transform 0.3s ease-in-out;
+    opacity: 0.6;
+    position: relative;
+}
+
+.slick-center .carousel-item{
+    transform: scale(1);
+    z-index: 2;
+    opacity: 1;
+}
+
+.slick-slide:nth-child(3), .slick-slide:nth-child(4) {
+  z-index: 2; 
+}
+  
+.carousel-image {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+  
+.song-info {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
+}
