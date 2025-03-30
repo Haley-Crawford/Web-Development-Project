@@ -1,8 +1,9 @@
 import React from 'react'
 import { Global, css } from '@emotion/react'
-import { Heart, Like } from './Icons'
+import { Heart, Like } from '../../Icons'
 import styled from '@emotion/styled'
 import { HeartBroken, PlusOne } from '@mui/icons-material'
+import styles from './Songs.module.css'
 
 const my_styles = css
     `
@@ -73,19 +74,19 @@ function generateSong(n) {
 
     for (let _ = 0; _ < n; _++) {
         songs.push(
-            <div className='song'>
-                <div className='img-div'>
-                    <img src='https://picsum.photos/35' alt='' className='song-img'/>
+            <div className={styles.song}>
+                <div className={styles.img_div}>
+                    <img src='https://picsum.photos/35' alt='' className={styles.song_img}/>
                 </div>
-                <div className='song-info'>
-                    <p className='song-name'>Song Name</p>
-                    <p className='album-info'>Album Name • Mar 2025</p>
+                <div className={styles.song_info}>
+                    <p className={styles.song_name}>Song Name</p>
+                    <p className={styles.album_info}>Album Name • {new Date().getMonth()} {new Date().getFullYear()}</p>
                 </div>
-                <div className='song-choices'>
-                    <button className='song-like choice-btn'>
+                <div className={styles.song_choices}>
+                    <button className={`${styles.song_like} ${styles.choice_btn}`}>
                         <Like />
                     </button>
-                    <button className='song-favorite choice-btn'>
+                    <button className={`${styles.song_favorite} ${styles.choice_btn}`}>
                         <Heart />
                     </button>
                 </div>
@@ -101,10 +102,10 @@ export default function SongsComponent() {
     const songs = generateSong(12)
     return (
         <>
-            <Global styles={my_styles} />
-            <div className='song-container'>
-                <p className='title'>Popular Songs</p>
-                <div className='song-list'>    
+            {/* <Global styles={my_styles} /> */}
+            <div className={styles.song_container}>
+                <p className={styles.title}>Popular Songs</p>
+                <div className={styles.song_list}>    
                     {songs}
                 </div>
             </div>

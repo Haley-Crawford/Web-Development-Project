@@ -1,8 +1,8 @@
 import React from 'react';
 import { Global, css } from '@emotion/react'
-import ArtistComponent from './artist info.jsx'
-import SongsComponent from './artist page - songs.jsx';
-import AlbumsComponent from './artist page - albums.jsx';
+
+import Songs from './Songs/Songs.jsx'
+import Albums from './Albums/Albums.jsx';
 
 const my_styles = css
     `
@@ -38,16 +38,11 @@ const my_styles = css
 
         .song-container {
             grid-area: songs;
-            background-color: #8cffa0;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            row-gap: 5px;
         }
 
         .album-container {
             grid-area: albums;
-             background-color:rgb(138, 72, 183);
+            
         }
 
         .controls {
@@ -63,9 +58,10 @@ export default function ArtistPage() {
             <div className='container'>
                 <nav>NavBar</nav>
                 <div className='tools'>Tools Div</div>
-                <ArtistComponent/>
-                <SongsComponent />
-                <AlbumsComponent />
+                {/* <ArtistComponent/> */}
+                <div className='artist-container'></div>
+                <Songs  className='song-container'/>
+                <Albums />
                 {/* <div className='albums'>Albums Div</div> */}
                 <div className='controls'>Controls Div</div>
             </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import { Global, css } from '@emotion/react'
 import styled from '@emotion/styled'
 
-import {GlobalStyles, Container, Form, Title, InputBlock, Wrapper, Label, Input, Icon, Img, Submit} from './authentication.jsx'
+import {GlobalStyles, Container, Form, Title, InputBlock, Wrapper, Label, Input, Icon, Img, Submit} from '../authentication.jsx'
 
 import bckgroundImg from '../assets/main-background.gif'
 import userIcon from '../assets/user-icon.png'

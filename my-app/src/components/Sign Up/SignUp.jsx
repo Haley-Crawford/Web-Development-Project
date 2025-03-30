@@ -3,6 +3,7 @@ import { Global, css } from '@emotion/react'
 import styled from '@emotion/styled'
 //import { createGlobalStyle } from 'styled-components'
 import { Person, Lock, Visibility, VisibilityOff } from '@mui/icons-material'
+import styles from './SignUp.module.css'
 
 
 
