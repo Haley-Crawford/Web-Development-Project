@@ -8,7 +8,9 @@ function App() {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [audioPlaying, setAudioPlaying] = useState(false);
+  const [trackObject, setTrack] = useState({});
   const audioRef = useRef(new Audio());
+  const [trackQueue, setTrackQueue] = useState([]);
 
   const handleInputChange = (e) => {
 
@@ -36,16 +38,32 @@ function App() {
 
   };
 
-  const handleSongPlay = (trackUrl) => {
+  const handleSongPlay = (trackOb) => {
+
+    setTrack(trackOb)
 
     if(audioPlaying){
 
       audioRef.current.pause();
     };
 
-    audioRef.current.src = trackUrl;
+    audioRef.current.src = trackOb.audio;
     audioRef.current.play();
     setAudioPlaying(true);
+
+  };
+
+  const handleQueue = (trackOb) => {
+
+    if(trackQueue.length < 10){
+
+      setTrackQueue(prevQueue => [...prevQueue, trackOb]);
+      console.log(`new queue `)
+
+    }else {
+
+      console.log("Queue too big");
+    }
 
   };
 
@@ -60,11 +78,11 @@ function App() {
       <div id="searchResults">
         {searchResults.map((track) => (
           <div key={track.name + "|" + track.artist_id}>
-            <span>{track.name} by {track.artist_name} <button onClick={() => handleSongPlay(`${track.audio}`)}>Play</button> <button>Queue</button></span>
+            <span>{track.name} by {track.artist_name} <button onClick={() => handleSongPlay(track)}>Play</button> <button>Queue</button></span>
           </div>
         ))}
       </div>
-      <Soundbar></Soundbar>
+      <Soundbar audioReference={audioRef} isPlaying={audioPlaying} setIsPlaying={setAudioPlaying} audioTrack={trackObject}></Soundbar>
     </div>
   );
 }
