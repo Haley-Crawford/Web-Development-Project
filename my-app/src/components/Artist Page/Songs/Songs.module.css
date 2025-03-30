@@ -1,0 +1,68 @@
+*, *:before, *:after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.song_container {
+    background-color: #8cffa0;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+.song_list {
+    background-color: lightgrey;
+    border-radius: 10px;
+    padding: 3px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    overflow: auto;
+    height: 80%;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 2rem;
+    margin-left: 10px;
+}
+
+.song_name {
+    font-weight: 500;
+    font-size: 1.3rem;
+}
+
+.song {
+    display: flex;
+    margin: 10px;
+    column-gap: 10px;
+}
+
+.img_div {
+    display: flex;
+    justify-content: center;
+    width: 50px;
+} 
+
+.song_img {
+    border-radius: 10px;
+    width: 100%;
+}
+
+.song_choices {
+    margin-left: 5px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.choice_btn {
+    background: transparent;
+    border: none;
+}
+
+.choice_btn > * {
+    height: 70%;
+    width: 70%;
+}
