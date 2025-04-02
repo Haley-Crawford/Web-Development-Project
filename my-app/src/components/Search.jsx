@@ -1,16 +1,12 @@
-import React, {useState, useRef} from "react"
-import './App.css';
+import React, {useState} from "react"
 import Soundbar from "./Soundbar.jsx"
+
 
 const apiKey = process.env.REACT_APP_JAMENDO_KEY;
 
-function Search() {
+function Search({audioRef, trackQueue, setTrackQueue, audioPlaying, setAudioPlaying, setTrack}) {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [audioPlaying, setAudioPlaying] = useState(false);
-  const [trackObject, setTrack] = useState({});
-  const audioRef = useRef(new Audio());
-  const [trackQueue, setTrackQueue] = useState([]);
 
   const handleInputChange = (e) => {
 
@@ -19,13 +15,15 @@ function Search() {
   };
 
   const handleSearchClick = async (e) => {
+    console.log(`searching for ${searchInput}`)
     const url = `https://api.jamendo.com/v3.0/tracks/?client_id=${apiKey}&format=jsonpretty&limit=5&search=${encodeURIComponent(searchInput)}`;
     try{
-
+      
       const response = await fetch(url);
       if(!response.ok){
         throw new Error(`API request failed with status ${response.status}`);
       };
+
 
       const data = await response.json();
       console.log(data.results);
@@ -40,7 +38,13 @@ function Search() {
 
   const handleSongPlay = (trackOb) => {
 
-    setTrack(trackOb)
+    setTrack(trackOb);
+    setTrackQueue(prevQueue => {
+      const newQueue = [...prevQueue];
+      newQueue[0] = trackOb;
+
+      return newQueue;
+    })
 
     if(audioPlaying){
 
@@ -54,11 +58,15 @@ function Search() {
   };
 
   const handleQueue = (trackOb) => {
+    console.log(`queue: ${trackQueue.map(track => {return track.name})}`)
 
     if(trackQueue.length < 10){
 
-      setTrackQueue(prevQueue => [...prevQueue, trackOb]);
-      console.log(`new queue `)
+      setTrackQueue(prevQueue => {
+        const newQueue = [...prevQueue];
+        newQueue.push(trackOb);
+      });
+      console.log(`new queue ${trackQueue}`)
 
     }else {
 
@@ -69,7 +77,7 @@ function Search() {
 
 
   return (
-    <div className="App">
+    <>
       <div id="searchDiv">
         <input id="searchBar" value={searchInput} onChange={handleInputChange}></input>
         <button onClick={handleSearchClick}>Search</button>
@@ -78,13 +86,12 @@ function Search() {
       <div id="searchResults">
         {searchResults.map((track) => (
           <div key={track.name + "|" + track.artist_id}>
-            <span>{track.name} by {track.artist_name} <button onClick={() => handleSongPlay(track)}>Play</button> <button>Queue</button></span>
+            <span>{track.name} by {track.artist_name} <button onClick={() => handleSongPlay(track)}>Play</button> <button onClick={() => handleQueue(track)}>Queue</button></span>
           </div>
         ))}
       </div>
-      <Soundbar audioReference={audioRef} isPlaying={audioPlaying} setIsPlaying={setAudioPlaying} audioTrack={trackObject}></Soundbar>
-    </div>
+    </>
   );
 }
 
-export default App;
+export default Search;
