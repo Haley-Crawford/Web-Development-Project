@@ -1,0 +1,86 @@
+.album_container {
+    background-color: #2e302f;
+    padding: 5px 15px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    border-radius: 10px;
+    height: 45%;
+    max-width: 700px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 2rem;
+    text-shadow: 2px 2px 2px goldenrod, -2px 1px 3px black;
+    background-color: transparent;
+}
+/*
+.album_list {
+    border-radius: 10px;
+    padding: 3px;
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    max-width: 650px;
+    overflow: hidden;
+}
+
+.album_img {
+    width: 95px;
+    height: 95px;
+    border-radius: 10px;
+} */
+
+.carousel_container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin: 0.5rem 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .carousel {
+    display: flex;
+    align-items: center;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .songCard {
+    min-width: 100px;
+    margin: 0 20px;
+    transition: all 1.5s ease-in-out;
+    position: relative;
+    filter: brightness(0.5);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .songCard.active {
+    transform: scale(1.05);
+    filter: brightness(1);
+  }
+  
+  .songImage {
+    width: 150px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: all 3s ease-in-out;
+  }
+
+  .songInfo {
+    margin-top: 1rem;
+    transition: all 3s ease-in-out;
+  }
+  
+  .songTitle {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    color: white;
+  }

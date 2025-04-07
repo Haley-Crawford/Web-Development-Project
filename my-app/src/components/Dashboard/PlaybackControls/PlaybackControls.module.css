@@ -1,0 +1,145 @@
+.container {
+  height: 5.5rem;
+  background-color: rgb(23, 23, 23);
+  border-top: 1px solid rgb(38, 38, 38);
+  padding: 0 1rem;
+}
+
+.content {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nowPlaying {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 25%;
+}
+
+.albumArt {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0.25rem;
+  object-fit: cover;
+}
+
+.songInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.songTitle {
+  font-weight: 500;
+}
+
+.artistName {
+  font-size: 0.875rem;
+  color: rgb(156, 163, 175);
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.controlButton {
+  color: rgb(156, 163, 175);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.controlButton:hover {
+  color: white;
+}
+
+.controlIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.playButton {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+}
+
+.playButton:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s;
+}
+
+.playIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: black;
+}
+
+.playIconOffset {
+  margin-left: 0.15rem;
+}
+
+.progressBar {
+  width: 100%;
+  max-width: 36rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: rgb(156, 163, 175);
+}
+
+.progress {
+  flex: 1;
+  height: 0.25rem;
+  background-color: rgb(64, 64, 64);
+  border-radius: 9999px;
+}
+
+.progressFill {
+  width: 33.333333%;
+  height: 100%;
+  background-color: #FFD700;
+  border-radius: 9999px;
+}
+
+.volume {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 25%;
+  justify-content: center;
+}
+
+.volumeBar {
+  width: 6rem;
+  height: 0.25rem;
+  background-color: rgb(64, 64, 64);
+  border-radius: 9999px;
+}
+
+.volumeFill {
+  width: 66.666667%;
+  height: 100%;
+  background-color: white;
+  border-radius: 9999px;
+}

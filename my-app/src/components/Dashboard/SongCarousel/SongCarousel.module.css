@@ -1,0 +1,57 @@
+.carouselContainer {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 1rem 0;
+  padding: 1rem 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  transition: transform 0.5s ease-in-out;
+  padding: 0 1rem;
+}
+
+.songCard {
+  min-width: 200px;
+  margin: 0 20px;
+  transition: all 0.5s ease-in-out;
+  position: relative;
+  filter: brightness(0.5);
+}
+
+.songCard.active {
+  transform: scale(1.05);
+  filter: brightness(1);
+}
+
+.songImage {
+  width: 200px;
+  height: 200px;
+  border-radius: 1rem;
+  object-fit: cover;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.5s ease-in-out;
+}
+
+.songInfo {
+  margin-top: 1rem;
+  text-align: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.songTitle {
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin-bottom: 0.25rem;
+  color: white;
+}
+
+.artistName {
+  color: rgb(156, 163, 175);
+  font-size: 0.875rem;
+}

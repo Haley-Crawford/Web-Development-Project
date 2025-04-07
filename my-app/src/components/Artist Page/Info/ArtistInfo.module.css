@@ -1,0 +1,72 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    color: white;
+    font-size: large;
+    font-weight: 500;
+}
+
+.wrapper {
+    display: flex;
+    gap: 20px;
+    border-radius: 10px;
+}
+
+.choices {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.choices p {
+    text-shadow: 2px 2px goldenrod;
+}
+
+.img {
+    height: 100%;
+    border-radius: 10px;
+}
+
+.like {
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.follow {
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn {
+    height: 35px;
+    width: 35px;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    color: white;
+}
+
+.info {
+    border-radius: 10px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+
