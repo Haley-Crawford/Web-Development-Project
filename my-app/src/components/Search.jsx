@@ -20,13 +20,14 @@ function Search({audioRef, trackQueue, setTrackQueue, audioPlaying, setAudioPlay
     try{
       
       const response = await fetch(url);
+      
       if(!response.ok){
         throw new Error(`API request failed with status ${response.status}`);
       };
 
 
       const data = await response.json();
-      console.log(data.results);
+      console.log(data.results)
       setSearchResults(data.results);
       
 
@@ -43,8 +44,11 @@ function Search({audioRef, trackQueue, setTrackQueue, audioPlaying, setAudioPlay
       const newQueue = [...prevQueue];
       newQueue[0] = trackOb;
 
+      console.log("new queue " + newQueue.map((track, index) => {return track.name}))
+
       return newQueue;
     })
+
 
     if(audioPlaying){
 
@@ -58,19 +62,18 @@ function Search({audioRef, trackQueue, setTrackQueue, audioPlaying, setAudioPlay
   };
 
   const handleQueue = (trackOb) => {
-    console.log(`queue: ${trackQueue.map(track => {return track.name})}`)
+    
+    if(trackQueue.length < 11){
 
-    if(trackQueue.length < 10){
-
-      setTrackQueue(prevQueue => {
-        const newQueue = [...prevQueue];
-        newQueue.push(trackOb);
-      });
-      console.log(`new queue ${trackQueue}`)
+      setTrackQueue((prevQueue) => {
+        const newQueue = [...prevQueue, trackOb];
+        console.log(newQueue.map((track, index) => {return track.name}));
+        return newQueue;
+      })
+      
 
     }else {
-
-      console.log("Queue too big");
+      console.log("queue is too big")
     }
 
   };

@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useRef} from "react";
 import "./Soundbar.css";
 
-const Soundbar = ( {audioReference, isPlaying, setIsPlaying, audioTrack, songQueue} ) => {
+const Soundbar = ( {audioReference, isPlaying, setIsPlaying, audioTrack, setTrack, songQueue, setTrackQueue} ) => {
 
     const [progress, setProgress] = useState(0);
     const [isSeeking, setIsSeeking] = useState(false);
@@ -63,15 +63,44 @@ const Soundbar = ( {audioReference, isPlaying, setIsPlaying, audioTrack, songQue
 
     };
 
+    const handleSkip = () => {
+
+        if(songQueue.length > 1){
+
+            if(isPlaying){
+
+                audioReference.current.pause()
+                setIsPlaying(false)
+            }
+
+            const nextSong = songQueue[1]
+            setTrack(nextSong)
+            setTrackQueue((prevQueue) => {return prevQueue.splice(1)})
+            audioReference.current.src = nextSong.audio
+            audioReference.current.play()
+            console.log(`new song: ${nextSong.name} with new queue ${songQueue.map((item) => {return item.name}).splice(1)}`)
+
+        }else {
+
+            console.log("no songs left")
+            audioReference.current.pause()
+            setIsPlaying(false)
+            setTrack({})
+            setTrackQueue([])
+            
+        }
+
+    };
+
     return (<>
         <div id="musicPlayer">
             <div id="playerControls">
                 <button id="goBackButton">Go Back</button>
                 <button id="playPauseButton" onClick={handlePlayPause}>{isPlaying ? "Pause": "Play"}</button>
-                <button id="skipButton">Skip</button>
+                <button id="skipButton" onClick={handleSkip} >Skip</button>
             </div>
             <div id="songInfo">
-                <span id="currentSongName">{isPlaying? `${audioTrack.name}` : "No song playing"}</span> - <span id="currentArtistName"></span>
+                <span id="currentSongName">{audioTrack.name? `${audioTrack.name}` : "No song playing"}</span> - <span id="currentArtistName"></span>
             </div>
             <input ref={progressBarRef} type="range" value={progress} onClick={handleSeek} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp} />
         </div>
