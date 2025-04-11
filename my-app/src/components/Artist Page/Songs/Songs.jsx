@@ -1,8 +1,5 @@
 import React from 'react'
-import { Global, css } from '@emotion/react'
 import { FaRegHeart as Heart, FaPlusCircle as Like } from 'react-icons/fa'
-import styled from '@emotion/styled'
-import { HeartBroken, PlusOne } from '@mui/icons-material'
 import styles from './Songs.module.css'
 
 

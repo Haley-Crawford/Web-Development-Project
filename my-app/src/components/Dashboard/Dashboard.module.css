@@ -22,9 +22,3 @@
     flex-direction: column;
     min-height: 0; /* Ensures flex items can shrink below content size */
   }
-  
-  .welcomeText {
-    font-size: 1.875rem;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
-  }

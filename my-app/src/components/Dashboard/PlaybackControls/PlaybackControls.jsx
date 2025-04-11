@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Shuffle, SkipBack, Play, Pause, SkipForward, Repeat, ListMusic, Volume2 } from 'lucide-react';
 import styles from './PlaybackControls.module.css';
 
@@ -11,6 +11,7 @@ import styles from './PlaybackControls.module.css';
 // }
 
 export function PlaybackControls({ 
+  audioRef,
   isPlaying, 
   setIsPlaying, 
   currentSongIndex, 
@@ -23,6 +24,21 @@ export function PlaybackControls({
 
   const handleNext = () => {
     setCurrentSongIndex(prev => (prev === totalSongs - 1 ? 0 : prev + 1));
+  };
+
+  const handlePlayPause = () => {
+
+    if(isPlaying){
+
+        audioRef.current.pause();
+        setIsPlaying(false);
+
+    }else {
+
+        audioRef.current.play();
+        setIsPlaying(true);
+    };
+
   };
 
   return (
@@ -52,7 +68,8 @@ export function PlaybackControls({
             </button>
             <button 
               className={styles.playButton}
-              onClick={() => setIsPlaying(!isPlaying)}
+              onclick={handlePlayPause}
+              // onClick={() => setIsPlaying(!isPlaying)}
             >
               {isPlaying ? (
                 <Pause className={styles.playIcon} />

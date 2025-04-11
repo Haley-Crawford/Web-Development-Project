@@ -5,7 +5,7 @@ import { PlaybackControls } from './PlaybackControls/PlaybackControls';
 import { SongCarousel } from './SongCarousel/SongCarousel';
 import styles from './Dashboard.module.css';
 
-function Dashboard() {
+function Dashboard(props) {
   const [showDropdown, setShowDropdown] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);

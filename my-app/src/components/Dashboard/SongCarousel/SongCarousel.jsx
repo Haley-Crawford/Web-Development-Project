@@ -47,8 +47,8 @@ export const originalSongs = [
   }
 ];
 
-export function SongCarousel(){//{ currentIndex, setCurrentIndex, isPlaying }) {
-  const [currentIndex, setCurrentIndex] = useState(0)
+export function SongCarousel({ currentIndex, setCurrentIndex }){//{ currentIndex, setCurrentIndex, isPlaying }) {
+  //const [currentIndex, setCurrentIndex] = useState(0)
   const [displayedSongs, setDisplayedSongs] = useState([]);
   const timeoutRef = useRef(null);
   const transitionRef = useRef(true);
@@ -89,7 +89,7 @@ export function SongCarousel(){//{ currentIndex, setCurrentIndex, isPlaying }) {
     return () => {
       resetTimeout();
     };
-  }, [currentIndex, displayedSongs.length]); //isPlaying, setCurrentIndex
+  }, [currentIndex, setCurrentIndex, displayedSongs.length]); //isPlaying, setCurrentIndex
 
   const getCardClassName = (index) => {
     let className = styles.songCard;
@@ -103,6 +103,7 @@ export function SongCarousel(){//{ currentIndex, setCurrentIndex, isPlaying }) {
 
   return (
     <div className={styles.carouselContainer}>
+      <h1 className={styles.welcomeText}>Welcome Back</h1>
       <div 
         className={styles.carousel}
         style={{

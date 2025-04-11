@@ -1,6 +1,3 @@
-
-//import { Global, css } from '@emotion/react'
-
 import styles from './ArtistPage.module.css'
 
 import { Songs } from './Songs/Songs.jsx'

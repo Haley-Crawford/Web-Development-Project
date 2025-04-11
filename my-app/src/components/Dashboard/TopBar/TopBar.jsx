@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import { Search, User, ChevronDown, Settings, LogOut } from 'lucide-react';
 import styles from './TopBar.module.css';
 

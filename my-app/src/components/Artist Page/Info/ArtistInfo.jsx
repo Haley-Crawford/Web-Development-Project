@@ -1,7 +1,5 @@
 import React from 'react'
-import { IconContext } from "react-icons";
-import { Global, css } from '@emotion/react'
-import styled from '@emotion/styled'
+
 //import { Heart, Like } from '../../Icons'
 import { FaHeart } from 'react-icons/fa'
 import styles from './ArtistInfo.module.css'
