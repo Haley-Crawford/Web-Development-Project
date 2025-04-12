@@ -19,39 +19,20 @@ function ArtistPage() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentSongIndex, setCurrentSongIndex] = useState(0);
 
-    return (
-        <div className={styles.app}>
-            <Sidebar />
-
-            <div className={styles.mainContent}>
-                <TopBar 
-                    showDropdown={showDropdown} 
-                    setShowDropdown={setShowDropdown} 
-                />
-                
-                <main className={styles.contentArea}>
-                    <ArtistInfo />
-                    <div className={styles.artist_content} >
-                        <Songs />
-                        <Albums />
-                    </div>
-                    {/* <h1 className={styles.welcomeText}>Welcome Back</h1>
-                    <SongCarousel 
-                    currentIndex={currentSongIndex}
-                    setCurrentIndex={setCurrentSongIndex}
-                    isPlaying={isPlaying}
-                    /> */}
-                </main>
-
-                <PlaybackControls 
-                    isPlaying={isPlaying} 
-                    setIsPlaying={setIsPlaying}
-                    currentSongIndex={currentSongIndex}
-                    setCurrentSongIndex={setCurrentSongIndex}
-                    totalSongs={5}
-                />
+    return (                
+        <main className={styles.contentArea}>
+            <ArtistInfo />
+            <div className={styles.artist_content} >
+                <Songs />
+                <Albums />
             </div>
-        </div>
+            {/* <h1 className={styles.welcomeText}>Welcome Back</h1>
+            <SongCarousel 
+            currentIndex={currentSongIndex}
+            setCurrentIndex={setCurrentSongIndex}
+            isPlaying={isPlaying}
+            /> */}
+        </main>
     )
 }
 
