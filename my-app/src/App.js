@@ -5,6 +5,7 @@ import { Sidebar } from './components/Sidebar/Sidebar';
 import { TopBar } from './components/Dashboard/TopBar/TopBar'
 import { SongCarousel } from './components/Dashboard/SongCarousel/SongCarousel'
 import { PlaybackControls } from './components/Dashboard/PlaybackControls/PlaybackControls'
+import ArtistPage from './components/Artist Page/ArtistPage'
 
 function App() {
 
@@ -32,6 +33,9 @@ function App() {
                   currentIndex={currentSongIndex}
                   setCurrentIndex={setCurrentSongIndex}
                 />
+              }/>
+              <Route path='/artist' element={
+                <ArtistPage />
               }/>
             </Routes>
           </ main>

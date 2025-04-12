@@ -56,19 +56,28 @@
 }
 
 .controlButton {
-  color: rgb(156, 163, 175);
   background: none;
   border: none;
   cursor: pointer;
 }
 
-.controlButton:hover {
-  color: white;
-}
-
 .controlIcon {
+  color: rgb(156, 163, 175);
   width: 1.25rem;
   height: 1.25rem;
+  fill: transparent;
+  transition: fill 0.5s ease;
+  transition: color 0.5s ease;
+}
+
+.controlIcon:hover {
+  color: white;
+  fill: transparent;
+}
+
+.like {
+  color: goldenrod !important;
+  fill: goldenrod !important;
 }
 
 .playButton {

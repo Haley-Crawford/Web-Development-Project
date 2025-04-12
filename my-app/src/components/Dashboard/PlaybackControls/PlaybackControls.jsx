@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Shuffle, SkipBack, Play, Pause, SkipForward, Repeat, ListMusic, Volume2 } from 'lucide-react';
+import { Shuffle, SkipBack, Play, Pause, SkipForward, Repeat, ListMusic, Volume2, Heart } from 'lucide-react';
 import styles from './PlaybackControls.module.css';
 
 // interface PlaybackControlsProps {
@@ -18,6 +18,9 @@ export function PlaybackControls({
   setCurrentSongIndex,
   totalSongs 
 }) {
+
+  const [isLiked, setIsLiked] = useState(false)
+
   const handlePrevious = () => {
     setCurrentSongIndex(prev => (prev === 0 ? totalSongs - 1 : prev - 1));
   };
@@ -40,6 +43,10 @@ export function PlaybackControls({
     };
 
   };
+
+  const handleLike = () => {
+    setIsLiked(prev => !prev)
+  }
 
   return (
     <div className={styles.container}>
@@ -68,7 +75,7 @@ export function PlaybackControls({
             </button>
             <button 
               className={styles.playButton}
-              onclick={handlePlayPause}
+              onClick={handlePlayPause}
               // onClick={() => setIsPlaying(!isPlaying)}
             >
               {isPlaying ? (
@@ -82,6 +89,9 @@ export function PlaybackControls({
             </button>
             <button className={styles.controlButton}>
               <Repeat className={styles.controlIcon} />
+            </button>
+            <button className={styles.controlButton} onClick={handleLike}>
+              <Heart className={`${styles.controlIcon} ${isLiked ? styles.like : ''}`} />
             </button>
           </div>
           <div className={styles.progressBar}>

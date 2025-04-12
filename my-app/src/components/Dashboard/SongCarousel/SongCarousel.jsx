@@ -1,19 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './SongCarousel.module.css';
 
-// interface Song {
-//   id: number;
-//   title: string;
-//   artist: string;
-//   imageUrl: string;
-// }
-
-// interface SongCarouselProps {
-//   currentIndex: number;
-//   setCurrentIndex: (index: number) => void;
-//   isPlaying: boolean;
-// }
-
 export const originalSongs = [
   {
     id: 1,
@@ -47,7 +34,7 @@ export const originalSongs = [
   }
 ];
 
-export function SongCarousel({ currentIndex, setCurrentIndex }){//{ currentIndex, setCurrentIndex, isPlaying }) {
+export function SongCarousel({ currentIndex, setCurrentIndex }) {
   //const [currentIndex, setCurrentIndex] = useState(0)
   const [displayedSongs, setDisplayedSongs] = useState([]);
   const timeoutRef = useRef(null);
@@ -69,12 +56,12 @@ export function SongCarousel({ currentIndex, setCurrentIndex }){//{ currentIndex
   };
 
   useEffect(() => {
-    if (!displayedSongs.length) return; //|| !isPlaying
+    if (!displayedSongs.length) return;
     
     resetTimeout();
     
     timeoutRef.current = window.setTimeout(() => {
-      if (currentIndex >= originalSongs.length - 1) {
+      if (currentIndex >= displayedSongs.length - 1) {
         // Reset to the beginning without animation
         transitionRef.current = false;
         setCurrentIndex(0);
