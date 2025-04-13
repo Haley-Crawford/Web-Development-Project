@@ -28,13 +28,13 @@ function App() {
           />
           <main className='contentArea'>
             <Routes>
-              <Route path='/' element={
+              <Route path='/artist' element={
                 <SongCarousel 
                   currentIndex={currentSongIndex}
                   setCurrentIndex={setCurrentSongIndex}
                 />
               }/>
-              <Route path='/artist' element={
+              <Route path='/' element={
                 <ArtistPage />
               }/>
             </Routes>

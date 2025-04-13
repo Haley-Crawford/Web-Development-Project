@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: large;
+    font-weight: 500;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: large;
+    font-weight: 500;
+    width: 100%;
+    height: 25%;
+    overflow: hidden;
+}

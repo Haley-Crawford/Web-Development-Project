@@ -8,8 +8,9 @@ import { Sidebar } from '../Sidebar/Sidebar.jsx';
 import { PlaybackControls } from '../Dashboard/PlaybackControls/PlaybackControls.jsx';
 import { SongCarousel } from '../Dashboard/SongCarousel/SongCarousel.jsx';
 import { TopBar } from '../Dashboard/TopBar/TopBar.jsx';
-import { ArtistInfo } from './Info/ArtistInfo.jsx'
+import { Artist } from './Artist/Artist.jsx'
 import React, { useState } from 'react';
+import { SongCard } from './Song Card/SongCard.jsx';
 
 
 
@@ -21,17 +22,12 @@ function ArtistPage() {
 
     return (                
         <main className={styles.contentArea}>
-            <ArtistInfo />
-            <div className={styles.artist_content} >
-                <Songs />
-                <Albums />
-            </div>
-            {/* <h1 className={styles.welcomeText}>Welcome Back</h1>
-            <SongCarousel 
-            currentIndex={currentSongIndex}
-            setCurrentIndex={setCurrentSongIndex}
-            isPlaying={isPlaying}
-            /> */}
+            <section className={styles.artist}>
+                <Artist />
+            </section>
+            <section className={styles.song_card}>
+                <SongCard />
+            </section>
         </main>
     )
 }

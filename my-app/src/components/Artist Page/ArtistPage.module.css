@@ -1,9 +1,15 @@
 .contentArea {
   flex: 1;
-  overflow: hidden;
+  overflow: scroll;
   display: flex;
-  justify-content: space-around;
   min-height: 0; /* Ensures flex items can shrink below content size */
+  gap: 10px;
+}
+
+.artist {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
 }
 
 .artist_content {

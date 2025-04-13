@@ -1,0 +1,16 @@
+.profile {
+    font-size: large;
+    font-weight: 500;
+    position: relative;
+}
+
+.img {
+    width: 100%;
+}
+
+.name {
+    position: absolute;
+    top: 275px;
+    font-size: 4rem;
+    color: black;
+}
