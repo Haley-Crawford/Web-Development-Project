@@ -52,7 +52,7 @@ function Search({searchResults, setSearchResults}) {
 
   return (
       <div id="searchResults">
-        {searchResults ? <Songs songs={searchResults} setSongs={setSearchResults} />: <div style={{color:"white"}}>loading...</div>}
+        {searchResults ? <Songs songs={searchResults} setSongs={setSearchResults} style={{height: "100%"}}/>: <div style={{color:"white"}}>loading...</div>}
       </div>
   );
 }

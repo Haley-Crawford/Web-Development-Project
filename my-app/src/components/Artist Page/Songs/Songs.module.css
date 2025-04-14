@@ -21,6 +21,7 @@
     flex-direction: column;
     overflow: hidden;
     gap: 3px 10px;
+    height: 280px;
 }
 
 .song {
