@@ -23,14 +23,16 @@ export function Songs({ songs, setSongs }) {
             <h2 className={styles.title}>Popular Songs</h2>
             <ol className={styles.song_list}>    
                 {songs.map((song) => (
+                {songs.map((song) => (
                     <li className={styles.song} key={song.id}>
                         <div className={styles.img_div}>
                             <img src='https://picsum.photos/40' alt='' className={styles.song_img}/>
                         </div>
                         <div className={styles.song_info}>
-                            <p className={styles.song_name}>Song Name</p>
-                            <p className={styles.album_info}>Album Name • {new Date().getMonth()} {new Date().getFullYear()}</p>
+                            <p className={styles.song_name}>{song.title}</p>
+                            <p className={styles.album_info}>{song.album} • {new Date().getMonth()} {song.release}</p>
                         </div>
+                        <button className={styles.btn} onClick={() => handleLike(song.id)}>
                         <button className={styles.btn} onClick={() => handleLike(song.id)}>
                             <Heart className={`${styles.icon} ${song.isLiked ? styles.like : ''}`}/>
                         </button>
