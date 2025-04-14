@@ -1,12 +1,10 @@
 import React, {useState, useRef} from "react"
-import './App.css';
-import Soundbar from "./Soundbar.jsx"
+import { Songs } from './Artist Page/Songs/Songs'
 
 const apiKey = process.env.REACT_APP_JAMENDO_KEY;
 
-function Search() {
+function Search({searchResults, setSearchResults}) {
   const [searchInput, setSearchInput] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [trackObject, setTrack] = useState({});
   const audioRef = useRef(new Audio());
@@ -19,23 +17,7 @@ function Search() {
   };
 
   const handleSearchClick = async (e) => {
-    const url = `https://api.jamendo.com/v3.0/tracks/?client_id=${apiKey}&format=jsonpretty&limit=5&search=${encodeURIComponent(searchInput)}`;
-    try{
-
-      const response = await fetch(url);
-      if(!response.ok){
-        throw new Error(`API request failed with status ${response.status}`);
-      };
-
-      const data = await response.json();
-      console.log(data.results);
-      setSearchResults(data.results);
-      
-
-    }catch (err){
-      console.log(err);
-    }
-
+    console.log("nothing")
   };
 
   const handleSongPlay = (trackOb) => {
@@ -69,22 +51,10 @@ function Search() {
 
 
   return (
-    <div className="App">
-      <div id="searchDiv">
-        <input id="searchBar" value={searchInput} onChange={handleInputChange}></input>
-        <button onClick={handleSearchClick}>Search</button>
-      </div>
-      
       <div id="searchResults">
-        {searchResults.map((track) => (
-          <div key={track.name + "|" + track.artist_id}>
-            <span>{track.name} by {track.artist_name} <button onClick={() => handleSongPlay(track)}>Play</button> <button>Queue</button></span>
-          </div>
-        ))}
+        {searchResults ? <Songs songs={searchResults} setSongs={setSearchResults} style={{height: "100%"}}/>: <div style={{color:"white"}}>loading...</div>}
       </div>
-      <Soundbar audioReference={audioRef} isPlaying={audioPlaying} setIsPlaying={setAudioPlaying} audioTrack={trackObject}></Soundbar>
-    </div>
   );
 }
 
-export default App;
+export default Search;

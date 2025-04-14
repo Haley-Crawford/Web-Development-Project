@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import './components.css';
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = ({ searchResults, setSearchResults }) => {
   const [query, setQuery] = useState("");
+  const nav = useNavigate();
 
   const handleChange = (event) => {
     setQuery(event.target.value);
@@ -10,9 +12,7 @@ const SearchBar = ({ onSearch }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (onSearch) {
-      onSearch(query);
-    }
+    nav('/search');
   };
 
   return (
@@ -23,6 +23,11 @@ const SearchBar = ({ onSearch }) => {
         value={query}
         onChange={handleChange}
         style={{ padding: "8px", width: "200px", borderRadius: "4px", border: "1px solid #ccc" }}
+        onKeyDown={(e) => {
+          if(e.key == "Enter"){
+            handleSubmit()
+          };
+        }}
       />
       <button type="submit" style={{ padding: "8px 12px", cursor: "pointer" }}>
         Search

@@ -1,9 +1,16 @@
 import React, { useState, useEffect, useRef} from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Search, User, ChevronDown, Settings, LogOut } from 'lucide-react';
 import styles from './TopBar.module.css';
 
 
-export function TopBar({ showDropdown, setShowDropdown }) {
+export function TopBar({ showDropdown, setShowDropdown, isSearching, setIsSearching, searchInput, setSearchInput }) {
+  const nav = useNavigate();
+
+  const handleChange = (e) => {
+    setSearchInput(e.target.value)
+  };
+
   return (
     <div className={styles.topBar}>
       <div className={styles.searchContainer}>
@@ -11,8 +18,16 @@ export function TopBar({ showDropdown, setShowDropdown }) {
           <Search className={styles.searchIcon} />
           <input
             type="text"
-            placeholder="Search for songs, artists, or playlists"
             className={styles.searchInput}
+            placeholder='Search for songs, artists, or playlists'
+            value={searchInput}
+            onChange={handleChange}
+            onKeyDown={(e) => {
+              if(e.key === "Enter"){
+                setIsSearching(true);
+                nav("/search");
+              }
+            }}
           />
         </div>
       </div>
