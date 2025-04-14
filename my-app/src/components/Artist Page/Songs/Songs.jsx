@@ -22,8 +22,7 @@ export function Songs({ songs, setSongs }) {
         <div className={styles.song_container}>
             <h2 className={styles.title}>Popular Songs</h2>
             <ol className={styles.song_list}>    
-                {songs.map((song) => (
-                {songs.map((song) => (
+                {songs.map((song) => 
                     <li className={styles.song} key={song.id}>
                         <div className={styles.img_div}>
                             <img src='https://picsum.photos/40' alt='' className={styles.song_img}/>
@@ -33,11 +32,10 @@ export function Songs({ songs, setSongs }) {
                             <p className={styles.album_info}>{song.album} • {new Date().getMonth()} {song.release}</p>
                         </div>
                         <button className={styles.btn} onClick={() => handleLike(song.id)}>
-                        <button className={styles.btn} onClick={() => handleLike(song.id)}>
                             <Heart className={`${styles.icon} ${song.isLiked ? styles.like : ''}`}/>
                         </button>
                     </li>
-                ))}
+                )}
             </ol>
             <p>See more</p>
         </div>
