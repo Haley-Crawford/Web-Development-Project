@@ -1,46 +1,43 @@
-import React from 'react'
-import { FaRegHeart as Heart, FaPlusCircle as Like } from 'react-icons/fa'
+import React, { useState } from 'react'
+import { Heart } from 'lucide-react'
 import styles from './Songs.module.css'
 
 
+export function Songs({ songs, setSongs }) {
 
-function generateSong(n) {
-    let songs = []
+    // const [songs, setSongs] = useState([
+    //     {id: 1, title: `Song 1`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false},
+    //     {id: 2, title: `Song 2`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false},
+    //     {id: 3, title: `Song 3`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false},
+    //     {id: 4, title: `Song 4`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false},
+    //     {id: 5, title: `Song 5`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false}
+    // ])
 
-    for (let _ = 0; _ < n; _++) {
-        songs.push(
-            <div className={styles.song}>
-                <div className={styles.img_div}>
-                    <img src='https://picsum.photos/40' alt='' className={styles.song_img}/>
-                </div>
-                <div className={styles.song_info}>
-                    <p className={styles.song_name}>Song Name</p>
-                    <p className={styles.album_info}>Album Name • {new Date().getMonth()} {new Date().getFullYear()}</p>
-                </div>
-                <div className={styles.song_choices}>
-                    <button className={`${styles.song_like} ${styles.choice_btn}`}>
-                        <Like className={styles.icon} />
-                    </button>
-                    <button className={`${styles.song_favorite} ${styles.choice_btn}`}>
-                        <Heart className={styles.icon} />
-                    </button>
-                </div>
-            </div>
-        )
+    const handleLike = (id) => {
+        const updatedSongs = songs.map(song => song.id === id ? { ...song, isLiked: !song.isLiked } : song)
+        setSongs(updatedSongs)
     }
 
-    return songs
-}
-
-
-export function Songs() {
-    const songs = generateSong(12)
     return (
         <div className={styles.song_container}>
-            <p className={styles.title}>Popular Songs</p>
-            <div className={styles.song_list}>    
-                {songs}
-            </div>
+            <h2 className={styles.title}>Popular Songs</h2>
+            <ol className={styles.song_list}>    
+                {songs.map((song) => 
+                    <li className={styles.song} key={song.id}>
+                        <div className={styles.img_div}>
+                            <img src='https://picsum.photos/40' alt='' className={styles.song_img}/>
+                        </div>
+                        <div className={styles.song_info}>
+                            <p className={styles.song_name}>{song.title}</p>
+                            <p className={styles.album_info}>{song.album} • {new Date().getMonth()} {song.release}</p>
+                        </div>
+                        <button className={styles.btn} onClick={() => handleLike(song.id)}>
+                            <Heart className={`${styles.icon} ${song.isLiked ? styles.like : ''}`}/>
+                        </button>
+                    </li>
+                )}
+            </ol>
+            <p>See more</p>
         </div>
     )
 

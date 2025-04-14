@@ -1,13 +1,19 @@
 .contentArea {
   flex: 1;
-  overflow: hidden;
   display: flex;
-  justify-content: space-around;
-  min-height: 0; /* Ensures flex items can shrink below content size */
+  gap: 10px;
+  background-color: rgb(23, 23, 23);
 }
 
-.artist_content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.artistSection {
+  border-radius: 10px;
+  overflow: hidden;
+  min-width: 60%; 
+}
+
+.songCard {
+  padding: 15px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: rgb(38, 38, 38)
 }

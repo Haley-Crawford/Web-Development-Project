@@ -5,7 +5,7 @@ import { Sidebar } from './components/Sidebar/Sidebar';
 import { TopBar } from './components/Dashboard/TopBar/TopBar'
 import { SongCarousel } from './components/Dashboard/SongCarousel/SongCarousel'
 import { PlaybackControls } from './components/Dashboard/PlaybackControls/PlaybackControls'
-import ArtistPage from './components/Artist Page/ArtistPage'
+import { ArtistPage } from './components/Artist Page/ArtistPage'
 
 function App() {
 
@@ -28,13 +28,13 @@ function App() {
           />
           <main className='contentArea'>
             <Routes>
-              <Route path='/' element={
+              <Route path='/artist' element={
                 <SongCarousel 
                   currentIndex={currentSongIndex}
                   setCurrentIndex={setCurrentSongIndex}
                 />
               }/>
-              <Route path='/artist' element={
+              <Route path='/' element={
                 <ArtistPage />
               }/>
             </Routes>
