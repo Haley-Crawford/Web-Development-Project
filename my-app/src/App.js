@@ -7,7 +7,6 @@ import { SongCarousel } from './components/Dashboard/SongCarousel/SongCarousel'
 import { PlaybackControls } from './components/Dashboard/PlaybackControls/PlaybackControls'
 import { ArtistPage } from './components/Artist Page/ArtistPage'
 import Search from './components/Search.jsx'
-import { Songs } from './components/Artist Page/Songs/Songs.jsx'
 
 function App() {
 
@@ -80,7 +79,7 @@ function App() {
               <Route path='/' element={
                 <ArtistPage />
               }/>
-              <Route path='/search' element={<Search searchResults={searchResults} />} />
+              <Route path='/search' element={<Search searchResults={searchResults} setSearchResults={setSearchResults} />} />
             </Routes>
           </ main>
           <PlaybackControls 

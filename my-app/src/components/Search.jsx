@@ -1,9 +1,9 @@
 import React, {useState, useRef} from "react"
-
+import { Songs } from './Artist Page/Songs/Songs'
 
 const apiKey = process.env.REACT_APP_JAMENDO_KEY;
 
-function Search({searchResults}) {
+function Search({searchResults, setSearchResults}) {
   const [searchInput, setSearchInput] = useState("");
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [trackObject, setTrack] = useState({});
@@ -52,11 +52,7 @@ function Search({searchResults}) {
 
   return (
       <div id="searchResults">
-        {searchResults ? searchResults.map((track) => (
-          <div key={track.name + "|" + track.artist_id}>
-            <span>{track.name} by {track.artist_name} <button onClick={() => handleSongPlay(track)}>Play</button> <button>Queue</button></span>
-          </div>
-        )): <div style={{color:"white"}}>loading...</div>}
+        {searchResults ? <Songs songs={searchResults} setSongs={setSearchResults} />: <div style={{color:"white"}}>loading...</div>}
       </div>
   );
 }
