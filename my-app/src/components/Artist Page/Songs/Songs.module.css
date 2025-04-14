@@ -1,16 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 .song_container {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    padding: 15px;
-}
-
-.song_list {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    gap: 3px 10px;
-    height: 200px;
+    padding: 0 15px;
 }
 
 .title {
@@ -19,11 +16,20 @@
     text-shadow: 2px 2px 2px goldenrod, -2px 1px 3px black;
 }
 
+.song_list {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    gap: 3px 10px;
+    height: 280px;
+}
+
 .song {
     position: relative;
     display: flex;
     margin: 7px;
     column-gap: 10px;
+    padding: 5px;
     align-items: center;
 }
 
@@ -70,6 +76,7 @@
     width: 25px;
     height: 25px;
     color: rgb(96, 97, 97);
+    transition: all 0.5s ease;
 }
 
 .icon:hover {
@@ -78,6 +85,8 @@
 }
 
 .like {
+    display: block;
     color: goldenrod !important;
+    fill: goldenrod;
 }
 

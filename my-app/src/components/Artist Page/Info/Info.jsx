@@ -13,9 +13,6 @@ export function Info() {
 
     return (   
         <div className={styles.container} >
-            <div className={styles.info}>
-                <p className={styles.text}>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            </div>
             <div className={styles.choices} >          
                 <button className={styles.play}>
                     <Play className={styles.playIcon} />

@@ -1,35 +1,31 @@
+import React, { useState } from 'react';
+
 import styles from './ArtistPage.module.css'
 
-import { Songs } from './Songs/Songs.jsx'
-import { Albums } from './Albums/Albums.jsx'
-import NavBar from '../Nav Bar/NavBar.jsx'
-
-import { Sidebar } from '../Sidebar/Sidebar.jsx';
-import { PlaybackControls } from '../Dashboard/PlaybackControls/PlaybackControls.jsx';
-import { SongCarousel } from '../Dashboard/SongCarousel/SongCarousel.jsx';
-import { TopBar } from '../Dashboard/TopBar/TopBar.jsx';
 import { Artist } from './Artist/Artist.jsx'
-import React, { useState } from 'react';
+
 import { SongCard } from './Song Card/SongCard.jsx';
 
 
 
-function ArtistPage() {
-    
-    const [showDropdown, setShowDropdown] = useState(false);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [currentSongIndex, setCurrentSongIndex] = useState(0);
+export function ArtistPage() {
+
+    const [songs, setSongs] = useState([
+        {id: 1, title: `Song 1`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false},
+        {id: 2, title: `Song 2`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false},
+        {id: 3, title: `Song 3`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false},
+        {id: 4, title: `Song 4`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false},
+        {id: 5, title: `Song 5`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false}
+    ])
 
     return (                
         <main className={styles.contentArea}>
-            <section className={styles.artist}>
-                <Artist />
+            <section className={styles.artistSection}>
+                <Artist songs={songs} setSongs={setSongs} />
             </section>
-            <section className={styles.song_card}>
-                <SongCard />
+            <section className={styles.songCard} >
+                <SongCard/>
             </section>
         </main>
     )
 }
-
-export default ArtistPage

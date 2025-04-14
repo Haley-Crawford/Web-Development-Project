@@ -8,7 +8,7 @@
 }
 
 .choices {
-    padding: 10px 15px;
+    padding: 20px 15px;
     display: flex;
     align-items: center;
     gap: 40px;
@@ -69,4 +69,5 @@
 
 .followOn {
     border: 3px solid goldenrod !important;
+    color: goldenrod;
 }

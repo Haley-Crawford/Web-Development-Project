@@ -14,13 +14,14 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #FFD700;
+  color: goldenrod;
   margin-bottom: 2rem;
 }
 
 .homeIcon {
   width: 2rem;
   height: 2rem;
+  color: goldenrod;
 }
 
 .appName {

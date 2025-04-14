@@ -1,16 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { Home, Library, Plus } from 'lucide-react';
 import styles from './Sidebar.module.css';
 
-// interface Playlist {
-//   id: number;
-//   name: string;
-//   imageUrl: string;
-// }
-
-// interface SidebarProps {
-//   playlists: Playlist[];
-// }
 
 export function Sidebar() {
 
@@ -24,7 +16,9 @@ export function Sidebar() {
     <div className={styles.sidebar}>
       <div className={styles.sidebarContent}>
         <div className={styles.logo}>
-          <Home className={styles.homeIcon} />
+          <Link to='/' >
+            <Home className={styles.homeIcon}/>
+          </Link>
           <span className={styles.appName}>Music App</span>
         </div>
         

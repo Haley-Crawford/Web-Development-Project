@@ -1,0 +1,75 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.img {
+    border-radius: 7px;
+}
+
+.name {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.credits, .queued {
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgb(62, 62, 62);
+}
+
+.queued {
+    display: flex;
+    flex-direction: column;
+}
+
+.queuedSong {
+    display: flex;
+    padding: 10px;
+    position: relative;
+    gap: 15px;
+}
+
+.queuedSong:hover {
+    background-color: rgb(67, 68, 67);
+    border-radius: 7px;
+}
+
+.queuedSong:hover .queueImg {
+    filter: brightness(10%);
+}
+
+.queuedSong:hover .play {
+    display: block;
+}
+
+.queueImg {
+    border-radius: 5px;
+}
+
+.play {
+    position: absolute;
+    display: none;
+    left: 20px;
+    top: 20px;
+    fill: white;
+    height: 40px;
+    width: 40px;
+}
+
+.play:hover {
+    transform: scale(1.1);
+}
+
+.queueInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-weight: 600;
+}
+
+.queueArtist {
+    color: rgb(123, 123, 123);
+    font-weight: 500;
+}
