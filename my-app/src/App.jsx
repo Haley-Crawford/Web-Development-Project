@@ -13,13 +13,14 @@ function App() {
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [trackObject, setTrack] = useState({});
   const [trackQueue, setTrackQueue] = useState([]);
+  const [prevTracks, setPrevTacks] = useState([]);
 
 
   return (
     <>
       <Search audioRef={audioRef} trackQueue={trackQueue} setTrackQueue={setTrackQueue} audioPlaying={audioPlaying} setAudioPlaying={setAudioPlaying} setTrack={setTrack} />
       <ArtistPage />
-      <Soundbar audioReference={audioRef} isPlaying={audioPlaying} setIsPlaying={setAudioPlaying} audioTrack={trackObject} songQueue={trackQueue} setTrackQueue={setTrackQueue} setTrack={setTrack}/>
+      <Soundbar audioReference={audioRef} isPlaying={audioPlaying} setIsPlaying={setAudioPlaying} audioTrack={trackObject} songQueue={trackQueue} setTrackQueue={setTrackQueue} setTrack={setTrack} setPrevTacks={setPrevTacks} prevTrack={prevTracks} />
     </>
   )
 }

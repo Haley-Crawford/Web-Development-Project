@@ -82,7 +82,7 @@ function Search({audioRef, trackQueue, setTrackQueue, audioPlaying, setAudioPlay
   return (
     <>
       <div id="searchDiv">
-        <input id="searchBar" value={searchInput} onChange={handleInputChange}></input>
+        <input id="searchBar" value={searchInput} onChange={handleInputChange} onKeyPr></input>
         <button onClick={handleSearchClick}>Search</button>
       </div>
       

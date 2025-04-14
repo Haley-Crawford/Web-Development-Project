@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useRef} from "react";
 import "./Soundbar.css";
 
-const Soundbar = ( {audioReference, isPlaying, setIsPlaying, audioTrack, setTrack, songQueue, setTrackQueue} ) => {
+const Soundbar = ( {audioReference, isPlaying, setIsPlaying, audioTrack, setTrack, songQueue, setTrackQueue, setPrevTracks, prevTracks} ) => {
 
     const [progress, setProgress] = useState(0);
     const [isSeeking, setIsSeeking] = useState(false);
@@ -89,6 +89,10 @@ const Soundbar = ( {audioReference, isPlaying, setIsPlaying, audioTrack, setTrac
             setTrackQueue([])
             
         }
+
+    const handleGoBack = () => {
+
+    };
 
     };
 
