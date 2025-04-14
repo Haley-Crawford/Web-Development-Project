@@ -15,7 +15,12 @@ export function TopBar({ showDropdown, setShowDropdown, isSearching, setIsSearch
     <div className={styles.topBar}>
       <div className={styles.searchContainer}>
         <div className={styles.searchWrapper}>
-          <Search className={styles.searchIcon} />
+          <Search className={styles.searchIcon} style={{cursor: "pointer"}} onClick={(e) => {
+              
+              setIsSearching(true);
+              nav("/search");
+
+            }}/>
           <input
             type="text"
             className={styles.searchInput}
