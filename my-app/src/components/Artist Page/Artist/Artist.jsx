@@ -8,7 +8,7 @@ import { Albums } from '../Albums/Albums'
 
 
 
-export function Artist({ songs, setSongs }) {
+export function Artist({ songs, setSongs, updateFavorites, title}) {
     const [color, setColor] = useState('#ffff')
 
     useEffect(() => {
@@ -26,7 +26,12 @@ export function Artist({ songs, setSongs }) {
             </section>
             <section className={styles.content} style={gradient}>
                 <Info />
-                <Songs songs={songs} setSongs={setSongs} />
+                <Songs 
+                    songs={songs} 
+                    setSongs={setSongs} 
+                    updateFavorites={updateFavorites}
+                    title={title}
+                />
                 <Albums />
             </section>
         </div>

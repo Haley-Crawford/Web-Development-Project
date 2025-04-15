@@ -3,7 +3,7 @@ import { Songs } from './Artist Page/Songs/Songs'
 
 const apiKey = process.env.REACT_APP_JAMENDO_KEY;
 
-function Search({searchResults, setSearchResults}) {
+export function Search({songs, setSongs, searchResults, setSearchResults, favoriteSongs, updateFavorites}) {
   const [searchInput, setSearchInput] = useState("");
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [trackObject, setTrack] = useState({});
@@ -49,12 +49,46 @@ function Search({searchResults, setSearchResults}) {
 
   };
 
+  const mergeSongIntoList = (list, songToMerge) => {
+    const exists = list.some(song => song.id === songToMerge.id);
+    return exists
+      ? list.map(song => song.id === songToMerge.id ? songToMerge : song)
+      : [...list, songToMerge];
+  }
+
+  // Handle song like/unlike
+  const handleLike = (songId) => {
+    const updatedSongs = songs.map(song => {
+      if (song.id === songId) {
+        song.isLiked = !song.isLiked;
+      }
+      return song;
+    });
+    setSongs(updatedSongs); // Update the global state
+    updateFavorites(updatedSongs); // Update favorites list
+  }
+
 
   return (
       <div id="searchResults">
-        {searchResults ? <Songs songs={searchResults} setSongs={setSearchResults} style={{height: "100%"}}/>: <div style={{color:"white"}}>loading...</div>}
+        {searchResults 
+          ? <Songs 
+              songs={searchResults} 
+              setSongs={(newResults) => {
+                setSearchResults(newResults);
+  
+                // Sync liked/unliked songs into global song list
+                newResults.forEach((newSong) => {
+                  setSongs(prev => mergeSongIntoList(prev, newSong));
+                });
+              }} 
+              style={{height: "100%"}}
+              title='Results'
+              favoriteSongs={favoriteSongs}
+              updateFavorites={updateFavorites}
+              onLike={handleLike}
+            />
+          : <div style={{color:"white"}}>loading...</div>}
       </div>
   );
 }
-
-export default Search;

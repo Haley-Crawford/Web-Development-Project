@@ -1,28 +1,31 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Heart } from 'lucide-react'
 import styles from './Songs.module.css'
 
 
-export function Songs({ songs, setSongs }) {
-
-    // const [songs, setSongs] = useState([
-    //     {id: 1, title: `Song 1`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false},
-    //     {id: 2, title: `Song 2`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false},
-    //     {id: 3, title: `Song 3`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false},
-    //     {id: 4, title: `Song 4`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false},
-    //     {id: 5, title: `Song 5`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false}
-    // ])
+export function Songs({ songs, setSongs, updateFavorites, title, onLike }) {
 
     const handleLike = (id) => {
-        const updatedSongs = songs.map(song => song.id === id ? { ...song, isLiked: !song.isLiked } : song)
-        setSongs(updatedSongs)
+        const updatedSongs = songs.map(song => 
+            song.id === id
+            ? { ...song, isLiked: !song.isLiked } 
+            : song
+        )
+
+        setSongs && setSongs(updatedSongs)
+
+        updateFavorites(updatedSongs)
     }
+
+    const displayedSongs = title === 'Favorites'
+        ? songs.filter((song) => song.isLiked)
+        : songs
 
     return (
         <div className={styles.song_container}>
-            <h2 className={styles.title}>Popular Songs</h2>
+            <h2 className={styles.title}>{title}</h2>
             <ol className={styles.song_list}>    
-                {songs.map((song) => 
+                {displayedSongs.map((song) => 
                     <li className={styles.song} key={song.id}>
                         <div className={styles.img_div}>
                             <img src={song.album_image} alt='song image' className={styles.song_img}/>
