@@ -1,9 +1,12 @@
-import React, {useState, useRef} from "react"
-import { Songs } from './Artist Page/Songs/Songs'
+import React, {useState, useRef} from 'react'
+import { Link } from 'react-router-dom'
+import styles from './Search.module.css'
+import { Songs } from '../../../Artist Page/Songs/Songs'
+import gif from '../../../../assets/banana.gif'
 
 const apiKey = process.env.REACT_APP_JAMENDO_KEY;
 
-function Search({searchResults, setSearchResults}) {
+export function Search({searchResults, setSearchResults}) {
   const [searchInput, setSearchInput] = useState("");
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [trackObject, setTrack] = useState({});
@@ -44,17 +47,25 @@ function Search({searchResults, setSearchResults}) {
 
     }else {
 
-      console.log("Queue too big");
+      console.log('Queue too big');
     }
 
   };
 
-
   return (
-      <div id="searchResults">
-        {searchResults ? <Songs songs={searchResults} setSongs={setSearchResults} style={{height: "100%"}}/>: <div style={{color:"white"}}>loading...</div>}
+      <div id='searchResults'>
+        {searchResults.length > 1 
+        ? <Songs 
+            songs={searchResults} 
+            setSongs={setSearchResults} 
+            style={{height: "100%"}}
+          />
+        : <div className={styles.notFound}>
+            <img src={gif} alt='' className={styles.img}/>
+            <h1 className={styles.msg}>Uh Oh...</h1>
+            <p className={styles.txt}>We don't have that in our database</p>
+          </div>
+        }
       </div>
   );
 }
-
-export default Search;

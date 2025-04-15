@@ -4,7 +4,6 @@ import styles from './Songs.module.css'
 
 
 export function Songs({ songs, setSongs }) {
-
     // const [songs, setSongs] = useState([
     //     {id: 1, title: `Song 1`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false},
     //     {id: 2, title: `Song 2`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false},
