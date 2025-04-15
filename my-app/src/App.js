@@ -12,7 +12,7 @@ function App() {
 
   const audioRef = useRef(new Audio());
   const [audioPlaying, setAudioPlaying] = useState(false);
-  const [trackObject, setTrack] = useState({});
+  const [track, setTrack] = useState({});
   const [trackQueue, setTrackQueue] = useState([]);
   const [prevTracks, setPrevTracks] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -79,7 +79,7 @@ function App() {
               <Route path='/' element={
                 <ArtistPage />
               }/>
-              <Route path='/search' element={<Search searchResults={searchResults} setSearchResults={setSearchResults} />} />
+              <Route path='/search' element={<Search searchResults={searchResults} setSearchResults={setSearchResults} audioRef={audioRef} audioPlaying={audioPlaying} setAudioPlaying={setAudioPlaying} setTrack={setTrack} trackQueue={trackQueue} setTrackQueue={setTrackQueue} />} />
             </Routes>
           </ main>
           <PlaybackControls 
@@ -89,6 +89,10 @@ function App() {
             currentSongIndex={currentSongIndex}
             setCurrentSongIndex={setCurrentSongIndex}
             totalSongs={5}
+            track={track}
+            setTrack={setTrack}
+            trackQueue={trackQueue}
+            setTrackQueue={setTrackQueue}
           />
         </div>
       </div>

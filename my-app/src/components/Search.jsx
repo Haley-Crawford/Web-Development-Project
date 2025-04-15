@@ -3,21 +3,13 @@ import { Songs } from './Artist Page/Songs/Songs'
 
 const apiKey = process.env.REACT_APP_JAMENDO_KEY;
 
-function Search({searchResults, setSearchResults}) {
+function Search({searchResults, setSearchResults, audioRef, audioPlaying, setAudioPlaying, setTrack, trackQueue, setTrackQueue}) {
   const [searchInput, setSearchInput] = useState("");
-  const [audioPlaying, setAudioPlaying] = useState(false);
-  const [trackObject, setTrack] = useState({});
-  const audioRef = useRef(new Audio());
-  const [trackQueue, setTrackQueue] = useState([]);
 
   const handleInputChange = (e) => {
 
     setSearchInput(e.target.value);
 
-  };
-
-  const handleSearchClick = async (e) => {
-    console.log("nothing")
   };
 
   const handleSongPlay = (trackOb) => {
@@ -52,7 +44,7 @@ function Search({searchResults, setSearchResults}) {
 
   return (
       <div id="searchResults">
-        {searchResults ? <Songs songs={searchResults} setSongs={setSearchResults} style={{height: "100%"}}/>: <div style={{color:"white"}}>loading...</div>}
+        {searchResults ? <Songs songs={searchResults} setSongs={setSearchResults} audioRef={audioRef} audioPlaying={audioPlaying} setAudioPlaying={setAudioPlaying} setTrack={setTrack} trackQueue={trackQueue} setTrackQueue={setTrackQueue} style={{height: "100%"}}/>: <div style={{color:"white"}}>loading...</div>}
       </div>
   );
 }

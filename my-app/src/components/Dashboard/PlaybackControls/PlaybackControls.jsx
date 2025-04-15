@@ -16,7 +16,11 @@ export function PlaybackControls({
   setIsPlaying, 
   currentSongIndex, 
   setCurrentSongIndex,
-  totalSongs 
+  totalSongs, 
+  track,
+  setTrack,
+  trackQueue,
+  setTrackQueue
 }) {
 
   const [isLiked, setIsLiked] = useState(false)
@@ -25,8 +29,33 @@ export function PlaybackControls({
     setCurrentSongIndex(prev => (prev === 0 ? totalSongs - 1 : prev - 1));
   };
 
-  const handleNext = () => {
-    setCurrentSongIndex(prev => (prev === totalSongs - 1 ? 0 : prev + 1));
+  const handleNext = async () => {
+
+    if(trackQueue.length > 1){
+
+        if(isPlaying){
+
+            audioRef.current.pause()
+            setIsPlaying(false)
+        }
+
+        const nextSong = trackQueue[1]
+        setTrack(nextSong)
+        setTrackQueue((prevQueue) => {return prevQueue.splice(1)})
+        audioRef.current.src = nextSong.audio
+        audioRef.current.play()
+        console.log(`new song: ${nextSong.name} with new queue ${trackQueue.map((item) => {return item.name}).splice(1)}`)
+
+    }else {
+
+        console.log("no songs left")
+        audioRef.current.pause()
+        setIsPlaying(false)
+        setTrack({})
+        setTrackQueue([])
+        
+    }
+
   };
 
   const handlePlayPause = () => {
@@ -54,13 +83,13 @@ export function PlaybackControls({
         {/* Currently Playing */}
         <div className={styles.nowPlaying}>
           <img 
-            src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=100&h=100" 
+            src={track? track.album_image :"https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=100&h=100"}
             alt="Now Playing" 
             className={styles.albumArt}
           />
           <div className={styles.songInfo}>
-            <h3 className={styles.songTitle}>Song Title</h3>
-            <p className={styles.artistName}>Artist Name</p>
+            <h3 className={styles.songTitle}>{track? track.name: "Song Title"}</h3>
+            <p className={styles.artistName}>{track? track.artist_name: "Artist Name"}</p>
           </div>
         </div>
 
