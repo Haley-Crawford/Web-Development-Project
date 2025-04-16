@@ -20,40 +20,109 @@ export function PlaybackControls({
   track,
   setTrack,
   trackQueue,
-  setTrackQueue
+  setTrackQueue,
+  prevTracks,
+  setPrevTracks
 }) {
 
   const [isLiked, setIsLiked] = useState(false)
 
   const handlePrevious = () => {
-    setCurrentSongIndex(prev => (prev === 0 ? totalSongs - 1 : prev - 1));
+    
+    const curStack = prevTracks;
+    const wasPlaying = isPlaying;
+    const ref = audioRef.current;
+
+    if(curStack && curStack.length > 0){
+
+      if(wasPlaying){
+
+        setIsPlaying(false);
+        ref.pause();
+      };
+
+      const backSong = curStack[0];
+      
+      setPrevTracks(prevStack =>{
+        const newStack = prevStack.slice(1);
+        return newStack;
+      });
+      ref.src = backSong.audio;
+      ref.play();
+      setTrack(backSong);
+      setIsPlaying(true);
+
+    }else{
+
+      setPrevTracks([]);
+      console.log("no songs to go back");
+      
+    }
+
   };
 
-  const handleNext = async () => {
+  const handleNext = () => {
+    
+    const curQueue = trackQueue;
+    const curStack = prevTracks;
+    const wasPlaying = isPlaying;
+    const ref = audioRef.current;
+    if(curQueue.length <= 1){
 
-    if(trackQueue.length > 1){
+      console.log("no more songs");
 
-        if(isPlaying){
+      if(wasPlaying){
 
-            audioRef.current.pause()
-            setIsPlaying(false)
-        }
+        setIsPlaying(false);
+        ref.pause();
 
-        const nextSong = trackQueue[1]
-        setTrack(nextSong)
-        setTrackQueue((prevQueue) => {return prevQueue.splice(1)})
-        audioRef.current.src = nextSong.audio
-        audioRef.current.play()
-        console.log(`new song: ${nextSong.name} with new queue ${trackQueue.map((item) => {return item.name}).splice(1)}`)
+      };
 
-    }else {
+      if(curQueue.length = 1){
 
-        console.log("no songs left")
-        audioRef.current.pause()
-        setIsPlaying(false)
-        setTrack({})
-        setTrackQueue([])
+        const curSong = curQueue[0];
+        setPrevTracks((prevTracks) => {
+          const newStack = [...prevTracks, curSong];
+          return newStack;
+        });
+
+        console.log(`new stack: ${[curSong, ...curStack].map(item => item.name)}`)
         
+      };
+
+      setTrack({});
+      setTrackQueue([]);
+
+
+    }else{
+
+      const curSong = curQueue[0];
+      const nextSong = curQueue[1];
+      if(wasPlaying){
+
+        ref.pause();
+        setIsPlaying(false);
+      };
+
+      setTrack(nextSong);
+      setTrackQueue(prevQueue => {
+        const newQueue = prevQueue.slice(1);
+        return newQueue;
+      });
+      setPrevTracks((prevTracks) => {
+        const newStack = [curSong, ...prevTracks];
+        return newStack;
+      });
+
+      ref.src = nextSong.audio;
+      ref.play();
+      setIsPlaying(true);
+
+      console.log(`new song: ${nextSong.name}`);
+      console.log(`new queue: ${curQueue.map(item => item.name).slice(1)}`)
+      console.log(`new stack: ${[curSong, ...curStack].map(item => item.name)}`)
+
+
     }
 
   };

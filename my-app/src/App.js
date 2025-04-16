@@ -93,6 +93,8 @@ function App() {
             setTrack={setTrack}
             trackQueue={trackQueue}
             setTrackQueue={setTrackQueue}
+            prevTracks={prevTracks}
+            setPrevTracks={setPrevTracks}
           />
         </div>
       </div>
