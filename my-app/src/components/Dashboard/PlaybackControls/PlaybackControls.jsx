@@ -31,6 +31,7 @@ export function PlaybackControls({
 }) {
   const [songEnded, setSongEnded] = useState(false);
   const [progress, setProgress] = useState(0.0);
+  const progressBarRef = useRef(null);
 
   useEffect(() => {
 
@@ -47,8 +48,7 @@ export function PlaybackControls({
         const totalSeconds = aud.currentTime
         const minutes = Math.floor(totalSeconds / 60)
         const seconds = Math.floor(totalSeconds % 60)
-        const newProgress = (totalSeconds / aud.duration).toFixed(2) * 100
-        console.log(newProgress);
+        const newProgress = (totalSeconds / aud.duration).toFixed(4) * 100
         
         setElapsedTime(`${minutes}:${seconds < 10? `0${seconds}`: seconds}`)
         setProgress(newProgress)
@@ -72,6 +72,21 @@ export function PlaybackControls({
   }, [songEnded])
 
   const [isLiked, setIsLiked] = useState(false)
+
+  const handleProgressClick = (e) => {
+    const audio = audioRef.current;
+    if (!audio.duration) return;
+    console.log("clicked");
+    
+    const progressBar = progressBarRef.current;
+    const clickPosition = e.clientX - progressBar.getBoundingClientRect().left;
+    const progressBarWidth = progressBar.clientWidth;
+    const seekPercentage = (clickPosition / progressBarWidth);
+    const seekTime = audio.duration * seekPercentage;
+    
+    audio.currentTime = seekTime;
+    setProgress(seekPercentage * 100);
+  };
 
   const handleEnd = () => {
     const curQueue = trackQueue
@@ -246,7 +261,7 @@ export function PlaybackControls({
           </div>
           <div className={styles.progressBar}>
             <span className={styles.time}>{elapsedTime}</span>
-            <div className={styles.progress}>
+            <div className={styles.progress} ref={progressBarRef} onClick={handleProgressClick} style={{cursor: "pointer"}}>
               <div className={styles.progressFill} style={{"width": `${progress}%`}}></div>
             </div>
             <span className={styles.time}>{duration}</span>
