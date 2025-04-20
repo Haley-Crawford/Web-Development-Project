@@ -22,10 +22,62 @@ export function PlaybackControls({
   trackQueue,
   setTrackQueue,
   prevTracks,
-  setPrevTracks
+  setPrevTracks,
+  elapsedTime,
+  setElapsedTime,
+  duration,
+  setDuration
+
 }) {
+  const [songEnded, setSongEnded] = useState(false);
+  const [progress, setProgress] = useState(0.0);
+
+  useEffect(() => {
+
+    const aud = audioRef.current;
+    setElapsedTime("0:00");
+    const seconds = track.duration % 60
+    const minutes = Math.floor(track.duration / 60)
+    setDuration(`${minutes}:${seconds < 10? `0${seconds}`: seconds}`);
+
+    const updateTime = () => {
+      if(isPlaying){
+        
+        const aud = audioRef.current;
+        const totalSeconds = aud.currentTime
+        const minutes = Math.floor(totalSeconds / 60)
+        const seconds = Math.floor(totalSeconds % 60)
+        const newProgress = (totalSeconds / aud.duration).toFixed(2) * 100
+        console.log(newProgress);
+        
+        setElapsedTime(`${minutes}:${seconds < 10? `0${seconds}`: seconds}`)
+        setProgress(newProgress)
+      }
+    }
+    aud.addEventListener("timeupdate", updateTime);
+    aud.addEventListener("ended", handleEnd);
+
+    return () => {
+      aud.removeEventListener("timeupdate", updateTime)
+      aud.removeEventListener("ended", handleEnd)
+    }
+
+  }, [track])
+
+  useEffect(() => {
+    if(songEnded == true){
+      handleNext()
+    }
+
+  }, [songEnded])
 
   const [isLiked, setIsLiked] = useState(false)
+
+  const handleEnd = () => {
+    const curQueue = trackQueue
+    console.log(`song ended cur queue ${curQueue.map(item => item.name)}`)
+    setSongEnded(true)
+  }
 
   const handlePrevious = () => {
     
@@ -193,11 +245,11 @@ export function PlaybackControls({
             </button>
           </div>
           <div className={styles.progressBar}>
-            <span className={styles.time}>0:00</span>
+            <span className={styles.time}>{elapsedTime}</span>
             <div className={styles.progress}>
-              <div className={styles.progressFill}></div>
+              <div className={styles.progressFill} style={{"width": `${progress}%`}}></div>
             </div>
-            <span className={styles.time}>3:45</span>
+            <span className={styles.time}>{duration}</span>
           </div>
         </div>
 

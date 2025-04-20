@@ -20,6 +20,8 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const [elapsedTime, setElapsedTime] = useState("");
+  const [duration, setDuration] = useState("");
   const apiKey = process.env.REACT_APP_JAMENDO_KEY;
 
   const apiSearch = async () => {
@@ -40,6 +42,7 @@ function App() {
       console.log(err);
     }
   };
+
 
   useEffect(() => {
 
@@ -95,6 +98,10 @@ function App() {
             setTrackQueue={setTrackQueue}
             prevTracks={prevTracks}
             setPrevTracks={setPrevTracks}
+            elapsedTime={elapsedTime}
+            setElapsedTime={setElapsedTime}
+            duration={duration}
+            setDuration={setDuration}
           />
         </div>
       </div>
