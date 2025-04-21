@@ -61,6 +61,16 @@
   cursor: pointer;
 }
 
+.bot {
+  color: gold;
+  fill: goldenrod;
+  transition: all 0.5s ease;
+}
+
+.bot:hover {
+  transform: scale(1.2);
+}
+
 .controlIcon {
   color: rgb(156, 163, 175);
   width: 1.25rem;

@@ -1,14 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Shuffle, SkipBack, Play, Pause, SkipForward, Repeat, ListMusic, Volume2, Heart } from 'lucide-react';
+import { Shuffle, SkipBack, Play, Pause, SkipForward, Repeat, Bot, Volume2, Heart } from 'lucide-react';
 import styles from './PlaybackControls.module.css';
-
-// interface PlaybackControlsProps {
-//   isPlaying: boolean;
-//   setIsPlaying: (playing: boolean) => void;
-//   currentSongIndex: number;
-//   setCurrentSongIndex: (index: number) => void;
-//   totalSongs: number;
-// }
 
 export function PlaybackControls({ 
   audioRef,
@@ -16,6 +8,8 @@ export function PlaybackControls({
   setIsPlaying, 
   currentSongIndex, 
   setCurrentSongIndex,
+  totalSongs,
+  toggleChat 
   totalSongs, 
   track,
   setTrack,
@@ -268,10 +262,9 @@ export function PlaybackControls({
           </div>
         </div>
 
-        {/* Volume Controls */}
         <div className={styles.volume}>
-          <button className={styles.controlButton}>
-            <ListMusic className={styles.controlIcon} />
+          <button className={styles.controlButton} onClick={toggleChat}>
+            <Bot  className={styles.bot} />
           </button>
           <button className={styles.controlButton}>
             <Volume2 className={styles.controlIcon} />
