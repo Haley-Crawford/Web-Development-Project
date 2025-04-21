@@ -4,7 +4,7 @@ import { Search, User, ChevronDown, Settings, LogOut } from 'lucide-react';
 import styles from './TopBar.module.css';
 
 
-export function TopBar({ showDropdown, setShowDropdown, isSearching, setIsSearching, searchInput, setSearchInput }) {
+export function TopBar({ showDropdown, setShowDropdown, setIsSearching, searchInput, setSearchInput }) {
   const nav = useNavigate();
 
   const handleChange = (e) => {
@@ -15,22 +15,22 @@ export function TopBar({ showDropdown, setShowDropdown, isSearching, setIsSearch
     <div className={styles.topBar}>
       <div className={styles.searchContainer}>
         <div className={styles.searchWrapper}>
-          <Search className={styles.searchIcon} style={{cursor: "pointer"}} onClick={(e) => {
+          <Search className={styles.searchIcon} style={{cursor: 'pointer'}} onClick={(e) => {
               
               setIsSearching(true);
-              nav("/search");
+              nav('/search');
 
             }}/>
           <input
-            type="text"
+            type='text'
             className={styles.searchInput}
             placeholder='Search for songs, artists, or playlists'
             value={searchInput}
             onChange={handleChange}
             onKeyDown={(e) => {
-              if(e.key === "Enter"){
+              if(e.key === 'Enter'){
                 setIsSearching(true);
-                nav("/search");
+                nav('/search');
               }
             }}
           />

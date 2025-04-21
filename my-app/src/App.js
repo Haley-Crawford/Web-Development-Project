@@ -6,7 +6,7 @@ import { TopBar } from './components/Dashboard/TopBar/TopBar'
 import { SongCarousel } from './components/Dashboard/SongCarousel/SongCarousel'
 import { PlaybackControls } from './components/Dashboard/PlaybackControls/PlaybackControls'
 import { ArtistPage } from './components/Artist Page/ArtistPage'
-import Search from './components/Search.jsx'
+import { Search } from './components/Dashboard/TopBar/Search/Search.jsx'
 
 function App() {
 
@@ -26,6 +26,7 @@ function App() {
 
   const apiSearch = async () => {
     const url = `https://api.jamendo.com/v3.0/tracks/?client_id=${apiKey}&format=jsonpretty&limit=5&search=${encodeURIComponent(searchInput)}`;
+    
     try{
 
       const response = await fetch(url);
@@ -64,7 +65,6 @@ function App() {
         <Sidebar /> 
         <div className='mainContent'>
           <TopBar 
-            isSearching={isSearching}
             setIsSearching={setIsSearching}
             searchInput={searchInput}
             setSearchInput={setSearchInput}
@@ -82,7 +82,15 @@ function App() {
               <Route path='/' element={
                 <ArtistPage />
               }/>
-              <Route path='/search' element={<Search searchResults={searchResults} setSearchResults={setSearchResults} audioRef={audioRef} audioPlaying={audioPlaying} setAudioPlaying={setAudioPlaying} setTrack={setTrack} trackQueue={trackQueue} setTrackQueue={setTrackQueue} />} />
+              <Route 
+                path='/search' 
+                element={
+                  <Search 
+                    searchResults={searchResults} 
+                    setSearchResults={setSearchResults} 
+                  />
+                } 
+              />
             </Routes>
           </ main>
           <PlaybackControls 
