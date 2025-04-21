@@ -88,6 +88,12 @@ function App() {
                   <Search 
                     searchResults={searchResults} 
                     setSearchResults={setSearchResults} 
+                    audioRef={audioRef}
+                    audioPlaying={audioPlaying}
+                    setAudioPlaying={setAudioPlaying}
+                    setTrack={setTrack}
+                    trackQueue={trackQueue}
+                    setTrackQueue={setTrackQueue}
                   />
                 } 
               />
