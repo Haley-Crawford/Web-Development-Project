@@ -12,7 +12,7 @@ function App() {
 
   const audioRef = useRef(new Audio());
   const [audioPlaying, setAudioPlaying] = useState(false);
-  const [trackObject, setTrack] = useState({});
+  const [track, setTrack] = useState({});
   const [trackQueue, setTrackQueue] = useState([]);
   const [prevTracks, setPrevTracks] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -20,6 +20,8 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const [elapsedTime, setElapsedTime] = useState("");
+  const [duration, setDuration] = useState("");
   const apiKey = process.env.REACT_APP_JAMENDO_KEY;
 
   const apiSearch = async () => {
@@ -41,6 +43,7 @@ function App() {
       console.log(err);
     }
   };
+
 
   useEffect(() => {
 
@@ -85,6 +88,12 @@ function App() {
                   <Search 
                     searchResults={searchResults} 
                     setSearchResults={setSearchResults} 
+                    audioRef={audioRef}
+                    audioPlaying={audioPlaying}
+                    setAudioPlaying={setAudioPlaying}
+                    setTrack={setTrack}
+                    trackQueue={trackQueue}
+                    setTrackQueue={setTrackQueue}
                   />
                 } 
               />
@@ -97,6 +106,16 @@ function App() {
             currentSongIndex={currentSongIndex}
             setCurrentSongIndex={setCurrentSongIndex}
             totalSongs={5}
+            track={track}
+            setTrack={setTrack}
+            trackQueue={trackQueue}
+            setTrackQueue={setTrackQueue}
+            prevTracks={prevTracks}
+            setPrevTracks={setPrevTracks}
+            elapsedTime={elapsedTime}
+            setElapsedTime={setElapsedTime}
+            duration={duration}
+            setDuration={setDuration}
           />
         </div>
       </div>
