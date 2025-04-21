@@ -15,10 +15,21 @@
 }
 
 .contentArea {
+  position: relative;
   flex: 1;
   /* padding: 2rem; */
   overflow: auto;
   display: flex;
   flex-direction: column;
   min-height: 0; /* Ensures flex items can shrink below content size */
+}
+
+.showChat {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.hideChat {
+  display: none;
 }

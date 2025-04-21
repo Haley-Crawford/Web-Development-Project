@@ -7,6 +7,8 @@ import { SongCarousel } from './components/Dashboard/SongCarousel/SongCarousel'
 import { PlaybackControls } from './components/Dashboard/PlaybackControls/PlaybackControls'
 import { ArtistPage } from './components/Artist Page/ArtistPage'
 import { Search } from './components/Dashboard/TopBar/Search/Search.jsx'
+import AlbumPage from './albumPage.js'
+import { ChatBot } from './components/Chatbot/Chatbot.jsx';
 
 function App() {
 
@@ -20,6 +22,7 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const [chatDisplay, setChatDisplay] = useState(false)
   const apiKey = process.env.REACT_APP_JAMENDO_KEY;
 
   const apiSearch = async () => {
@@ -41,6 +44,11 @@ function App() {
       console.log(err);
     }
   };
+
+  const toggleChat = () => {
+    setChatDisplay(prev => !prev)
+    console.log(chatDisplay)
+  }
 
   useEffect(() => {
 
@@ -70,14 +78,17 @@ function App() {
           />
           <main className='contentArea'>
             <Routes>
-              <Route path='/artist' element={
+              <Route path='/a' element={
                 <SongCarousel 
                   currentIndex={currentSongIndex}
                   setCurrentIndex={setCurrentSongIndex}
                 />
               }/>
-              <Route path='/' element={
+              <Route path='/b' element={
                 <ArtistPage />
+              }/>
+              <Route path='/' element={
+                <AlbumPage />
               }/>
               <Route 
                 path='/search' 
@@ -89,6 +100,8 @@ function App() {
                 } 
               />
             </Routes>
+
+            <ChatBot isVisible={chatDisplay}/>
           </ main>
           <PlaybackControls 
             audioRef={audioRef}
@@ -97,6 +110,7 @@ function App() {
             currentSongIndex={currentSongIndex}
             setCurrentSongIndex={setCurrentSongIndex}
             totalSongs={5}
+            toggleChat={toggleChat}
           />
         </div>
       </div>

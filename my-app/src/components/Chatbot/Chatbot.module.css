@@ -1,0 +1,99 @@
+.container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #111;
+    color: goldenrod;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 1.3rem;
+    max-width: 200px;
+    height: 70%;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255,215,0,0.2);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.chat_box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #333;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 3px solid #222;
+    height: calc(100% - 70px);
+}
+
+.chat_log {
+    min-height: 150px;
+    max-height: 300px;
+    overflow: auto;
+    padding: 0.5rem;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    border: 2px solid #333;
+}
+
+.chat_response {
+    background-color: #222;
+    padding: 0.75rem;
+    border-radius: 8px;
+}
+
+.loading {
+    font-style: italic;
+    color: #ccc;
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input {
+    padding: 0.5rem;
+    border-radius: 6px;
+    min-height: 30px;
+}
+
+.input::placeholder {
+    text-wrap: wrap;
+    text-align: center;    
+    color: #999;
+}
+
+.submit_btn {
+    border-radius: 6px;
+    height: 1.5rem;
+    font-weight: 700;
+}
+
+.submit_btn:hover {
+    background-color: #e6c200;
+    transform: scale(1.1);
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.hide {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+}
