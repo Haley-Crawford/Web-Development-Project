@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { Heart } from 'lucide-react'
+import { Heart, CirclePlus } from 'lucide-react'
 import styles from './Songs.module.css'
 
 
-export function Songs({ songs, setSongs }) {
+export function Songs({ songs, setSongs, audioRef, audioPlaying, setAudioPlaying, setTrack, trackQueue, setTrackQueue }) {
+
     // const [songs, setSongs] = useState([
     //     {id: 1, title: `Song 1`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false},
     //     {id: 2, title: `Song 2`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false},
@@ -17,6 +18,51 @@ export function Songs({ songs, setSongs }) {
         setSongs(updatedSongs)
     }
 
+    const handlePlay = (song) => {
+        
+        const ref = audioRef.current;
+
+        if(audioPlaying){
+
+            ref.pause();
+            ref.src = song.audio;
+            setTrack(song);
+            setTrackQueue(prevQueue => {
+                const newQueue = [...prevQueue];
+                newQueue[0] = song;
+                return newQueue;
+            })
+            const newQueue = [...trackQueue];
+            newQueue[0] = song;
+            console.log(`new queue: ${newQueue.map(item => item.name)}`)
+            ref.play();
+
+        }else {
+
+            ref.src = song.audio;
+            setTrack(song)
+            setTrackQueue([song])
+            console.log(`new queue: ${[song.name]}`)
+            ref.play();
+            setAudioPlaying(true);
+        }
+
+    }
+
+    const handleQueue = (song) => {
+
+        const curQueue = trackQueue;
+        if(curQueue.length < 10){
+
+            setTrackQueue(prevQueue => [...prevQueue, song]);
+            const newQueue = [...trackQueue, song]
+            console.log(`new queue: ${newQueue.map(item => item.name)}`)
+        }else {
+            console.log("queue too long");
+        }
+
+    };
+
     return (
         <div className={styles.song_container}>
             <h2 className={styles.title}>Popular Songs</h2>
@@ -24,12 +70,17 @@ export function Songs({ songs, setSongs }) {
                 {songs.map((song) => 
                     <li className={styles.song} key={song.id}>
                         <div className={styles.img_div}>
-                            <img src={song.album_image} alt='song image' className={styles.song_img}/>
+                            <button style={{cursor: "pointer"}}>
+                                <img src={song.album_image} alt='song image' className={styles.song_img} onClick={() => {handlePlay(song)}} />
+                            </button>
                         </div>
                         <div className={styles.song_info}>
                             <p className={styles.song_name}>{song.name}</p>
-                            <p className={styles.album_info}>{song.album_name} • {song.releasedate}</p>
+                            <p className={styles.album_info}>{song.artist_name} • {song.album_name} • {song.releasedate}</p>
                         </div>
+                        <button className={styles.btn} style={{right: "50px"}}>
+                            <CirclePlus className={styles.icon} onClick={() => {handleQueue(song)}} style={{cursor: "pointer"}} />
+                        </button>
                         <button className={styles.btn} onClick={() => handleLike(song.id)}>
                             <Heart className={`${styles.icon} ${song.isLiked ? styles.like : ''}`}/>
                         </button>
