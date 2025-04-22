@@ -70,7 +70,7 @@ export function Songs({ songs, setSongs, audioRef, audioPlaying, setAudioPlaying
                 {songs.map((song) => 
                     <li className={styles.song} key={song.id}>
                         <div className={styles.img_div}>
-                            <button style={{cursor: "pointer"}}>
+                            <button style={{cursor: "pointer", background: 'none', border: 'none'}}>
                                 <img src={song.album_image} alt='song image' className={styles.song_img} onClick={() => {handlePlay(song)}} />
                             </button>
                         </div>

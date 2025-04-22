@@ -93,13 +93,13 @@ function App() {
           />
           <main className='contentArea'>
             <Routes>
-              <Route path='/a' element={
+              <Route path='/' element={
                 <SongCarousel 
                   currentIndex={currentSongIndex}
                   setCurrentIndex={setCurrentSongIndex}
                 />
               }/>
-              <Route path='/' element={
+              <Route path='/b' element={
                 <ArtistPage />
               }/>
               <Route path='/a' element={
