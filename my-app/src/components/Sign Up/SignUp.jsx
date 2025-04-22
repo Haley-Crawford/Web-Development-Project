@@ -1,274 +1,192 @@
 import React, { useState } from 'react'
-import { Global, css } from '@emotion/react'
-import styled from '@emotion/styled'
-//import { createGlobalStyle } from 'styled-components'
-import { Person, Lock, Visibility, VisibilityOff } from '@mui/icons-material'
+import { User2, Mail, Lock, Eye, EyeOff } from 'lucide-react'
 import styles from './SignUp.module.css'
+import Modal from 'react-modal'
 
+Modal.setAppElement('#root')
 
+export function SignUp({ isOpen, onClose, setAuth }) {
 
-import userIcon from '../assets/user-icon.png'
-import lockIcon from '../assets/lock-icon.png'
-import eyeIcon from '../assets/eye-icon.png'
-import hiddenEyeIcon from '../assets/hidden-eye-icon.png'
-import bckgroundImg from '../assets/main-background.gif'
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        check_password: '',
+    })
 
-const GlobalStyles = css
-    `
-        *, *:before, *:after {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-            text-transform: uppercase;
-        }
-    `
+    const [errors, setErrors] = useState({})
+    const [showPassword, setShowPassword] = useState(false)
+    const [submitted, setSubmitted] = useState(false)
 
-const Container = styled.div
-    `
-        position: absolute;
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        color: white;
-        text-shadow: 3px 2px 3px goldenrod;
-        background: no-repeat url(${bckgroundImg});
-        background-size: 100% 100%;
-    `
+    const validateForm = () => {
+        const newErrors = {}
 
-const Form = styled.form
-    `
-        border: 5px inset goldenrod;
-        min-width: 35vw;
-        display: flex;
-        flex-direction: column;
-        margin: 15px auto;
-        border-radius: 15px;
-        background-color: black;
-        opacity: 0.75;
-        overflow: hidden;
-        position: relative;
-        box-shadow: 5px 5px 15px goldenrod;
-    `
+        if (!formData.name.trim()) newErrors.name = 'Name is required'
 
-const Title = styled.h1
-    `
-        text-align: center;
-        font-size: 26px;
-        margin: 25px 0;
-    `
+        if (!formData.email.trim()) newErrors.email = 'Email is required'
+        else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email is invalid'
 
-const InputBlock = styled.div
-    `
-        display: flex;
-        flex-direction: column;
-        margin: 15px 0;
-        padding-left: 50px;
-    `
+        if (!formData.password) newErrors.password = 'Password is required'
+        else if (formData.password.length < 8) newErrors.password = 'Password must be at least 8 characters'
+    
+        if (formData.password !== formData.check_password) newErrors.password_check = 'Passwords do not match'
 
-const Wrapper = styled.div
-    `
-        position: relative;
-        display: flex;
-        width: 80%;
-        flex-grow: 2;
-
-        &:hover input, input[type='text']:focus, input[type='password']:focus {
-            border-color: goldenrod;
-        }
-    `
-
-const FlexLogin = styled.div
-    `
-        margin: 0;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-    `
-
-const Label = styled.label
-    `
-        display: inline-block;
-        font-size: 16px;
-        margin-bottom: 5px;
-    `
-
-const Input = styled.input
-    `
-        width: 100%;
-        background-color: grey;
-        font-size: 16px;
-        border: 3px inset grey;
-        -webkit-transition: 0.5s;
-        transition: 0.5s;
-        outline: none;
-        line-height: 100%;
-
-        &.form-info {
-            height: 30px;
-            border-radius: 7.5px;
-        }
-
-        &.indent {
-            text-indent: 35px;
-        }
-
-        &[type='submit'] {
-            color: white;
-            text-shadow: 2px 2px 2px goldenrod, -2px 2px 3px black;
-            font-size: 20px;
-            height: 60px;
-            background-color: black;
-            border: 3px inset goldenrod;
-            margin-bottom: 0;
-        }
-
-        &[type='submit']:hover {
-            text-shadow: 3px 3px 3px black;
-            font-size: 24px;
-            transform: scale(1.05);
-            background-color: goldenrod;
-            border: 5px inset goldenrod;
-        }
-    `
-
-const LinkLogin = styled.div
-    `
-        width: 45px;
-        height: 45px;
-        background: radial-gradient(rgb(201, 168, 25), rgb(207, 150, 4));
-        margin: 10px 0;
-        border-radius: 50%;
-        -webkit-transition: 0.5s;
-        transition: 0.5s;
-
-        &:hover {
-            box-shadow: 2px 2px black, 2px 2px 12px white;
-        };
-    `
-
-const Icon = styled.button
-    `    
-        background-color: transparent;
-        border: none;
-
-        &.left {
-            position: absolute;
-            top: 3px;
-            left: 5px;
-        }
-
-        &.right {
-            position: absolute;
-            top: 3px;
-            right: 5px;
-        }
-    `
-
-const Img = styled.img
-    `
-        width: 25px;
-        height: 25px;
-    `
-
-const Submit = styled.div
-    `
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 35px;
-    `
-
-export default function SignUp() {
-
-    const [form, setForm] = useState({})
-
-    const handleInputChange = (e) => { 
-        const name = e.target.name
-        const value = e.target.value
-        setForm(values => ({...form, [name]: value}))
-        if (name === 'password') handlePasswordChange(value)
-        if (name == 'check_password') handleCheckPassword()
-        console.log(form)
+        setErrors(newErrors)
+        return Object.keys(newErrors).length === 0
     }
 
-    const handlePasswordChange = (data) => console.log(data)
-    const handleCheckPassword = (data) => {
-        const password = document.getElementById('password')
+    const handleChange = (e) => { 
+        const { name, value } = e.target
+        setFormData({...formData, [name]: value})
+
+        setErrors({...errors, [name]: undefined})
     }
 
-  return (
-    <>
-        <Global styles={GlobalStyles} />
-        <Container>
-            <Form>
-                <Title>CREATE ACCOUNT</Title>
-                <InputBlock> 
-                    <Label htmlFor='fname'>First name</Label>
-                    <Wrapper>
-                        <Input type='text' id='fname' name='fname' className='form-info' value={form.fname || ''} onInput={handleInputChange}/>
-                    </Wrapper>
-                </InputBlock>
+    const handleSubmit = (e) => {
+        e.preventDefault()
 
-                <InputBlock>
-                    <Label htmlFor="lname">Last name</Label>
-                    <Wrapper>
-                        <Input type='text' id='lname' name='lname' className='form-info' value={form.lname || ''} onInput={handleInputChange}/>
-                    </Wrapper>
-                </InputBlock>
+        if (validateForm()) {
+            console.log('Form submitted:', formData)
+            setSubmitted(true)
+            setAuth(true)
+        }
+        console.log(errors)
+    }
 
-                <InputBlock>
-                    <Label htmlFor='username'>Username</Label>
-                    <Wrapper>
-                        <Input type='text' id='username' name='username' className='form-info indent' value={form.username || ''} onInput={handleInputChange}/>
-                        
-                        <Icon className='icon left'>
-                            <Img className='user-logo' src={userIcon} alt='User Icon' />
-                        </Icon>
-                        
-                    </Wrapper>
-                </InputBlock>
+    const togglePassword = () => {
+        setShowPassword(!showPassword)
+    }
 
-                <InputBlock>
-                    <Label htmlFor='password'>Password</Label>
-                    <Wrapper>
-                        <Input type='password' id='password' name='password' className='form-info indent' value={form.password || ''} onInput={handleInputChange}/>
-                        <Icon className='icon left'>
-                            <Img className='lock-logo' src={lockIcon} alt='Lock Icon' />
-                        </Icon>
-                        <Icon className='icon right'>
-                            <Img className='seek' src={hiddenEyeIcon} alt='Hidden Eye Icon' />
-                        </Icon>
-                    </Wrapper>
-                </InputBlock>
+    if (submitted) {
+        return (
+            <div>Success!</div>
+        )
+    }
 
-                <InputBlock>
-                    <Label htmlFor='check-password'>Retype Your Password</Label>
-                    <Wrapper>
-                        <Input type='password' id='check-password' name='check_password' className='form-info indent' value={form.check_password || ''} onInput={handleInputChange}/>
-                        <Icon className='icon left'>
-                            <Img className='lock-logo' src={lockIcon} alt='Lock Icon' />
-                        </Icon>
-                        <Icon className='icon right'>
-                            <Img className='seek' src={hiddenEyeIcon} alt='Hidden Eye Icon' />
-                        </Icon>
-                    </Wrapper>
-                </InputBlock>
-
-                {/*<p><a href='#'>Forgot Password?</a></p>*/}
-                {/* <FlexLogin>
-                    <LinkLogin></LinkLogin>
-                    <LinkLogin></LinkLogin>
-                    <LinkLogin></LinkLogin>
-                </FlexLogin> */}
-                {/*<p><a href='#' className='sign-up'>Sign Up?</a></p>*/}
-
-                <Submit>
-                    <Input type="submit" value="Sign Up?" className='form-info' />
-                </Submit>
-            </Form>
-        </Container>
-    </>
+  return (    
+    <Modal
+        isOpen={isOpen}
+        onRequestClose={onClose}
+        contentLabel="Example Modal"
+        className={styles.Modal__Content}
+        overlayClassName={styles.Modal__Overlay}
+    >
+        <div className={styles.container}>
+            <div className={styles.form_wrapper}>
+                <div className={styles.form_content}>
+                    <h1>Join Us</h1>
+                    <p className={styles.subtitle}>Create your account</p>
+                    <button className={styles.exit} onClick={onClose}>X</button>
+                    <form className={styles.form} onSubmit={handleSubmit}>
+                        <div className={styles.group}>
+                            <label htmlFor='name'>Full Name</label>
+                            <div className={styles.wrapper}>
+                                <User2 size={18} className={styles.icon} />
+                                <input 
+                                    type='text'
+                                    id='name'
+                                    name='name'
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    placeholder='Enter your full name'
+                                    className={errors.name ? styles.error : ''}
+                                />
+                            </div>
+                            {errors.name && <p className={styles.err_msg}>{errors.name}</p>}
+                        </div>
+                        <div className={styles.group}>
+                            <label htmlFor='email'>Email Address</label>
+                            <div className={styles.wrapper}>
+                                <Mail size={18} className={styles.icon} />
+                                <input 
+                                    type='email'
+                                    id='email'
+                                    name='email'
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    placeholder='Enter your email'
+                                    className={errors.email ? styles.error : ''}
+                                />
+                            </div>
+                            {errors.email && <p className={styles.err_msg}>{errors.email}</p>}
+                        </div>
+                        <div className={styles.group}>
+                            <label htmlFor='password'>Password</label>
+                            <div className={styles.wrapper}>
+                                <Lock size={18} className={styles.icon} />
+                                <input 
+                                    type={showPassword ? 'text' : 'password'}
+                                    id='password'
+                                    name='password'
+                                    value={formData.password}
+                                    onChange={handleChange}
+                                    placeholder='Create a password'
+                                    className={errors.password ? styles.error : ''}
+                                />
+                                <button
+                                    type='button'
+                                    className={styles.toggle_password}
+                                    onClick={togglePassword}
+                                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                                >
+                                    {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
+                                </button>
+                            </div>
+                            {errors.password && <p className={styles.err_msg}>{errors.password}</p>}
+            
+                            {formData.password && (
+                                <div className={styles.password_strength}>
+                                    <div className={`${styles.strength_bar} ${
+                                        formData.password.length < 6
+                                        ? 'weak'
+                                        : (!/[A-Z][a-z][0-9][!@#$%^&*]/.test(formData.password))
+                                            ? 'medium'
+                                            : 'strong'
+                                    }`}
+                                    >
+            
+                                    </div>
+                                    <span>
+                                        {formData.password.length < 6
+                                        ? 'Weak'
+                                        : (!/[A-Z][a-z][0-9][!@#$%^&*]/.test(formData.password))
+                                            ? 'Medium'
+                                            : 'Strong'
+                                        }
+                                    </span>
+                                </div>
+                            )}
+                        </div>
+                        <div className={styles.group}>
+                            <label htmlFor='check_password'>Password</label>
+                            <div className={styles.wrapper}>
+                                <Lock size={18} className={styles.icon} />
+                                <input 
+                                    type={showPassword ? 'text' : 'password'}
+                                    id='check_password'
+                                    name='check_password'
+                                    value={formData.check_password}
+                                    onChange={handleChange}
+                                    placeholder='Re-enter your password'
+                                    className={errors.check_password ? styles.error : ''}
+                                />
+                                <button
+                                    type='button'
+                                    className={styles.toggle_password}
+                                    onClick={togglePassword}
+                                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                                >
+                                    {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
+                                </button>
+                            </div>
+                            {errors.check_password && <p className={styles.err_msg}>{errors.check_password}</p>}
+                        </div>
+                        <button type='submit' className={styles.btn}>Create Account</button>
+                    </form>
+                    <p className={styles.form_footer}>Already have an account? <a href='#'>Sign in</a></p>
+                </div>
+            </div>
+        </div>
+    </Modal>
   )
 }

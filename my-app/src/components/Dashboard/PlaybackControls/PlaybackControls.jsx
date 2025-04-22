@@ -9,8 +9,7 @@ export function PlaybackControls({
   currentSongIndex, 
   setCurrentSongIndex,
   totalSongs,
-  toggleChat 
-  totalSongs, 
+  toggleChat,  
   track,
   setTrack,
   trackQueue,
@@ -20,8 +19,9 @@ export function PlaybackControls({
   elapsedTime,
   setElapsedTime,
   duration,
-  setDuration
-
+  setDuration,
+  isAuth,
+  toggleAuth
 }) {
   const [songEnded, setSongEnded] = useState(false);
   const [progress, setProgress] = useState(0.0);
@@ -249,7 +249,7 @@ export function PlaybackControls({
             <button className={styles.controlButton}>
               <Repeat className={styles.controlIcon} />
             </button>
-            <button className={styles.controlButton} onClick={handleLike}>
+            <button className={styles.controlButton} onClick={() => isAuth ? handleLike() : toggleAuth()}>
               <Heart className={`${styles.controlIcon} ${isLiked ? styles.like : ''}`} />
             </button>
           </div>

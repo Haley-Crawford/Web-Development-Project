@@ -9,6 +9,10 @@ import { ArtistPage } from './components/Artist Page/ArtistPage'
 import { Search } from './components/Dashboard/TopBar/Search/Search.jsx'
 import AlbumPage from './albumPage.js'
 import { ChatBot } from './components/Chatbot/Chatbot.jsx';
+import { SignUp } from './components/Sign Up/SignUp.jsx';
+import Modal from 'react-modal';
+
+
 
 function App() {
 
@@ -25,6 +29,8 @@ function App() {
   const [chatDisplay, setChatDisplay] = useState(false)
   const [elapsedTime, setElapsedTime] = useState("");
   const [duration, setDuration] = useState("");
+  const [auth, setAuth] = useState(false)
+  const [showAuth, setShowAuth] = useState(false)
   const apiKey = process.env.REACT_APP_JAMENDO_KEY;
 
   const apiSearch = async () => {
@@ -52,6 +58,10 @@ function App() {
     console.log(chatDisplay)
   }
 
+  const toggleAuth = () => {
+    setShowAuth(true)
+  }
+
   useEffect(() => {
 
     if(isSearching == true){
@@ -66,8 +76,11 @@ function App() {
   }, [isSearching])
 
   return (
-    
     <BrowserRouter>
+      <SignUp
+        isOpen={showAuth}
+        onClose={() => setShowAuth(false)}
+      />
       <div className='app'>
         <Sidebar /> 
         <div className='mainContent'>
@@ -86,10 +99,10 @@ function App() {
                   setCurrentIndex={setCurrentSongIndex}
                 />
               }/>
-              <Route path='/b' element={
+              <Route path='/' element={
                 <ArtistPage />
               }/>
-              <Route path='/' element={
+              <Route path='/a' element={
                 <AlbumPage />
               }/>
               <Route 
@@ -129,6 +142,8 @@ function App() {
             setElapsedTime={setElapsedTime}
             duration={duration}
             setDuration={setDuration}
+            isAuth={auth}
+            toggleAuth={toggleAuth}
           />
         </div>
       </div>
