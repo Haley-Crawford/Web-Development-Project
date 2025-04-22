@@ -2,36 +2,32 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background-color: black;
 }
 
 .album-cover {
-    width: 200px;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 20px; 
+    width: 200px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Optional: rounded corners */
+    margin-bottom: 20px; /* Space below the image */
 }
 
-.header, .footer {
+.header {
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    background-color: #b09f4f;
-    color: white;
+    background-color: #f0f0f0;
 }
 
 .sidebar {
     width: 200px;
-    background-color: darkgray; 
+    background-color: #e8e8e8;
     padding: 20px;
-    color: gold; 
 }
 
 .album-info {
     flex-grow: 1;
     padding: 20px;
-    background-color: black; 
-    color: white; 
+    background-color: #fff;
 }
 
 .song-list {
@@ -43,12 +39,17 @@
     justify-content: space-between;
     padding: 10px 0;
     border-bottom: 1px solid #ccc;
-    color: gold;
 }
 
 .favorite-button {
     background: none;
     border: none;
     cursor: pointer;
-    color: gold;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #f0f0f0;
 }
