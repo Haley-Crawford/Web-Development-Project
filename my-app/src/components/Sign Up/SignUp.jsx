@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import { User2, Mail, Lock, Eye, EyeOff } from 'lucide-react'
 import styles from './SignUp.module.css'
 import Modal from 'react-modal'
+import { signUpWithEmail, signInWithGoogle } from '../../firebase'; 
+import { useAuth } from '../../AuthProvider'
 
 Modal.setAppElement('#root')
 
-export function SignUp({ isOpen, onClose, setAuth }) {
+export function SignUp({ isOpen, onClose }) {
+    const { currentUser } = useAuth();
 
     const [formData, setFormData] = useState({
         name: '',
@@ -42,13 +45,13 @@ export function SignUp({ isOpen, onClose, setAuth }) {
         setErrors({...errors, [name]: undefined})
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         if (validateForm()) {
-            console.log('Form submitted:', formData)
-            setSubmitted(true)
-            setAuth(true)
+            
+            const user = await signUpWithEmail(formData.email, formData.password, formData.name);
+            onClose()
         }
         console.log(errors)
     }
