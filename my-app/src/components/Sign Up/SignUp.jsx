@@ -3,10 +3,12 @@ import { User2, Mail, Lock, Eye, EyeOff } from 'lucide-react'
 import styles from './SignUp.module.css'
 import Modal from 'react-modal'
 import { signUpWithEmail, signInWithGoogle } from '../../firebase'; 
+import { useAuth } from '../../AuthProvider'
 
 Modal.setAppElement('#root')
 
-export function SignUp({ isOpen, onClose, setAuth }) {
+export function SignUp({ isOpen, onClose }) {
+    const { currentUser } = useAuth();
 
     const [formData, setFormData] = useState({
         name: '',
@@ -48,9 +50,8 @@ export function SignUp({ isOpen, onClose, setAuth }) {
 
         if (validateForm()) {
             
-            await signUpWithEmail(formData.email, formData.password, formData.name);
-            onClose();
-            setAuth(true);
+            const user = await signUpWithEmail(formData.email, formData.password, formData.name);
+            onClose()
         }
         console.log(errors)
     }
