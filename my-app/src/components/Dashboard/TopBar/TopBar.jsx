@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, User, ChevronDown, Settings, LogOut } from 'lucide-react';
+import { Search, User, ChevronDown, Settings, LogOut, Filter } from 'lucide-react';
 import styles from './TopBar.module.css';
 
 
-export function TopBar({ showDropdown, setShowDropdown, setIsSearching, searchInput, setSearchInput }) {
+export function TopBar({ showFilter, setShowFilter, showDropdown, setShowDropdown, setIsSearching, searchInput, setSearchInput }) {
   const nav = useNavigate();
 
   const handleChange = (e) => {
@@ -24,7 +24,7 @@ export function TopBar({ showDropdown, setShowDropdown, setIsSearching, searchIn
           <input
             type='text'
             className={styles.searchInput}
-            placeholder='Search for songs, artists, or playlists'
+            placeholder='Search for songs, artists, or albums'
             value={searchInput}
             onChange={handleChange}
             onKeyDown={(e) => {
@@ -34,6 +34,10 @@ export function TopBar({ showDropdown, setShowDropdown, setIsSearching, searchIn
               }
             }}
           />
+          <Filter className={styles.filterIcon} style={{cursor: 'pointer'}} onClick={() => setShowFilter(!showFilter)}/>
+            {showFilter && (
+              <div className={styles.filterDropdown} >Hello World!</div>
+            )}
         </div>
       </div>
 

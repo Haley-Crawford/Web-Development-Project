@@ -22,6 +22,7 @@ function App() {
   const [trackQueue, setTrackQueue] = useState([]);
   const [prevTracks, setPrevTracks] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -90,6 +91,8 @@ function App() {
             setSearchInput={setSearchInput}
             showDropdown={showDropdown} 
             setShowDropdown={setShowDropdown} 
+            showFilter={showFilter}
+            setShowFilter={setShowFilter}
           />
           <main className='contentArea'>
             <Routes>
@@ -102,7 +105,7 @@ function App() {
               <Route path='/b' element={
                 <ArtistPage />
               }/>
-              <Route path='/a' element={
+              <Route path='/b' element={
                 <AlbumPage />
               }/>
               <Route 
