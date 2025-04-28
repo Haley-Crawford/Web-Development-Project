@@ -12,7 +12,7 @@ import { ChatBot } from './components/Chatbot/Chatbot.jsx';
 import { SignUp } from './components/Sign Up/SignUp.jsx';
 import Modal from 'react-modal';
 import { AuthProvider } from './AuthProvider.jsx';
-
+import { LogIn } from './components/Sign Up/LogIn.jsx'
 
 
 function App() {
@@ -32,6 +32,7 @@ function App() {
   const [duration, setDuration] = useState("");
   const [auth, setAuth] = useState(false)
   const [showAuth, setShowAuth] = useState(false)
+  const [showLogIn, setShowLogIn] = useState(false)
   const apiKey = process.env.REACT_APP_JAMENDO_KEY;
 
   const apiSearch = async () => {
@@ -63,6 +64,10 @@ function App() {
     setShowAuth(true)
   }
 
+  const logInToggle = () => {
+    setShowLogIn(true)
+  }
+
   useEffect(() => {
 
     if(isSearching == true){
@@ -82,6 +87,12 @@ function App() {
         <SignUp
           isOpen={showAuth}
           onClose={() => setShowAuth(false)}
+          logInToggle={logInToggle}
+        />
+        <LogIn 
+          isOpen={showLogIn}
+          onClose={() => setShowLogIn(false)}
+          signUpToggle={toggleAuth}
         />
         <div className='app'>
           <Sidebar /> 
@@ -91,7 +102,9 @@ function App() {
               searchInput={searchInput}
               setSearchInput={setSearchInput}
               showDropdown={showDropdown} 
-              setShowDropdown={setShowDropdown} 
+              setShowDropdown={setShowDropdown}
+              toggleAuth={toggleAuth} 
+              logInToggle={logInToggle}
             />
             <main className='contentArea'>
               <Routes>

@@ -7,7 +7,7 @@ import { auth } from '../../../firebase'
 import { signOut } from 'firebase/auth'
 
 
-export function TopBar({ showDropdown, setShowDropdown, setIsSearching, searchInput, setSearchInput }) {
+export function TopBar({ showDropdown, setShowDropdown, setIsSearching, searchInput, setSearchInput, toggleAuth, logInToggle }) {
   const nav = useNavigate();
   const {currentUser} = useAuth();
 
@@ -61,7 +61,7 @@ export function TopBar({ showDropdown, setShowDropdown, setIsSearching, searchIn
 
         {showDropdown && !currentUser && (
           <div className={styles.dropdown}>
-            <button className={`${styles.dropdownItem} ${styles.logoutButton}`} style={{cursor: "pointer"}}>
+            <button onClick={logInToggle} className={`${styles.dropdownItem} ${styles.logoutButton}`} style={{cursor: "pointer"}}>
               <LogIn className={styles.dropdownIcon} />
               <span>Log in / Sign up</span>
             </button>
