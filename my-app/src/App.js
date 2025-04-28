@@ -3,13 +3,12 @@ import React, { useState, useRef, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Sidebar } from './components/Sidebar/Sidebar';
 import { TopBar } from './components/Dashboard/TopBar/TopBar'
-import { SongCarousel } from './components/Dashboard/SongCarousel/SongCarousel'
 import { PlaybackControls } from './components/Dashboard/PlaybackControls/PlaybackControls'
 import { ArtistPage } from './components/Artist Page/ArtistPage'
 import { Search } from './components/Dashboard/TopBar/Search/Search.jsx'
-import AlbumPage from './albumPage.js'
 import { ChatBot } from './components/Chatbot/Chatbot.jsx';
 import { SignUp } from './components/Sign Up/SignUp.jsx';
+import { Dashboard } from './components/Dashboard/Dashboard.jsx';
 import Modal from 'react-modal';
 import { AuthProvider } from './AuthProvider.jsx';
 import { LogIn } from './components/Sign Up/LogIn.jsx'
@@ -23,6 +22,7 @@ function App() {
   const [trackQueue, setTrackQueue] = useState([]);
   const [prevTracks, setPrevTracks] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -30,13 +30,14 @@ function App() {
   const [chatDisplay, setChatDisplay] = useState(false)
   const [elapsedTime, setElapsedTime] = useState("");
   const [duration, setDuration] = useState("");
-  const [auth, setAuth] = useState(false)
-  const [showAuth, setShowAuth] = useState(false)
+  const [auth, setAuth] = useState(false);
+  const [showAuth, setShowAuth] = useState(false);
+  const [filterWord, setFilterWord] = useState('tracks');
   const [showLogIn, setShowLogIn] = useState(false)
   const apiKey = process.env.REACT_APP_JAMENDO_KEY;
 
   const apiSearch = async () => {
-    const url = `https://api.jamendo.com/v3.0/tracks/?client_id=${apiKey}&format=jsonpretty&limit=5&search=${encodeURIComponent(searchInput)}`;
+    const url = `https://api.jamendo.com/v3.0/${filterWord}/?client_id=${apiKey}&format=jsonpretty&limit=5&search=${encodeURIComponent(searchInput)}`;
     
     try{
 
@@ -76,7 +77,11 @@ function App() {
       
       console.log(`search for ${searchInput}`)
 
-      setIsSearching(false);
+      setFilterWord('tracks')
+
+      setTimeout(() => {
+        setIsSearching(false);
+      }, 2000)
     }
 
   }, [isSearching])
@@ -103,22 +108,25 @@ function App() {
               setSearchInput={setSearchInput}
               showDropdown={showDropdown} 
               setShowDropdown={setShowDropdown}
+            showFilter={showFilter}
+            setShowFilter={setShowFilter}
+            setFilterWord={setFilterWord}
               toggleAuth={toggleAuth} 
               logInToggle={logInToggle}
             />
             <main className='contentArea'>
               <Routes>
                 <Route path='/' element={
-                  <SongCarousel 
-                    currentIndex={currentSongIndex}
-                    setCurrentIndex={setCurrentSongIndex}
+                  <Dashboard 
+                    currentSongIndex={currentSongIndex}
+                    setCurrentSongIndex={setCurrentSongIndex}
                   />
                 }/>
                 <Route path='/b' element={
                   <ArtistPage />
                 }/>
-                <Route path='/a' element={
-                  <AlbumPage />
+                <Route path='/b' element={
+                  null
                 }/>
                 <Route 
                   path='/search' 
@@ -132,6 +140,8 @@ function App() {
                       setTrack={setTrack}
                       trackQueue={trackQueue}
                       setTrackQueue={setTrackQueue}
+                    filterWord={filterWord}
+                    isSearching={isSearching}
                     />
                   } 
                 />

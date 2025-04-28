@@ -1,24 +1,28 @@
 .container {
-    position: absolute;
-    bottom: 0;
-    right: 0;
+    position: sticky;
+    bottom: 25px;
+    left: calc(100% - 325px);
     background-color: #111;
     color: goldenrod;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding: 1.3rem;
-    max-width: 200px;
-    height: 70%;
+    padding: 1rem;
+    max-width: 275px;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(255,215,0,0.2);
+    box-shadow: 0 0 15px rgba(199, 170, 7, 0.603);
     transition: opacity 0.5s ease, transform 0.5s ease;
     opacity: 0;
     transform: translateY(50px);
 }
 
-h1 {
-    text-align: center;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.heading {
+    font-size: 1.5rem;
 }
 
 .chat_box {
@@ -29,7 +33,7 @@ h1 {
     padding: 1rem;
     border-radius: 8px;
     border: 3px solid #222;
-    height: calc(100% - 70px);
+
 }
 
 .chat_log {
@@ -40,6 +44,95 @@ h1 {
     background-color: #1a1a1a;
     border-radius: 8px;
     border: 2px solid #333;
+}
+
+.message_wrapper {
+    display: flex;
+}
+
+.justify_start {
+    justify-content: flex-start;
+}
+  
+.justify_end {
+    justify-content: flex-end;
+}
+
+.message {
+    max-width: 80%;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+  
+.user_msg {
+    background-color: #a3cc93;
+    color: black;
+}
+  
+.bot_msg {
+    background-color: goldenrod;
+    color: black;
+}
+
+.bot_header {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.reasoning {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: #000;
+}
+  
+.timestamp {
+    font-size: 0.75rem;
+    color: #000;
+    margin-top: 0.5rem;
+    display: block;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+.bubble {
+    max-width: 80%;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background-color: #f3f4f6; /* Tailwind gray-100 */
+    color: #1f2937; /* Tailwind gray-800 */
+}
+
+.dots {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.dot {
+    animation: pulse 1s infinite;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 1;
+    }
 }
 
 .chat_response {
@@ -73,7 +166,7 @@ h1 {
 
 .submit_btn {
     border-radius: 6px;
-    height: 1.5rem;
+    height: 1.7rem;
     font-weight: 700;
 }
 

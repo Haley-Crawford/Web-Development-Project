@@ -36,18 +36,10 @@ export const originalSongs = [
 
 export function SongCarousel({ currentIndex, setCurrentIndex }) {
   //const [currentIndex, setCurrentIndex] = useState(0)
-  const [displayedSongs, setDisplayedSongs] = useState([]);
+  const [displayedSongs, setDisplayedSongs] = useState(originalSongs);
   const timeoutRef = useRef(null);
   const transitionRef = useRef(true);
 
-  useEffect(() => {
-    // Initialize with duplicated songs for continuous scrolling
-    const duplicatedSongs = [...originalSongs, ...originalSongs.map(song => ({
-      ...song,
-      id: song.id + originalSongs.length
-    }))];
-    setDisplayedSongs(duplicatedSongs);
-  }, []);
 
   const resetTimeout = () => {
     if (timeoutRef.current) {
@@ -69,7 +61,9 @@ export function SongCarousel({ currentIndex, setCurrentIndex }) {
           transitionRef.current = true;
         }, 50);
       } else {
+        const loopSongs = [...displayedSongs, displayedSongs[currentIndex]];
         setCurrentIndex((prevIndex) => prevIndex + 1);
+        setDisplayedSongs(loopSongs);
       }
     }, 3000);
 
@@ -90,7 +84,6 @@ export function SongCarousel({ currentIndex, setCurrentIndex }) {
 
   return (
     <div className={styles.carouselContainer}>
-      <h1 className={styles.welcomeText}>Welcome Back</h1>
       <div 
         className={styles.carousel}
         style={{

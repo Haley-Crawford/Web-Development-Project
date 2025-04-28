@@ -8,7 +8,7 @@
 }
 
 .mainContent {
-  flex: 1;
+  flex: 1 1;
   display: flex;
   flex-direction: column;
   min-width: 0; /* Ensures flex items can shrink below content size */
@@ -16,9 +16,9 @@
 
 .contentArea {
   position: relative;
-  flex: 1;
-  /* padding: 2rem; */
+  flex: 1 1;
   overflow: auto;
+  scrollbar-width: none;
   display: flex;
   flex-direction: column;
   min-height: 0; /* Ensures flex items can shrink below content size */
