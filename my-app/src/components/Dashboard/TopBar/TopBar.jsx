@@ -4,12 +4,20 @@ import { Search, User, ChevronDown, Settings, LogOut, Filter } from 'lucide-reac
 import styles from './TopBar.module.css';
 
 
-export function TopBar({ showFilter, setShowFilter, showDropdown, setShowDropdown, setIsSearching, searchInput, setSearchInput }) {
+export function TopBar({ showFilter, setShowFilter, showDropdown, setShowDropdown, setIsSearching, searchInput, setSearchInput, setFilterWord }) {
   const nav = useNavigate();
 
   const handleChange = (e) => {
     setSearchInput(e.target.value)
   };
+
+  const checkBox = (e) => {
+    const checkboxes = document.getElementsByName('check')
+    Array.from(checkboxes).forEach((box) => {
+      if (box != e.target) box.checked = false
+    })
+    setFilterWord(e.target.id)
+  }
 
   return (
     <div className={styles.topBar}>
@@ -36,7 +44,24 @@ export function TopBar({ showFilter, setShowFilter, showDropdown, setShowDropdow
           />
           <Filter className={styles.filterIcon} style={{cursor: 'pointer'}} onClick={() => setShowFilter(!showFilter)}/>
             {showFilter && (
-              <div className={styles.filterDropdown} >Hello World!</div>
+              <div className={styles.filterDropdown} >
+
+                <div className={styles.flex_dropDown}>
+                  <input type='checkbox' name='check' id='tracks' onClick={checkBox} className={styles.filterChoice}/>
+                  <label htmlFor='tracks'>Songs</label>
+                </div>
+
+                <div className={styles.flex_dropDown}>
+                  <input type='checkbox' name='check' id='artists' onClick={checkBox} className={styles.filterChoice}/>
+                  <label htmlFor='artists'>Artists</label>
+                </div>
+
+                <div className={styles.flex_dropDown}>
+                  <input type='checkbox' name='check' id='albums' onClick={checkBox} className={styles.filterChoice}/>
+                  <label htmlFor='albums'>Albums</label>
+                </div>
+
+              </div>
             )}
         </div>
       </div>

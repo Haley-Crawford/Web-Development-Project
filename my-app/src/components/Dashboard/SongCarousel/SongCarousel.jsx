@@ -90,7 +90,6 @@ export function SongCarousel({ currentIndex, setCurrentIndex }) {
 
   return (
     <div className={styles.carouselContainer}>
-      <h1 className={styles.welcomeText}>Welcome Back</h1>
       <div 
         className={styles.carousel}
         style={{

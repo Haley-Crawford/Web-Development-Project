@@ -10,6 +10,7 @@ import { Search } from './components/Dashboard/TopBar/Search/Search.jsx'
 import AlbumPage from './albumPage.js'
 import { ChatBot } from './components/Chatbot/Chatbot.jsx';
 import { SignUp } from './components/Sign Up/SignUp.jsx';
+import { Dashboard } from './components/Dashboard/Dashboard.jsx';
 import Modal from 'react-modal';
 
 
@@ -30,12 +31,13 @@ function App() {
   const [chatDisplay, setChatDisplay] = useState(false)
   const [elapsedTime, setElapsedTime] = useState("");
   const [duration, setDuration] = useState("");
-  const [auth, setAuth] = useState(false)
-  const [showAuth, setShowAuth] = useState(false)
+  const [auth, setAuth] = useState(false);
+  const [showAuth, setShowAuth] = useState(false);
+  const [filterWord, setFilterWord] = useState('tracks');
   const apiKey = process.env.REACT_APP_JAMENDO_KEY;
 
   const apiSearch = async () => {
-    const url = `https://api.jamendo.com/v3.0/tracks/?client_id=${apiKey}&format=jsonpretty&limit=5&search=${encodeURIComponent(searchInput)}`;
+    const url = `https://api.jamendo.com/v3.0/${filterWord}/?client_id=${apiKey}&format=jsonpretty&limit=5&search=${encodeURIComponent(searchInput)}`;
     
     try{
 
@@ -71,7 +73,11 @@ function App() {
       
       console.log(`search for ${searchInput}`)
 
-      setIsSearching(false);
+      setFilterWord('tracks')
+
+      setTimeout(() => {
+        setIsSearching(false);
+      }, 2000)
     }
 
   }, [isSearching])
@@ -93,13 +99,14 @@ function App() {
             setShowDropdown={setShowDropdown} 
             showFilter={showFilter}
             setShowFilter={setShowFilter}
+            setFilterWord={setFilterWord}
           />
           <main className='contentArea'>
             <Routes>
               <Route path='/' element={
-                <SongCarousel 
-                  currentIndex={currentSongIndex}
-                  setCurrentIndex={setCurrentSongIndex}
+                <Dashboard 
+                  currentSongIndex={currentSongIndex}
+                  setCurrentSongIndex={setCurrentSongIndex}
                 />
               }/>
               <Route path='/b' element={
@@ -120,6 +127,8 @@ function App() {
                     setTrack={setTrack}
                     trackQueue={trackQueue}
                     setTrackQueue={setTrackQueue}
+                    filterWord={filterWord}
+                    isSearching={isSearching}
                   />
                 } 
               />

@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 100;
 }
 
 .searchContainer {
@@ -39,11 +40,57 @@
   position: absolute;
   top: 3rem;
   right: 0;
-  width: 12rem;
+  width: 7rem;
   background-color: rgb(38, 38, 38);
   border-radius: 0.375rem;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  padding: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.flex_dropDown {
+  display: flex;
+  position: relative;
+}
+
+.flex_dropDown input {
+  display: none;
+}
+
+.filterDropdown label::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.filterChoice:checked + label::before {
+  background-color: #cfbb25; /* Green when checked */
+  border-color: #b1a01c;
+  box-shadow: 0 0 10px rgba(249, 217, 58, 0.4);
+}
+
+.filterChoice:checked + label::after {
+  content: '✔';
+  position: absolute;
+  right: 4px;
+  top: 0;
+  font-size: 16px;
+  color: black;
+  transition: opacity 0.2s;
+  opacity: 0;
+}
+
+.filterChoice:checked + label::after {
+  opacity: 1; /* Fade in the checkmark */
 }
 
 .searchInput {
