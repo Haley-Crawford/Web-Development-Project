@@ -3,16 +3,12 @@ import React, { useState, useRef, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Sidebar } from './components/Sidebar/Sidebar';
 import { TopBar } from './components/Dashboard/TopBar/TopBar'
-import { SongCarousel } from './components/Dashboard/SongCarousel/SongCarousel'
 import { PlaybackControls } from './components/Dashboard/PlaybackControls/PlaybackControls'
 import { ArtistPage } from './components/Artist Page/ArtistPage'
 import { Search } from './components/Dashboard/TopBar/Search/Search.jsx'
-import AlbumPage from './albumPage.js'
 import { ChatBot } from './components/Chatbot/Chatbot.jsx';
 import { SignUp } from './components/Sign Up/SignUp.jsx';
 import { Dashboard } from './components/Dashboard/Dashboard.jsx';
-import Modal from 'react-modal';
-
 
 
 function App() {
@@ -113,7 +109,7 @@ function App() {
                 <ArtistPage />
               }/>
               <Route path='/b' element={
-                <AlbumPage />
+                null
               }/>
               <Route 
                 path='/search' 

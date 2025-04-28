@@ -1,15 +1,14 @@
 .container {
-    position: absolute;
-    bottom: 115px;
-    right: 0;
+    position: sticky;
+    bottom: 25px;
+    left: calc(100% - 325px);
     background-color: #111;
     color: goldenrod;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 1rem;
     max-width: 275px;
-    height: 60%;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(255,215,0,0.2);
+    box-shadow: 0 0 15px rgba(199, 170, 7, 0.603);
     transition: opacity 0.5s ease, transform 0.5s ease;
     opacity: 0;
     transform: translateY(50px);
@@ -34,7 +33,7 @@
     padding: 1rem;
     border-radius: 8px;
     border: 3px solid #222;
-    height: 100%;
+
 }
 
 .chat_log {
@@ -167,7 +166,7 @@
 
 .submit_btn {
     border-radius: 6px;
-    height: 1.5rem;
+    height: 1.7rem;
     font-weight: 700;
 }
 
