@@ -1,12 +1,13 @@
 import React, {useState, useRef} from 'react'
 import { Link } from 'react-router-dom'
-import styles from './Search.module.css'
 import { Songs } from '../../../Artist Page/Songs/Songs'
+import { Albums } from '../../../Search Results/Albums'
+import styles from './Search.module.css'
 import gif from '../../../../assets/banana.gif'
 
 const apiKey = process.env.REACT_APP_JAMENDO_KEY;
 
-export function Search({searchResults, setSearchResults, audioRef, audioPlaying, setAudioPlaying, setTrack, trackQueue, setTrackQueue}) {
+export function Search({searchResults, setSearchResults, audioRef, audioPlaying, setAudioPlaying, setTrack, trackQueue, setTrackQueue, filterWord, isSearching}) {
   const [searchInput, setSearchInput] = useState("");
 
   const handleInputChange = (e) => {
@@ -45,20 +46,36 @@ export function Search({searchResults, setSearchResults, audioRef, audioPlaying,
   };
 
   return (
-      <div id='searchResults'>
-        {searchResults.length > 1 
-        ? <Songs 
-            songs={searchResults} 
-            setSongs={setSearchResults} 
-            audioRef={audioRef}
-            audioPlaying={audioPlaying}
-            setAudioPlaying={setAudioPlaying}
-            setTrack={setTrack}
-            trackQueue={trackQueue}
-            setTrackQueue={setTrackQueue}
-            style={{height: "100%"}}
-          />
-        : <div className={styles.notFound}>
+      <div className={styles.results} id='searchResults'>
+        {isSearching 
+        ? <div className={styles.bouncing_dots}>
+            <span className={styles.bouncing_dot}>.</span>
+            <span className={styles.bouncing_dot}>.</span>
+            <span className={styles.bouncing_dot}>.</span>
+            <span className={styles.bouncing_dot}>.</span>
+          </div>
+        : searchResults.length > 1 
+          ? filterWord === 'tracks' 
+            ? (<Songs 
+                songs={searchResults} 
+                setSongs={setSearchResults} 
+                audioRef={audioRef}
+                audioPlaying={audioPlaying}
+                setAudioPlaying={setAudioPlaying}
+                setTrack={setTrack}
+                trackQueue={trackQueue}
+                setTrackQueue={setTrackQueue}
+                style={{height: "100%"}}
+            />)
+            : filterWord === 'artists'
+              ? (null)
+              : filterWord === 'albums'
+                ? (<Albums 
+                    albums={searchResults}
+                    style={{height: '100%'}}
+                  />)
+                : null
+          : <div className={styles.notFound}>
             <img src={gif} alt='' className={styles.img}/>
             <h1 className={styles.msg}>Uh Oh...</h1>
             <p className={styles.txt}>We don't have that in our database</p>
