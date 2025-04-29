@@ -9,6 +9,9 @@ import { Search } from './components/Dashboard/TopBar/Search/Search.jsx'
 import { ChatBot } from './components/Chatbot/Chatbot.jsx';
 import { SignUp } from './components/Sign Up/SignUp.jsx';
 import { Dashboard } from './components/Dashboard/Dashboard.jsx';
+import Modal from 'react-modal';
+import { AuthProvider } from './AuthProvider.jsx';
+
 
 
 function App() {
@@ -123,37 +126,80 @@ function App() {
                     setTrackQueue={setTrackQueue}
                     filterWord={filterWord}
                     isSearching={isSearching}
+    <AuthProvider>
+      <BrowserRouter>
+        <SignUp
+          isOpen={showAuth}
+          onClose={() => setShowAuth(false)}
+        />
+        <div className='app'>
+          <Sidebar /> 
+          <div className='mainContent'>
+            <TopBar 
+              setIsSearching={setIsSearching}
+              searchInput={searchInput}
+              setSearchInput={setSearchInput}
+              showDropdown={showDropdown} 
+              setShowDropdown={setShowDropdown} 
+            />
+            <main className='contentArea'>
+              <Routes>
+                <Route path='/' element={
+                  <SongCarousel 
+                    currentIndex={currentSongIndex}
+                    setCurrentIndex={setCurrentSongIndex}
                   />
-                } 
-              />
-            </Routes>
+                }/>
+                <Route path='/b' element={
+                  <ArtistPage />
+                }/>
+                <Route path='/a' element={
+                  <AlbumPage />
+                }/>
+                <Route 
+                  path='/search' 
+                  element={
+                    <Search 
+                      searchResults={searchResults} 
+                      setSearchResults={setSearchResults} 
+                      audioRef={audioRef}
+                      audioPlaying={audioPlaying}
+                      setAudioPlaying={setAudioPlaying}
+                      setTrack={setTrack}
+                      trackQueue={trackQueue}
+                      setTrackQueue={setTrackQueue}
+                    />
+                  } 
+                />
+              </Routes>
 
-            <ChatBot isVisible={chatDisplay}/>
-          </ main>
-          <PlaybackControls 
-            audioRef={audioRef}
-            isPlaying={audioPlaying} 
-            setIsPlaying={setAudioPlaying}
-            currentSongIndex={currentSongIndex}
-            setCurrentSongIndex={setCurrentSongIndex}
-            totalSongs={5}
-            toggleChat={toggleChat}
-            track={track}
-            setTrack={setTrack}
-            trackQueue={trackQueue}
-            setTrackQueue={setTrackQueue}
-            prevTracks={prevTracks}
-            setPrevTracks={setPrevTracks}
-            elapsedTime={elapsedTime}
-            setElapsedTime={setElapsedTime}
-            duration={duration}
-            setDuration={setDuration}
-            isAuth={auth}
-            toggleAuth={toggleAuth}
-          />
+              <ChatBot isVisible={chatDisplay}/>
+            </ main>
+            <PlaybackControls 
+              audioRef={audioRef}
+              isPlaying={audioPlaying} 
+              setIsPlaying={setAudioPlaying}
+              currentSongIndex={currentSongIndex}
+              setCurrentSongIndex={setCurrentSongIndex}
+              totalSongs={5}
+              toggleChat={toggleChat}
+              track={track}
+              setTrack={setTrack}
+              trackQueue={trackQueue}
+              setTrackQueue={setTrackQueue}
+              prevTracks={prevTracks}
+              setPrevTracks={setPrevTracks}
+              elapsedTime={elapsedTime}
+              setElapsedTime={setElapsedTime}
+              duration={duration}
+              setDuration={setDuration}
+              isAuth={auth}
+              toggleAuth={toggleAuth}
+            />
+          </div>
         </div>
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
