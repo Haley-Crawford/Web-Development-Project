@@ -9,7 +9,6 @@ import { Search } from './components/Dashboard/TopBar/Search/Search.jsx'
 import { ChatBot } from './components/Chatbot/Chatbot.jsx';
 import { SignUp } from './components/Sign Up/SignUp.jsx';
 import { Dashboard } from './components/Dashboard/Dashboard.jsx';
-import Modal from 'react-modal';
 import { AuthProvider } from './AuthProvider.jsx';
 
 
@@ -80,52 +79,6 @@ function App() {
   }, [isSearching])
 
   return (
-    <BrowserRouter>
-      <SignUp
-        isOpen={showAuth}
-        onClose={() => setShowAuth(false)}
-      />
-      <div className='app'>
-        <Sidebar /> 
-        <div className='mainContent'>
-          <TopBar 
-            setIsSearching={setIsSearching}
-            searchInput={searchInput}
-            setSearchInput={setSearchInput}
-            showDropdown={showDropdown} 
-            setShowDropdown={setShowDropdown} 
-            showFilter={showFilter}
-            setShowFilter={setShowFilter}
-            setFilterWord={setFilterWord}
-          />
-          <main className='contentArea'>
-            <Routes>
-              <Route path='/' element={
-                <Dashboard 
-                  currentSongIndex={currentSongIndex}
-                  setCurrentSongIndex={setCurrentSongIndex}
-                />
-              }/>
-              <Route path='/b' element={
-                <ArtistPage />
-              }/>
-              <Route path='/b' element={
-                null
-              }/>
-              <Route 
-                path='/search' 
-                element={
-                  <Search 
-                    searchResults={searchResults} 
-                    setSearchResults={setSearchResults} 
-                    audioRef={audioRef}
-                    audioPlaying={audioPlaying}
-                    setAudioPlaying={setAudioPlaying}
-                    setTrack={setTrack}
-                    trackQueue={trackQueue}
-                    setTrackQueue={setTrackQueue}
-                    filterWord={filterWord}
-                    isSearching={isSearching}
     <AuthProvider>
       <BrowserRouter>
         <SignUp
@@ -141,20 +94,23 @@ function App() {
               setSearchInput={setSearchInput}
               showDropdown={showDropdown} 
               setShowDropdown={setShowDropdown} 
+              showFilter={showFilter}
+              setShowFilter={setShowFilter}
+              setFilterWord={setFilterWord}
             />
             <main className='contentArea'>
               <Routes>
                 <Route path='/' element={
-                  <SongCarousel 
-                    currentIndex={currentSongIndex}
-                    setCurrentIndex={setCurrentSongIndex}
+                  <Dashboard 
+                    currentSongIndex={currentSongIndex}
+                    setCurrentSongIndex={setCurrentSongIndex}
                   />
                 }/>
                 <Route path='/b' element={
                   <ArtistPage />
                 }/>
                 <Route path='/a' element={
-                  <AlbumPage />
+                  null
                 }/>
                 <Route 
                   path='/search' 
@@ -168,6 +124,8 @@ function App() {
                       setTrack={setTrack}
                       trackQueue={trackQueue}
                       setTrackQueue={setTrackQueue}
+                      filterWord={filterWord}
+                      isSearching={isSearching}
                     />
                   } 
                 />
