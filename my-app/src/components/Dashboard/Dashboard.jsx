@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { SongCarousel } from './SongCarousel/SongCarousel';
 import { Category } from './Category/Category';
+import { AudioDashboard } from './Trending Songs/TrendingDashboard';
 import styles from './Dashboard.module.css';
 
 export function Dashboard() {
-  const [isPlaying, setIsPlaying] = useState(false);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
 
   return (        
@@ -13,8 +13,8 @@ export function Dashboard() {
       <SongCarousel 
         currentIndex={currentSongIndex}
         setCurrentIndex={setCurrentSongIndex}
-        isPlaying={isPlaying}
       />
       <Category />
+      <AudioDashboard />
     </main>)
 }

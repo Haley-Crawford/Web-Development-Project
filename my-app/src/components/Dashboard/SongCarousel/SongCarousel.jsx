@@ -35,7 +35,6 @@ export const originalSongs = [
 ];
 
 export function SongCarousel({ currentIndex, setCurrentIndex }) {
-  //const [currentIndex, setCurrentIndex] = useState(0)
   const [displayedSongs, setDisplayedSongs] = useState(originalSongs);
   const timeoutRef = useRef(null);
   const transitionRef = useRef(true);
@@ -61,7 +60,11 @@ export function SongCarousel({ currentIndex, setCurrentIndex }) {
           transitionRef.current = true;
         }, 50);
       } else {
-        const loopSongs = [...displayedSongs, displayedSongs[currentIndex]];
+        const currSong = {
+          ...displayedSongs[currentIndex], 
+          id: displayedSongs.length+1,
+        }
+        const loopSongs = [...displayedSongs, currSong];
         setCurrentIndex((prevIndex) => prevIndex + 1);
         setDisplayedSongs(loopSongs);
       }
@@ -70,7 +73,7 @@ export function SongCarousel({ currentIndex, setCurrentIndex }) {
     return () => {
       resetTimeout();
     };
-  }, [currentIndex, setCurrentIndex, displayedSongs.length]); //isPlaying, setCurrentIndex
+  }, [currentIndex, setCurrentIndex, displayedSongs]); //isPlaying, setCurrentIndex
 
   const getCardClassName = (index) => {
     let className = styles.songCard;
