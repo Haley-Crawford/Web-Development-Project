@@ -79,7 +79,7 @@ export function Songs({ songs, setSongs, audioRef, audioPlaying, setAudioPlaying
                             <CirclePlus className={styles.icon} onClick={() => {handleQueue(song)}} style={{cursor: "pointer"}} />
                         </button>
                         <button className={styles.btn} style={{cursor: "pointer"}}>
-                            <SongLike song={song} className={styles.icon} />
+                            <SongLike song={song} className={styles.icon} fav={fav} />
                         </button>
                     </li>
                 )}

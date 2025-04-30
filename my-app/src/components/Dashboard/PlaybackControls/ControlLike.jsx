@@ -18,7 +18,7 @@ export const ControlLike = ({ track }) => {
             setIsLiked(likeSnap.exists());
         }
 
-        if(track){
+        if(track.id){
             checkIfLiked();
         }
         
