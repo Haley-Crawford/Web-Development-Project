@@ -19,7 +19,6 @@ export function Sidebar({ logInToggle }) {
     { id: 3, name: 'Chill Vibes', imageUrl: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?auto=format&fit=crop&q=80&w=200&h=200', extension: 'chill' },
   ];
 
-  const nav = useNavigate()
 
   return (
     <div className={styles.sidebar}>
