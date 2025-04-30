@@ -2,10 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Banana, Home, Library, Plus } from 'lucide-react';
 import styles from './Sidebar.module.css';
+import { useAuth } from '../../AuthProvider';
 
 
-export function Sidebar({}) {
+export function Sidebar({ logInToggle }) {
   const nav = useNavigate();
+  const { currentUser } = useAuth();
 
   const handleFavorites = () => {
     nav("/favorites")
@@ -42,7 +44,7 @@ export function Sidebar({}) {
       <div className={styles.playlistContainer}>
         <div className={styles.playlistList}>
           {playlists.map((playlist) => (
-            <div key={playlist.id} className={styles.playlistItem} onClick={playlist.id == 1? handleFavorites: null}>
+            <div key={playlist.id} className={styles.playlistItem} onClick={playlist.id == 1 && currentUser? handleFavorites: logInToggle}>
               <img src={playlist.imageUrl} alt={playlist.name} className={styles.playlistImage} />
               <span className={styles.playlistName}>{playlist.name}</span>
             </div>

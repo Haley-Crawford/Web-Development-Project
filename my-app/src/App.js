@@ -101,7 +101,7 @@ function App() {
           signUpToggle={toggleAuth}
         />
         <div className='app'>
-          <Sidebar /> 
+          <Sidebar logInToggle={logInToggle} /> 
           <div className='mainContent'>
             <TopBar 
               setIsSearching={setIsSearching}
