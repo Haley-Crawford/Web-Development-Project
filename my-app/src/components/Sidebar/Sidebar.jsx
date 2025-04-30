@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Banana, Home, Library, Plus } from 'lucide-react';
+import { Library, Plus, Banana } from 'lucide-react';
 import styles from './Sidebar.module.css';
 import { useAuth } from '../../AuthProvider';
 
@@ -14,10 +14,12 @@ export function Sidebar({ logInToggle }) {
   }
 
   const playlists = [
-    { id: 1, name: 'Favorite Songs', imageUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=200&h=200' },
-    { id: 2, name: 'Rock Classics', imageUrl: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&q=80&w=200&h=200' },
-    { id: 3, name: 'Chill Vibes', imageUrl: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?auto=format&fit=crop&q=80&w=200&h=200' },
+    { id: 1, name: 'Favorite Songs', imageUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=200&h=200', extension: 'favorites' },
+    { id: 2, name: 'Rock Classics', imageUrl: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&q=80&w=200&h=200', extension: 'rock' },
+    { id: 3, name: 'Chill Vibes', imageUrl: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?auto=format&fit=crop&q=80&w=200&h=200', extension: 'chill' },
   ];
+
+  const nav = useNavigate()
 
   return (
     <div className={styles.sidebar}>

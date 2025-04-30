@@ -1,13 +1,8 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
 .song_container {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    padding: 0 15px;
+    padding: 1rem;
 }
 
 .title {
@@ -24,7 +19,6 @@
 }
 
 .song {
-    z-index: 10;
     position: relative;
     display: flex;
     margin: 7px;
@@ -48,34 +42,6 @@
     justify-content: center;
     width: 50px;
 } 
-
-.img_btn {
-    position: relative;
-}
-
-.song:hover .song_img {
-    filter: brightness(50%);
-}
-
-.song:hover .play {
-    opacity: 1;
-}
-
-.play {
-    position: absolute;
-    opacity: 0;
-    left: 15%;
-    top: 10%;
-    fill: white;
-    color: white;
-    height: 40px;
-    width: 40px;
-}
-
-.play:hover {
-    opacity: 1;
-    transform: scale(1.1);
-}
 
 .song_img {
     border-radius: 10px;
@@ -117,5 +83,4 @@
     color: goldenrod !important;
     fill: goldenrod;
 }
-
 

@@ -2,12 +2,27 @@ import React, {useState, useRef} from 'react'
 import { Link } from 'react-router-dom'
 import { Songs } from '../../../Artist Page/Songs/Songs'
 import { Albums } from '../../../Search Results/Albums'
+import { Artists } from '../../../Search Results/Artists'
 import styles from './Search.module.css'
 import gif from '../../../../assets/banana.gif'
 
 const apiKey = process.env.REACT_APP_JAMENDO_KEY;
 
-export function Search({searchResults, setSearchResults, audioRef, audioPlaying, setAudioPlaying, setTrack, trackQueue, setTrackQueue, filterWord, isSearching}) {
+export function Search({
+  searchResults,
+  setSearchResults, 
+  audioRef, 
+  audioPlaying, 
+  setAudioPlaying, 
+  setTrack, 
+  trackQueue, 
+  setTrackQueue, 
+  filterWord, 
+  isSearching,
+  setFavoriteSongs,
+  setCurrArtist
+  }) {
+
   const [searchInput, setSearchInput] = useState("");
 
   const handleInputChange = (e) => {
@@ -65,10 +80,15 @@ export function Search({searchResults, setSearchResults, audioRef, audioPlaying,
                 setTrack={setTrack}
                 trackQueue={trackQueue}
                 setTrackQueue={setTrackQueue}
+                setFavoriteSongs={setFavoriteSongs}
                 style={{height: "100%"}}
             />)
             : filterWord === 'artists'
-              ? (null)
+              ? (<Artists 
+                  artists={searchResults}
+                  setCurrArtist={setCurrArtist}
+                  style={{height: '100%'}}
+                />)
               : filterWord === 'albums'
                 ? (<Albums 
                     albums={searchResults}

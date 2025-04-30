@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Heart, CirclePlus } from 'lucide-react'
+import React, { useState, useEffect } from 'react'
+import { Heart, CirclePlus, Play } from 'lucide-react'
 import styles from './Songs.module.css'
 import { SongLike } from './SongLike'
 
@@ -16,7 +16,7 @@ export function Songs({ songs, setSongs, audioRef, audioPlaying, setAudioPlaying
 
 
     const handlePlay = (song) => {
-        
+    
         const ref = audioRef.current;
 
         if(audioPlaying){
@@ -34,7 +34,7 @@ export function Songs({ songs, setSongs, audioRef, audioPlaying, setAudioPlaying
             console.log(`new queue: ${newQueue.map(item => item.name)}`)
             ref.play();
 
-        }else {
+        } else {
 
             ref.src = song.audio;
             setTrack(song)
@@ -57,7 +57,6 @@ export function Songs({ songs, setSongs, audioRef, audioPlaying, setAudioPlaying
         }else {
             console.log("queue too long");
         }
-
     };
 
     return (
@@ -67,8 +66,9 @@ export function Songs({ songs, setSongs, audioRef, audioPlaying, setAudioPlaying
                 {songs.map((song) => 
                     <li className={styles.song} key={song.id}>
                         <div className={styles.img_div}>
-                            <button style={{cursor: "pointer", background: 'none', border: 'none'}}>
+                            <button style={{cursor: "pointer", background: 'none', border: 'none'}} className={styles.img_btn}>
                                 <img src={song.album_image} alt='song image' className={styles.song_img} onClick={() => {handlePlay(song)}} />
+                                <Play className={styles.play}/> 
                             </button>
                         </div>
                         <div className={styles.song_info}>
