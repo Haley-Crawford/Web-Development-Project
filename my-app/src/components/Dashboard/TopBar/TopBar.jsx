@@ -14,6 +14,7 @@ export function TopBar({ showFilter, setShowFilter, showDropdown, setShowDropdow
   const handleChange = (e) => {
     setSearchInput(e.target.value)
   };
+
   const handleLogout = async () => {
     try {
       await signOut(auth);
@@ -35,7 +36,7 @@ export function TopBar({ showFilter, setShowFilter, showDropdown, setShowDropdow
       <div className={styles.searchContainer}>
         <div className={styles.searchWrapper}>
           <Search className={styles.searchIcon} style={{cursor: 'pointer'}} onClick={(e) => {
-              
+              if (!searchInput) return
               setIsSearching(true);
               nav('/search');
 
@@ -47,6 +48,7 @@ export function TopBar({ showFilter, setShowFilter, showDropdown, setShowDropdow
             value={searchInput}
             onChange={handleChange}
             onKeyDown={(e) => {
+              if (!searchInput) return
               if(e.key === 'Enter'){
                 setIsSearching(true);
                 nav('/search');

@@ -17,6 +17,39 @@ export function Songs({
     onLike
  }) {
 
+    // const songs = [
+    //     {
+    //       id: 1,
+    //       title: "Summer Nights",
+    //       artist: "Dream Wave",
+    //       imageUrl: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=400&h=400"
+    //     },
+    //     {
+    //       id: 2,
+    //       title: "Electric Dreams",
+    //       artist: "Neon Pulse",
+    //       imageUrl: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&q=80&w=400&h=400"
+    //     },
+    //     {
+    //       id: 3,
+    //       title: "Midnight Drive",
+    //       artist: "Urban Echo",
+    //       imageUrl: "https://images.unsplash.com/photo-1487180144351-b8472da7d491?auto=format&fit=crop&q=80&w=400&h=400"
+    //     },
+    //     {
+    //       id: 4,
+    //       title: "Ocean Breeze",
+    //       artist: "Coastal Rhythm",
+    //       imageUrl: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&q=80&w=400&h=400"
+    //     },
+    //     {
+    //       id: 5,
+    //       title: "City Lights",
+    //       artist: "Metro Beat",
+    //       imageUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&q=80&w=400&h=400"
+    //     }
+    //   ];
+
     const handleLike = (id) => {
         const updatedSongs = songs.map(song => 
             song.id === id
@@ -74,6 +107,8 @@ export function Songs({
             console.log("queue too long");
         }
     };
+
+    if (!Array.isArray(songs)) return null;
 
     return (
         <div className={styles.song_container}>

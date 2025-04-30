@@ -18,6 +18,7 @@ export function Search({
   trackQueue, 
   setTrackQueue, 
   filterWord, 
+  setFilterWord,
   isSearching,
   setFavoriteSongs,
   setCurrArtist
@@ -70,7 +71,7 @@ export function Search({
             <span className={styles.bouncing_dot}>.</span>
           </div>
         : searchResults.length > 1 
-          ? filterWord === 'tracks' 
+          ? filterWord === 'tracks'
             ? (<Songs 
                 songs={searchResults} 
                 setSongs={setSearchResults} 
@@ -86,6 +87,7 @@ export function Search({
             : filterWord === 'artists'
               ? (<Artists 
                   artists={searchResults}
+                  setFilterWord={setFilterWord}
                   setCurrArtist={setCurrArtist}
                   style={{height: '100%'}}
                 />)
