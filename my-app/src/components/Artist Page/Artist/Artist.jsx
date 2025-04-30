@@ -8,7 +8,7 @@ import { Albums } from '../Albums/Albums'
 
 
 
-export function Artist({ songs, setSongs, updateFavorites, title}) {
+export function Artist({ songs, setSongs, title, handleToggle, favoriteSongs, setFavoriteSongs}) {
     const [color, setColor] = useState('#ffff')
     const [scrollRatio, setScrollRatio] = useState(0)
     const contentRef = useRef(null)
@@ -56,8 +56,10 @@ export function Artist({ songs, setSongs, updateFavorites, title}) {
                 <Songs 
                     songs={songs} 
                     setSongs={setSongs} 
-                    updateFavorites={updateFavorites}
+                    favoriteSongs={favoriteSongs}
+                    setFavoriteSongs={setFavoriteSongs}
                     title={title}
+                    handleToggle={handleToggle}
                 />
                 <Albums />
             </section>

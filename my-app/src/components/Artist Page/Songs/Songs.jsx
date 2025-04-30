@@ -12,9 +12,12 @@ export function Songs({
     setTrack,
     trackQueue,
     setTrackQueue,
+    favoriteSongs,
     setFavoriteSongs,
     title,
-    onLike
+    onLike,
+    toggleSong,
+    handleToggle
  }) {
 
     // const songs = [
@@ -50,18 +53,24 @@ export function Songs({
     //     }
     //   ];
 
+    useEffect(() => {
+        const newSongs = songs.map(song => ({...song, isLiked: false}))
+        setSongs(newSongs)
+    }, [])
+
     const handleLike = (id) => {
+        console.log(id)
         const updatedSongs = songs.map(song => 
             song.id === id
             ? { ...song, isLiked: !song.isLiked } 
             : song
         )
 
-        setSongs && setSongs(updatedSongs)
+        setSongs(updatedSongs)
 
         const filteredSongs = updatedSongs.filter((song) => song.isLiked)
 
-        setFavoriteSongs(filteredSongs)
+        setFavoriteSongs([...favoriteSongs, filteredSongs])
     }
 
     const handlePlay = (song) => {
@@ -115,7 +124,7 @@ export function Songs({
             <h2 className={styles.title}>Song Results</h2>
             <ol className={styles.song_list}>    
                 {songs.map((song) => 
-                    <li className={styles.song} key={song.id}>
+                    <li className={styles.song} key={song.id} onClick={() => handleToggle(song.id)}>
                         <div className={styles.img_div}>
                             <button style={{cursor: "pointer", background: 'none', border: 'none'}} className={styles.img_btn}>
                                 <img src={song.album_image} alt='song image' className={styles.song_img} onClick={() => {handlePlay(song)}} />

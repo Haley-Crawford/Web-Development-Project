@@ -156,6 +156,8 @@ function App() {
                 <Route path='/artist' element={
                   <ArtistPage 
                     artist={searchResults}
+                    favoriteSongs={favoriteSongs}
+                    setFavoriteSongs={setFavoriteSongs}
                   />
                 }/>
                 <Route path='/a' element={
