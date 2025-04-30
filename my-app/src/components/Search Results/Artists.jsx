@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 export const Artists = ({ artists, setCurrArtist }) => {
 
     const nav = useNavigate()
+    if (!Array.isArray(artists)) return null;
 
     const handleClick = (artist) => {
         console.log(artist)
@@ -24,7 +25,7 @@ export const Artists = ({ artists, setCurrArtist }) => {
                 </button>
                 <h2>{artist.name.length > 12 ? artist.name.slice(0, 15) + '...' : artist.name}</h2>
                 <div className={styles.info}>
-                    <p>Founded: {artist.joindate.slice(0,4)}</p>
+                    <p>Founded: {artist.joindate ? artist.joindate.slice(0,4) : 'Unknown'}</p>
                     <a href={artist.website} target='_blank' rel='noreferrer' className={styles.artistLink}><Globe/></a>
                 </div>
               </div>

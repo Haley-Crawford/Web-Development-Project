@@ -4,6 +4,8 @@ import { Download, Info, Share2 } from 'lucide-react';
 
 export const Albums = ({ albums }) => {
 
+  if (!Array.isArray(albums)) return null;
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Album Results</h1>

@@ -58,6 +58,7 @@ export function Songs({ songs, setSongs, audioRef, audioPlaying, setAudioPlaying
             console.log("queue too long");
         }
     };
+    if (!Array.isArray(songs)) return null;
 
     return (
         <div className={styles.song_container}>
