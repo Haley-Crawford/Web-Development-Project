@@ -40,7 +40,7 @@ export function Sidebar() {
         <div className={styles.playlistList}>
           {playlists.map((playlist) => (
             <Link 
-              to={`${playlist.extension}`} 
+              to={playlist.extension === 'favorites' ? 'playlist' : '#'} 
               key={playlist.id} 
               className={styles.playlistItem}
             >

@@ -3,48 +3,45 @@ import React, { useState, useRef, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Sidebar } from './components/Sidebar/Sidebar';
 import { TopBar } from './components/Dashboard/TopBar/TopBar'
-import { SongCarousel } from './components/Dashboard/SongCarousel/SongCarousel'
 import { PlaybackControls } from './components/Dashboard/PlaybackControls/PlaybackControls'
 import { ArtistPage } from './components/Artist Page/ArtistPage'
-import { Search } from './components/Search.jsx'
-import { Favorites } from './components/Favorites.jsx';
-import { Songs } from './components/Artist Page/Songs/Songs.jsx';
-import { Artist } from './components/Artist Page/Artist/Artist.jsx';
+import { Search } from './components/Dashboard/TopBar/Search/Search.jsx'
+import { ChatBot } from './components/Chatbot/Chatbot.jsx';
+import { SignUp } from './components/Sign Up/SignUp.jsx';
+import { Dashboard } from './components/Dashboard/Dashboard.jsx';
+import { Playlist } from './components/Playlist/Playlist.jsx'
+import { AuthProvider } from './AuthProvider.jsx';
+
+
 
 function App() {
 
   const audioRef = useRef(new Audio());
   const [audioPlaying, setAudioPlaying] = useState(false);
-  const [trackObject, setTrack] = useState({});
+  const [track, setTrack] = useState({});
   const [trackQueue, setTrackQueue] = useState([]);
   const [prevTracks, setPrevTracks] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
-  const [searchInput, setSearchInput] = useState('');
-
-  const [songs, setSongs] = useState([
-        {id: 1, name: `Song 1`, album_name: 'Album Name', releasedate: new Date().getFullYear(), isLiked: false},
-        {id: 2, name: `Song 2`, album_name: 'Album Name', releasedate: new Date().getFullYear(), isLiked: false},
-        {id: 3, name: `Song 3`, album_name: 'Album Name', releasedate: new Date().getFullYear(), isLiked: false},
-        {id: 4, name: `Song 4`, album_name: 'Album Name', releasedate: new Date().getFullYear(), isLiked: false},
-        {id: 5, name: `Song 5`, album_name: 'Album Name', releasedate: new Date().getFullYear(), isLiked: false}
-    ])
-
-  const savedFavorites = JSON.parse(localStorage.getItem('favoriteSongs')) || [];
-  const [favoriteSongs, setFavoriteSongs] = useState(savedFavorites);
-
-  const updateFavorites = (songs) => {
-    const newFavorites = songs.filter(song => song.isLiked)
-    setFavoriteSongs(newFavorites)
-  }
+  const [searchInput, setSearchInput] = useState("");
+  const [chatDisplay, setChatDisplay] = useState(false)
+  const [elapsedTime, setElapsedTime] = useState("");
+  const [duration, setDuration] = useState("");
+  const [auth, setAuth] = useState(false);
+  const [showAuth, setShowAuth] = useState(false);
+  const [filterWord, setFilterWord] = useState('tracks');
+  const [favoriteSongs, setFavoriteSongs] = useState([]);
+  const [currArtist, setCurrArtist] = useState(null)
 
   const apiKey = process.env.REACT_APP_JAMENDO_KEY;
 
 
   const apiSearch = async () => {
-    const url = `https://api.jamendo.com/v3.0/tracks/?client_id=${apiKey}&format=jsonpretty&limit=5&search=${encodeURIComponent(searchInput)}`;
+    const url = `https://api.jamendo.com/v3.0/${filterWord}/?client_id=${apiKey}&format=jsonpretty&limit=10&namesearch=${encodeURIComponent(searchInput)}`;
+    
     try{
 
       const response = await fetch(url);
@@ -53,7 +50,6 @@ function App() {
       };
 
       const data = await response.json();
-      console.log(data.results);
       setSearchResults(data.results);
       
 
@@ -62,35 +58,34 @@ function App() {
     }
   };
 
+  const toggleChat = () => {
+    setChatDisplay(prev => !prev)
+  }
+
+  const toggleAuth = () => {
+    setShowAuth(true)
+  }
+
   useEffect(() => {
 
     if(isSearching == true){
 
       apiSearch();
       
-      console.log(`search for ${searchInput}`)
+      console.log(`search for ${searchInput} with filter ${filterWord}`)
 
-      setIsSearching(false);
+      setTimeout(() => {
+        setIsSearching(false);
+      }, 2000)
     }
 
   }, [isSearching])
 
-   // Whenever likedSongs state changes, update localStorage
-   useEffect(() => {
-    localStorage.setItem('favoriteSongs', JSON.stringify(favoriteSongs));
-  }, [favoriteSongs]);
-
   useEffect(() => {
-    localStorage.setItem('songs', JSON.stringify(songs));
-  }, [songs]);
+    setIsSearching(true) 
+  }, [filterWord])
 
-  useEffect(() => {
-    const savedSongs = JSON.parse(localStorage.getItem('songs'));
-    if (savedSongs) {
-      setSongs(savedSongs);
-    }
-  }, []);
-
+  // Load favorite songs from local storage
   useEffect(() => {
     const savedFavorites = JSON.parse(localStorage.getItem('favoriteSongs'));
     if (savedFavorites) {
@@ -98,82 +93,111 @@ function App() {
     }
   }, []);
 
+   // Whenever likedSongs state changes, update local storage
+  useEffect(() => {
+    localStorage.setItem('favoriteSongs', JSON.stringify(favoriteSongs));
+  }, [favoriteSongs]);
+
+  // useEffect(() => {
+  //   localStorage.setItem('songs', JSON.stringify(songs));
+  // }, [songs]);
+
+  // useEffect(() => {
+  //   const savedSongs = JSON.parse(localStorage.getItem('songs'));
+  //   if (savedSongs) {
+  //     setSongs(savedSongs);
+  //   }
+  // }, []);
+
+
   return (
-    
-    <BrowserRouter>
-      <div className='app'>
-        <Sidebar /> 
-        <div className='mainContent'>
-          <TopBar 
-            isSearching={isSearching}
-            setIsSearching={setIsSearching}
-            searchInput={searchInput}
-            setSearchInput={setSearchInput}
-            showDropdown={showDropdown} 
-            setShowDropdown={setShowDropdown} 
-          />
-          <main className='contentArea'>
-            <Routes>
-              <Route 
-                path='/artist' 
-                element={
-                  <SongCarousel 
-                    currentIndex={currentSongIndex}
-                    setCurrentIndex={setCurrentSongIndex}
+    <AuthProvider>
+      <BrowserRouter>
+        <SignUp
+          isOpen={showAuth}
+          onClose={() => setShowAuth(false)}
+        />
+        <div className='app'>
+          <Sidebar /> 
+          <div className='mainContent'>
+            <TopBar 
+              setIsSearching={setIsSearching}
+              searchInput={searchInput}
+              setSearchInput={setSearchInput}
+              showDropdown={showDropdown} 
+              setShowDropdown={setShowDropdown} 
+              showFilter={showFilter}
+              setShowFilter={setShowFilter}
+              setFilterWord={setFilterWord}
+            />
+            <main className='contentArea'>
+              <Routes>
+                <Route path='/' element={
+                  <Dashboard 
+                    currentSongIndex={currentSongIndex}
+                    setCurrentSongIndex={setCurrentSongIndex}
                   />
-                }
-              />
-              <Route 
-                path='/'
-                element={
-                  <ArtistPage 
-                    songs={songs}
-                    setSongs={setSongs}
-                    favoriteSongs={favoriteSongs}
-                    updateFavorites={updateFavorites} 
+                }/>
+                <Route path='/artist' element={
+                  <ArtistPage artist={currArtist}/>
+                }/>
+                <Route path='/a' element={
+                  null
+                }/>
+                <Route 
+                  path='/search' 
+                  element={
+                    <Search 
+                      searchResults={searchResults} 
+                      setSearchResults={setSearchResults} 
+                      audioRef={audioRef}
+                      audioPlaying={audioPlaying}
+                      setAudioPlaying={setAudioPlaying}
+                      setTrack={setTrack}
+                      trackQueue={trackQueue}
+                      setTrackQueue={setTrackQueue}
+                      filterWord={filterWord}
+                      isSearching={isSearching}
+                      setFavoriteSongs={setFavoriteSongs}
+                      setCurrArtist={setCurrArtist}
+                    />
+                  } 
+                />
+                <Route path='/playlist' element={
+                  <Playlist 
+                    songs={favoriteSongs}
+                    setSongs={setFavoriteSongs}
                   />
-                }
-              />
-              <Route 
-                path='/search' 
-                element={
-                  <Search 
-                    songs={songs} // <-- ADD this
-                    setSongs={setSongs} // <-- ADD this
-                    searchResults={searchResults} 
-                    setSearchResults={setSearchResults} 
-                    favoriteSongs={favoriteSongs}
-                    updateFavorites={updateFavorites}
-                  />
-                } 
-              />
-              <Route 
-                path='/favorites'
-                element={
-                  <Songs
-                    songs={songs.filter(song => song.isLiked)}
-                    setSongs={setSongs}
-                    favoriteSongs={favoriteSongs}
-                    updateFavorites={updateFavorites}
-                    title='Favorites'
-                  />
-                }
-              />
-            </Routes>
-          </ main>
-          <PlaybackControls 
-            audioRef={audioRef}
-            isPlaying={audioPlaying} 
-            setIsPlaying={setAudioPlaying}
-            currentSongIndex={currentSongIndex}
-            setCurrentSongIndex={setCurrentSongIndex}
-            totalSongs={5}
-            favoriteSongs={favoriteSongs}
-            updateFavorites={updateFavorites}
-          />
+                }/>
+              </Routes>
+
+              <ChatBot isVisible={chatDisplay}/>
+            </ main>
+            <PlaybackControls 
+              audioRef={audioRef}
+              isPlaying={audioPlaying} 
+              setIsPlaying={setAudioPlaying}
+              currentSongIndex={currentSongIndex}
+              setCurrentSongIndex={setCurrentSongIndex}
+              totalSongs={5}
+              toggleChat={toggleChat}
+              track={track}
+              setTrack={setTrack}
+              trackQueue={trackQueue}
+              setTrackQueue={setTrackQueue}
+              prevTracks={prevTracks}
+              setPrevTracks={setPrevTracks}
+              elapsedTime={elapsedTime}
+              setElapsedTime={setElapsedTime}
+              duration={duration}
+              setDuration={setDuration}
+              isAuth={auth}
+              toggleAuth={toggleAuth}
+            />
+          </div>
         </div>
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
