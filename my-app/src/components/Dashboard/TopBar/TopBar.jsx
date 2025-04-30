@@ -7,20 +7,12 @@ import { auth } from '../../../firebase'
 import { signOut } from 'firebase/auth'
 
 
-export function TopBar({ showFilter, setShowFilter, showDropdown, setShowDropdown, setIsSearching, searchInput, setSearchInput, setFilterWord }) {
+export function TopBar({ showFilter, setShowFilter, showDropdown, setShowDropdown, setIsSearching, searchInput, setSearchInput, setFilterWord, toggleAuth, logInToggle }) {
   const nav = useNavigate();
   const {currentUser} = useAuth();
 
   const handleChange = (e) => {
     setSearchInput(e.target.value)
-  };
-
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-    } catch (error) {
-      console.error("Error signing out:", error);
-    }
   };
 
   const checkBox = (e) => {
@@ -30,6 +22,14 @@ export function TopBar({ showFilter, setShowFilter, showDropdown, setShowDropdow
     })
     setFilterWord(e.target.id)
   }
+  
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
 
   return (
     <div className={styles.topBar}>
@@ -92,7 +92,7 @@ export function TopBar({ showFilter, setShowFilter, showDropdown, setShowDropdow
 
         {showDropdown && !currentUser && (
           <div className={styles.dropdown}>
-            <button className={`${styles.dropdownItem} ${styles.logoutButton}`} style={{cursor: "pointer"}}>
+            <button onClick={logInToggle} className={`${styles.dropdownItem} ${styles.logoutButton}`} style={{cursor: "pointer"}}>
               <LogIn className={styles.dropdownIcon} />
               <span>Log in / Sign up</span>
             </button>

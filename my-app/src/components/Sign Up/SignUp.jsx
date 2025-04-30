@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { User2, Mail, Lock, Eye, EyeOff } from 'lucide-react'
 import styles from './SignUp.module.css'
 import Modal from 'react-modal'
-import { signUpWithEmail, signInWithGoogle } from '../../firebase'; 
+import { signUpWithEmail } from '../../firebase'; 
 import { useAuth } from '../../AuthProvider'
 
 Modal.setAppElement('#root')
 
-export function SignUp({ isOpen, onClose }) {
+export function SignUp({ isOpen, onClose, logInToggle }) {
     const { currentUser } = useAuth();
 
     const [formData, setFormData] = useState({
@@ -20,6 +20,11 @@ export function SignUp({ isOpen, onClose }) {
     const [errors, setErrors] = useState({})
     const [showPassword, setShowPassword] = useState(false)
     const [submitted, setSubmitted] = useState(false)
+
+    const logInSwitch = () => {
+        onClose()
+        logInToggle()
+    }
 
     const validateForm = () => {
         const newErrors = {}
@@ -186,7 +191,7 @@ export function SignUp({ isOpen, onClose }) {
                         </div>
                         <button type='submit' className={styles.btn}>Create Account</button>
                     </form>
-                    <p className={styles.form_footer}>Already have an account? <a href='#'>Sign in</a></p>
+                    <p className={styles.form_footer}>Already have an account? <a href='#' onClick={logInSwitch}>Sign in</a></p>
                 </div>
             </div>
         </div>

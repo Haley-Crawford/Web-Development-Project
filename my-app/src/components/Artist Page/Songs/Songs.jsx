@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Heart, CirclePlus, Play } from 'lucide-react'
 import styles from './Songs.module.css'
+import { SongLike } from './SongLike'
 
 
 export function Songs({ 
@@ -19,44 +20,6 @@ export function Songs({
     toggleSong,
     handleToggle
  }) {
-
-    // const songs = [
-    //     {
-    //       id: 1,
-    //       title: "Summer Nights",
-    //       artist: "Dream Wave",
-    //       imageUrl: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=400&h=400"
-    //     },
-    //     {
-    //       id: 2,
-    //       title: "Electric Dreams",
-    //       artist: "Neon Pulse",
-    //       imageUrl: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&q=80&w=400&h=400"
-    //     },
-    //     {
-    //       id: 3,
-    //       title: "Midnight Drive",
-    //       artist: "Urban Echo",
-    //       imageUrl: "https://images.unsplash.com/photo-1487180144351-b8472da7d491?auto=format&fit=crop&q=80&w=400&h=400"
-    //     },
-    //     {
-    //       id: 4,
-    //       title: "Ocean Breeze",
-    //       artist: "Coastal Rhythm",
-    //       imageUrl: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&q=80&w=400&h=400"
-    //     },
-    //     {
-    //       id: 5,
-    //       title: "City Lights",
-    //       artist: "Metro Beat",
-    //       imageUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&q=80&w=400&h=400"
-    //     }
-    //   ];
-
-    useEffect(() => {
-        const newSongs = songs.map(song => ({...song, isLiked: false}))
-        setSongs(newSongs)
-    }, [])
 
     const handleLike = (id) => {
         console.log(id)
@@ -116,12 +79,13 @@ export function Songs({
             console.log("queue too long");
         }
     };
+    if (!Array.isArray(songs)) return null;
 
     if (!Array.isArray(songs)) return null;
 
     return (
         <div className={styles.song_container}>
-            <h2 className={styles.title}>Song Results</h2>
+            <h2 className={styles.title}>{fav? "Favorited Songs": "Popular Songs"}</h2>
             <ol className={styles.song_list}>    
                 {songs.map((song) => 
                     <li className={styles.song} key={song.id} onClick={() => handleToggle(song.id)}>
@@ -138,8 +102,8 @@ export function Songs({
                         <button className={styles.btn} style={{right: "50px"}}>
                             <CirclePlus className={styles.icon} onClick={() => {handleQueue(song)}} style={{cursor: "pointer"}} />
                         </button>
-                        <button className={styles.btn} onClick={() => handleLike(song.id)}>
-                            <Heart className={`${styles.icon} ${song.isLiked ? styles.like : ''}`}/>
+                        <button className={styles.btn} style={{cursor: "pointer"}}>
+                            <SongLike song={song} className={styles.icon} fav={fav} />
                         </button>
                     </li>
                 )}

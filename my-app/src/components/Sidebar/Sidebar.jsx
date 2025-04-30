@@ -2,9 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Library, Plus, Banana } from 'lucide-react';
 import styles from './Sidebar.module.css';
+import { useAuth } from '../../AuthProvider';
 
 
-export function Sidebar() {
+export function Sidebar({ logInToggle }) {
+  const nav = useNavigate();
+  const { currentUser } = useAuth();
+
+  const handleFavorites = () => {
+    nav("/favorites")
+  }
 
   const playlists = [
     { id: 1, name: 'Favorite Songs', imageUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=200&h=200', extension: 'favorites' },
@@ -12,7 +19,6 @@ export function Sidebar() {
     { id: 3, name: 'Chill Vibes', imageUrl: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?auto=format&fit=crop&q=80&w=200&h=200', extension: 'chill' },
   ];
 
-  const nav = useNavigate()
 
   return (
     <div className={styles.sidebar}>
@@ -39,14 +45,10 @@ export function Sidebar() {
       <div className={styles.playlistContainer}>
         <div className={styles.playlistList}>
           {playlists.map((playlist) => (
-            <Link 
-              to={playlist.extension === 'favorites' ? 'playlist' : '#'} 
-              key={playlist.id} 
-              className={styles.playlistItem}
-            >
-                <img src={playlist.imageUrl} alt={playlist.name} className={styles.playlistImage} />
-                <span className={styles.playlistName}>{playlist.name}</span>
-            </Link>
+            <div key={playlist.id} className={styles.playlistItem} onClick={playlist.id == 1 && currentUser? handleFavorites: logInToggle}>
+              <img src={playlist.imageUrl} alt={playlist.name} className={styles.playlistImage} />
+              <span className={styles.playlistName}>{playlist.name}</span>
+            </div>
           ))}
         </div>
       </div>

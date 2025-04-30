@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Shuffle, SkipBack, Play, Pause, SkipForward, Repeat, Bot, Volume2, Heart } from 'lucide-react';
 import styles from './PlaybackControls.module.css';
+import { AuthWrapper } from '../../AuthWrapper';
+import { ControlLike } from './ControlLike';
 
 export function PlaybackControls({ 
   audioRef,
@@ -249,8 +251,10 @@ export function PlaybackControls({
             <button className={styles.controlButton}>
               <Repeat className={styles.controlIcon} />
             </button>
-            <button className={styles.controlButton} onClick={() => isAuth ? handleLike() : toggleAuth()}>
-              <Heart className={`${styles.controlIcon} ${isLiked ? styles.like : ''}`} />
+            <button className={styles.controlButton}>
+              <AuthWrapper>
+                <ControlLike track={track} />
+              </AuthWrapper>
             </button>
           </div>
           <div className={styles.progressBar}>

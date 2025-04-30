@@ -52,13 +52,13 @@ export const signUpWithEmail = async (email, password, name) => {
     }
   };
 
-  export const signInWithGoogle = async () => {
+  export async function signInWithEmail(email, password) {
     try {
-      const result = await signInWithPopup(auth, provider);
-      await createUserDocument(result.user);
-      return result.user;
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      return userCredential.user;
     } catch (error) {
-      throw error;
+      throw error; // This will be caught in your Login component
     }
-  };
+  }
 

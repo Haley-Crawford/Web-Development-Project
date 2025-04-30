@@ -24,6 +24,7 @@
 }
 
 .song {
+    z-index: 10;
     position: relative;
     display: flex;
     margin: 7px;
@@ -116,4 +117,5 @@
     color: goldenrod !important;
     fill: goldenrod;
 }
+
 

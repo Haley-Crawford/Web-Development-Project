@@ -9,9 +9,11 @@ import { Search } from './components/Dashboard/TopBar/Search/Search.jsx'
 import { ChatBot } from './components/Chatbot/Chatbot.jsx';
 import { SignUp } from './components/Sign Up/SignUp.jsx';
 import { Dashboard } from './components/Dashboard/Dashboard.jsx';
+import Modal from 'react-modal';
 import { Playlist } from './components/Playlist/Playlist.jsx'
 import { AuthProvider } from './AuthProvider.jsx';
-
+import { LogIn } from './components/Sign Up/LogIn.jsx'
+import { Favorites } from './components/Favorites.jsx'
 
 
 function App() {
@@ -33,6 +35,7 @@ function App() {
   const [auth, setAuth] = useState(false);
   const [showAuth, setShowAuth] = useState(false);
   const [filterWord, setFilterWord] = useState('tracks');
+  const [showLogIn, setShowLogIn] = useState(false)
   const [favoriteSongs, setFavoriteSongs] = useState([]);
   const [currArtist, setCurrArtist] = useState(null)
 
@@ -79,6 +82,10 @@ function App() {
 
   const toggleAuth = () => {
     setShowAuth(true)
+  }
+
+  const logInToggle = () => {
+    setShowLogIn(true)
   }
 
   useEffect(() => {
@@ -131,19 +138,27 @@ function App() {
         <SignUp
           isOpen={showAuth}
           onClose={() => setShowAuth(false)}
+          logInToggle={logInToggle}
+        />
+        <LogIn 
+          isOpen={showLogIn}
+          onClose={() => setShowLogIn(false)}
+          signUpToggle={toggleAuth}
         />
         <div className='app'>
-          <Sidebar /> 
+          <Sidebar logInToggle={logInToggle} /> 
           <div className='mainContent'>
             <TopBar 
               setIsSearching={setIsSearching}
               searchInput={searchInput}
               setSearchInput={setSearchInput}
               showDropdown={showDropdown} 
-              setShowDropdown={setShowDropdown} 
-              showFilter={showFilter}
-              setShowFilter={setShowFilter}
-              setFilterWord={setFilterWord}
+              setShowDropdown={setShowDropdown}
+            showFilter={showFilter}
+            setShowFilter={setShowFilter}
+            setFilterWord={setFilterWord}
+              toggleAuth={toggleAuth} 
+              logInToggle={logInToggle}
             />
             <main className='contentArea'>
               <Routes>
@@ -160,8 +175,8 @@ function App() {
                     setFavoriteSongs={setFavoriteSongs}
                   />
                 }/>
-                <Route path='/a' element={
-                  null
+                <Route path='/favorites' element={
+                  <Favorites audioRef={audioRef} audioPlaying={audioPlaying} setAudioPlaying={setAudioPlaying} setTrack={setTrack} trackQueue={trackQueue} setTrackQueue={setTrackQueue}/>
                 }/>
                 <Route 
                   path='/search' 

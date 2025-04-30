@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 export const Artists = ({ artists, setFilterWord, setCurrArtist }) => {
 
     const nav = useNavigate()
+    if (!Array.isArray(artists)) return null;
 
     const handleClick = (artist) => {
         setCurrArtist(artist)
