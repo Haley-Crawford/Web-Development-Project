@@ -1,25 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { Home, Library, Plus } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Library, Plus, Banana } from 'lucide-react';
 import styles from './Sidebar.module.css';
 
 
 export function Sidebar() {
 
   const playlists = [
-    { id: 1, name: 'Favorite Songs', imageUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=200&h=200' },
-    { id: 2, name: 'Rock Classics', imageUrl: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&q=80&w=200&h=200' },
-    { id: 3, name: 'Chill Vibes', imageUrl: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?auto=format&fit=crop&q=80&w=200&h=200' },
+    { id: 1, name: 'Favorite Songs', imageUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=200&h=200', extension: 'favorites' },
+    { id: 2, name: 'Rock Classics', imageUrl: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&q=80&w=200&h=200', extension: 'rock' },
+    { id: 3, name: 'Chill Vibes', imageUrl: 'https://images.unsplash.com/photo-1487180144351-b8472da7d491?auto=format&fit=crop&q=80&w=200&h=200', extension: 'chill' },
   ];
+
+  const nav = useNavigate()
 
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebarContent}>
         <div className={styles.logo}>
           <Link to='/' >
-            <Home className={styles.homeIcon}/>
+            <Banana className={styles.homeIcon}/>
           </Link>
-          <span className={styles.appName}>Music App</span>
+          <span className={styles.appName}>Banana Music</span>
         </div>
         
         <div className={styles.librarySection}>
@@ -37,10 +39,14 @@ export function Sidebar() {
       <div className={styles.playlistContainer}>
         <div className={styles.playlistList}>
           {playlists.map((playlist) => (
-            <div key={playlist.id} className={styles.playlistItem}>
-              <img src={playlist.imageUrl} alt={playlist.name} className={styles.playlistImage} />
-              <span className={styles.playlistName}>{playlist.name}</span>
-            </div>
+            <Link 
+              to={playlist.extension === 'favorites' ? 'playlist' : '#'} 
+              key={playlist.id} 
+              className={styles.playlistItem}
+            >
+                <img src={playlist.imageUrl} alt={playlist.name} className={styles.playlistImage} />
+                <span className={styles.playlistName}>{playlist.name}</span>
+            </Link>
           ))}
         </div>
       </div>

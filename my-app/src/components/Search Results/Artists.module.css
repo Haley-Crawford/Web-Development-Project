@@ -11,14 +11,14 @@
     text-shadow: 2px 2px 2px rgb(114, 97, 53), -2px 1px 3px black;
 }
 
-.albumList {
+.artistList {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: space-between;
 }
 
-.albumCard {
+.artistCard {
     position: relative;
     min-width: 225px;
     max-width: 225px;
@@ -29,9 +29,10 @@
     flex-direction: column;
     justify-content: center;
     gap: 10px;
+    text-indent: 10px;
 }
 
-.albumCard::after {
+.artistCard::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -43,26 +44,31 @@
     transition: width 0.3s ease;
 }
 
-.albumCard:hover {
+.artistCard:hover {
     transform: translateY(-4px);
-    cursor: pointer;
 }
 
-.albumCard:hover::after {
+.artistCard:hover::after {
     width: 100%;
 }
 
 .img {
     height: 12rem;
     border-radius: 2rem;
+    transition: transform 1s ease;
 }
 
-.choices {
+.img:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.info {
     display: flex;
-    gap: 10px;
+    gap: 7px;
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
+.artistLink:hover {
+    transform: scale(1.1);
+    color: gold;
 }
