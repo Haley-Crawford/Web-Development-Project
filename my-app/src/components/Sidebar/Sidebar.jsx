@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Home, Library, Plus } from 'lucide-react';
+import { Banana, Home, Library, Plus } from 'lucide-react';
 import styles from './Sidebar.module.css';
 
 
@@ -22,9 +22,9 @@ export function Sidebar({}) {
       <div className={styles.sidebarContent}>
         <div className={styles.logo}>
           <Link to='/' >
-            <Home className={styles.homeIcon}/>
+            <Banana className={styles.homeIcon}/>
           </Link>
-          <span className={styles.appName}>Music App</span>
+          <span className={styles.appName}>Banana Music</span>
         </div>
         
         <div className={styles.librarySection}>
