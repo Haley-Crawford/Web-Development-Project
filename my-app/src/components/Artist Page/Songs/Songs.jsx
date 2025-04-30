@@ -66,9 +66,9 @@ export function Songs({ songs, setSongs, audioRef, audioPlaying, setAudioPlaying
             <ol className={styles.song_list}>    
                 {songs.map((song) => 
                     <li className={styles.song} key={song.id}>
-                        <div className={styles.img_div}>
+                        <div className={styles.img_div} onClick={() => {handlePlay(song)}}>
                             <button style={{cursor: "pointer", background: 'none', border: 'none'}} className={styles.img_btn}>
-                                <img src={song.album_image} alt='song image' className={styles.song_img} onClick={() => {handlePlay(song)}} />
+                                <img src={song.album_image} alt='song image' className={styles.song_img} />
                                 <Play className={styles.play}/> 
                             </button>
                         </div>

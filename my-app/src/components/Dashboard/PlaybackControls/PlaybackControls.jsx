@@ -96,29 +96,38 @@ export function PlaybackControls({
     const wasPlaying = isPlaying;
     const ref = audioRef.current;
 
-    if(curStack && curStack.length > 0){
+    if(ref.currentTime > 3){
 
-      if(wasPlaying){
-
-        setIsPlaying(false);
-        ref.pause();
-      };
-
-      const backSong = curStack[0];
-      
-      setPrevTracks(prevStack =>{
-        const newStack = prevStack.slice(1);
-        return newStack;
-      });
-      ref.src = backSong.audio;
-      ref.play();
-      setTrack(backSong);
-      setIsPlaying(true);
+      ref.currentTime = 0;
 
     }else{
 
-      setPrevTracks([]);
-      console.log("no songs to go back");
+
+      if(curStack && curStack.length > 0){
+
+        if(wasPlaying){
+  
+          setIsPlaying(false);
+          ref.pause();
+        };
+  
+        const backSong = curStack[0];
+        
+        setPrevTracks(prevStack =>{
+          const newStack = prevStack.slice(1);
+          return newStack;
+        });
+        ref.src = backSong.audio;
+        ref.play();
+        setTrack(backSong);
+        setIsPlaying(true);
+  
+      }else{
+  
+        setPrevTracks([]);
+        console.log("no songs to go back");
+        
+      }
       
     }
 
