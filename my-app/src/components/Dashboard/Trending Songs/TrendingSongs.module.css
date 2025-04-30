@@ -1,0 +1,72 @@
+.audioCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+    min-width: 175px;
+    color: white;
+}
+
+.audioCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 2px 5px goldenrod;
+
+}
+
+button {
+    border: none;
+    background: none;
+}
+
+button:hover .audioImage {
+    filter: brightness(50%);
+}
+
+button:hover .play {
+    opacity: 1;
+}
+
+.audioImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 1rem;
+    object-fit: cover;
+}
+
+.play {
+    position: absolute;
+    opacity: 0;
+    left: 35%;
+    top: 20%;
+    fill: white;
+    color: white;
+    height: 70px;
+    width: 70px;
+}
+
+.play:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.audioInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.audioTitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+    text-align: center;
+}
+
+.audioArtist {
+    font-size: 0.9rem;
+    margin: 0.25rem 0;
+}

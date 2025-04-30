@@ -48,7 +48,6 @@ function App() {
       };
 
       const data = await response.json();
-      console.log(data.results);
       setSearchResults(data.results);
       
 
@@ -59,7 +58,6 @@ function App() {
 
   const toggleChat = () => {
     setChatDisplay(prev => !prev)
-    console.log(chatDisplay)
   }
 
   const toggleAuth = () => {
@@ -76,9 +74,9 @@ function App() {
 
       apiSearch();
       
-      console.log(`search for ${searchInput}`)
+      console.log(`search for ${searchInput} with filter ${filterWord}`)
 
-      setFilterWord('tracks')
+      //setFilterWord('tracks')
 
       setTimeout(() => {
         setIsSearching(false);
@@ -141,8 +139,8 @@ function App() {
                       setTrack={setTrack}
                       trackQueue={trackQueue}
                       setTrackQueue={setTrackQueue}
-                    filterWord={filterWord}
-                    isSearching={isSearching}
+                      filterWord={filterWord}
+                      isSearching={isSearching}
                     />
                   } 
                 />

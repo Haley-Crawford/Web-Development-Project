@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 import styles from './Category.module.css';
 
 export function Category(){
-    const categories = ["Pop", "Rock", "Hip-Hop", "Jazz", "Classical", "Electronic", "R&B", "Country"];
+    const categories = ['Pop', 'Rock', 'Hip-Hop', 'Jazz', 'Classical', 'Electronic', 'R&B', 'Country'];
 
     return (
         <div className={styles.dashboardContainer}>

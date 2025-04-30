@@ -1,5 +1,4 @@
 .dashboardContainer {
-    overflow-x: auto; 
     margin: 35px 0;
 }
 
@@ -13,7 +12,6 @@
     display: flex;
     gap: 1rem;
     flex-wrap: nowrap;
-    overflow-x: auto;
     padding: 1.5rem;
     justify-content: center;
 } 

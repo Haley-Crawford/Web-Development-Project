@@ -1,7 +1,8 @@
 import React, {useState, useRef} from 'react'
 import { Link } from 'react-router-dom'
-import styles from './Search.module.css'
 import { Songs } from '../../../Artist Page/Songs/Songs'
+import { Albums } from '../../../Search Results/Albums'
+import styles from './Search.module.css'
 import gif from '../../../../assets/banana.gif'
 
 const apiKey = process.env.REACT_APP_JAMENDO_KEY;
@@ -69,7 +70,10 @@ export function Search({searchResults, setSearchResults, audioRef, audioPlaying,
             : filterWord === 'artists'
               ? (null)
               : filterWord === 'albums'
-                ? (null)
+                ? (<Albums 
+                    albums={searchResults}
+                    style={{height: '100%'}}
+                  />)
                 : null
           : <div className={styles.notFound}>
             <img src={gif} alt='' className={styles.img}/>

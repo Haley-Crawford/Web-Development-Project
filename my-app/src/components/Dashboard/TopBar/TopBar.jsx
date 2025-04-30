@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, User, ChevronDown, Settings, LogOut, Filter, LogIn } from 'lucide-react';
+import { Search, User, ChevronDown, Settings, LogOut, LogIn, Filter } from 'lucide-react';
 import styles from './TopBar.module.css';
 import { useAuth } from '../../../AuthProvider'
 import { auth } from '../../../firebase'

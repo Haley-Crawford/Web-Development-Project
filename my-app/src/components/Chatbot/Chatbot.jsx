@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Chatbot.module.css'
 import OpenAI from 'openai'
 import { BotMessageSquare as Bot } from 'lucide-react'
@@ -145,39 +145,16 @@ export function ChatBot( { isVisible }) {
             }
         }
 
-            //console.log(res.choices[0].message.content)
-            // const res = await fetch('https://api.deepseek.com/chat/completions', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         'Authorization': `Bearer ${apiKey}`,
-            //     },
-            //     body: JSON.stringify({
-            //         model: 'deepseek-chat',
-            //         messages: [
-            //             { role: 'system', content: 'You are a helpful assistant.'},
-            //             { role: 'user', content: input }
-            //         ],
-            //         stream: false
-            //         // max_tokens: 150,
-            //         // temperature: 0.7,
-            //     }),
-            // })
-
-            // const data = await res.json()
-            // setResponse(data.choices[0].message.content)
-        // } catch (err) {
-        //     console.error('Error fetching response from API:', err)
-        //     setResponse('Sorry, something went wrong.')
-        // } finally {
-        //     await new Promise(resolve => setTimeout(resolve, 5000)); // Wait 5 seconds between requests
-        //     setLoading(false)
-        //     setResponse('')
-        // }
-    //}
+    useEffect(() => {
+        const bot = document.getElementById('bot')
+        isVisible ? bot.style.zIndex = '' : (
+            setTimeout(() => {
+                bot.style.zIndex = '-1'
+            }, 1000))            
+    }, [isVisible])
     
     return (
-        <div className={`${styles.container} ${isVisible ? styles.show : styles.hide}`}>
+        <div className={`${styles.container} ${isVisible ? styles.show : styles.hide}`} id='bot'>
             <div className={styles.header}>
                 <h1 className={styles.heading}>Chat with Banana AI!</h1>
             </div>
