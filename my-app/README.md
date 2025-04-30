@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# 🍌 Banana Music - 15 Week Web Development Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+College students need an ad-free audio streaming web application to upload and enjoy their preferred music and podcasts, curate personalized playlists, and access a chatbot for tailored recommendations because ad-free audio streaming applications provide easy access to a vast library of music, podcasts, etc. that allow users to compile playlists of their favorite audios, integrating AI for seamless discovery of new music aligned with the student's current tastes.
 
-## Available Scripts
 
-In the project directory, you can run:
+Welcome to our **Banana Music** project! Over the course of 15 weeks, we’re building a full-featured music streaming platform inspired by [Spotify](https://www.spotify.com/), focusing on user experience, responsive design, and real-world backend functionality.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Project Overview
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The goal is to develop a Spotify-like application from scratch. Users will be able to:
+- Sign up & log in
+- Browse music and playlists
+- Play/pause/skip tracks
+- Create and manage playlists
+- Like and save songs
+- Experience a mobile-friendly, responsive chatbo
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🛠️ Tech Stack
 
-### `npm run build`
+**Frontend:**
+- React (with Hooks)
+- React Router
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Backend:**
+- Node.js
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Other Tools:**
+- Git & GitHub (version control)
+- Postman (API testing)
+- Vite (optional for fast dev environment)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 📆 Weekly Breakdown
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| Week | Focus Area |
+|------|------------|
+| 1    | Project planning, tech stack setup, Figma wireframes |
+| 2    | Frontend project setup, navigation layout |
+| 3    | Authentication system (signup, login, JWT) |
+| 4    | Database setup and user models |
+| 5    | Music player UI and audio controls |
+| 6    | Backend APIs for songs and playlists |
+| 7    | Implement song upload and storage |
+| 8    | Song playback and queue logic |
+| 9    | Playlist creation and management |
+|10    | Like/follow system for songs and artists |
+|11    | Mobile responsiveness and UI polishing |
+|12    | Advanced features (search, recommendations) |
+|13    | Testing and debugging |
+|14    | Deployment (Netlify + Render/Heroku) |
+|15    | Final presentation and documentation 🎉 |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
