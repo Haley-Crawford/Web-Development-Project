@@ -119,7 +119,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/Web-Development-Project">
         <SignUp
           isOpen={showAuth}
           onClose={() => setShowAuth(false)}

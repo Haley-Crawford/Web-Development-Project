@@ -30,7 +30,7 @@ export function Sidebar({ logInToggle }) {
           <span className={styles.appName}>Banana Music</span>
         </div>
         
-        <div className={styles.librarySection}>
+        {currentUser? <div className={styles.librarySection}>
           <div className={styles.libraryHeader}>
             <Library className={styles.libraryIcon} />
             <span>Your Library</span>
@@ -39,10 +39,10 @@ export function Sidebar({ logInToggle }) {
             <Plus className={styles.plusIcon} />
             <span>Create Playlist</span>
           </button>
-        </div>
+        </div>: null}
       </div>
 
-      <div className={styles.playlistContainer}>
+      {currentUser? <div className={styles.playlistContainer}>
         <div className={styles.playlistList}>
           {playlists.map((playlist) => (
             <div key={playlist.id} className={styles.playlistItem} onClick={playlist.id == 1 && currentUser? handleFavorites: logInToggle}>
@@ -51,7 +51,7 @@ export function Sidebar({ logInToggle }) {
             </div>
           ))}
         </div>
-      </div>
+      </div>: null}
     </div>
   );
 }
