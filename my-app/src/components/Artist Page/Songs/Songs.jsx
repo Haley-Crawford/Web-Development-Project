@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Heart, CirclePlus } from 'lucide-react'
 import styles from './Songs.module.css'
+import { SongLike } from './SongLike'
 
 
 export function Songs({ songs, setSongs, audioRef, audioPlaying, setAudioPlaying, setTrack, trackQueue, setTrackQueue }) {
@@ -81,8 +82,8 @@ export function Songs({ songs, setSongs, audioRef, audioPlaying, setAudioPlaying
                         <button className={styles.btn} style={{right: "50px"}}>
                             <CirclePlus className={styles.icon} onClick={() => {handleQueue(song)}} style={{cursor: "pointer"}} />
                         </button>
-                        <button className={styles.btn} onClick={() => handleLike(song.id)}>
-                            <Heart className={`${styles.icon} ${song.isLiked ? styles.like : ''}`}/>
+                        <button className={styles.btn} onClick={() => handleLike(song.id)} style={{cursor: "pointer"}}>
+                            <SongLike song={song} className={styles.icon} />
                         </button>
                     </li>
                 )}
