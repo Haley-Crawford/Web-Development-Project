@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Web-Development-Project/static/css/main.af1636d2.css",
+    "main.js": "/Web-Development-Project/static/js/main.d0c91832.js",
+    "static/media/banana.gif": "/Web-Development-Project/static/media/banana.c0735a11a83fdd8ad2d1.gif",
+    "index.html": "/Web-Development-Project/index.html",
+    "main.af1636d2.css.map": "/Web-Development-Project/static/css/main.af1636d2.css.map",
+    "main.d0c91832.js.map": "/Web-Development-Project/static/js/main.d0c91832.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.af1636d2.css",
+    "static/js/main.d0c91832.js"
+  ]
+}
