@@ -1,10 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Home, Library, Plus } from 'lucide-react';
 import styles from './Sidebar.module.css';
 
 
-export function Sidebar() {
+export function Sidebar({}) {
+  const nav = useNavigate();
+
+  const handleFavorites = () => {
+    nav("/favorites")
+  }
 
   const playlists = [
     { id: 1, name: 'Favorite Songs', imageUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=200&h=200' },
@@ -37,7 +42,7 @@ export function Sidebar() {
       <div className={styles.playlistContainer}>
         <div className={styles.playlistList}>
           {playlists.map((playlist) => (
-            <div key={playlist.id} className={styles.playlistItem}>
+            <div key={playlist.id} className={styles.playlistItem} onClick={playlist.id == 1? handleFavorites: null}>
               <img src={playlist.imageUrl} alt={playlist.name} className={styles.playlistImage} />
               <span className={styles.playlistName}>{playlist.name}</span>
             </div>

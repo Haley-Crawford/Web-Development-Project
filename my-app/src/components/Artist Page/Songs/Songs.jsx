@@ -4,7 +4,7 @@ import styles from './Songs.module.css'
 import { SongLike } from './SongLike'
 
 
-export function Songs({ songs, setSongs, audioRef, audioPlaying, setAudioPlaying, setTrack, trackQueue, setTrackQueue }) {
+export function Songs({ songs, setSongs, audioRef, audioPlaying, setAudioPlaying, setTrack, trackQueue, setTrackQueue, fav }) {
 
     // const [songs, setSongs] = useState([
     //     {id: 1, title: `Song 1`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false},
@@ -14,10 +14,6 @@ export function Songs({ songs, setSongs, audioRef, audioPlaying, setAudioPlaying
     //     {id: 5, title: `Song 5`, album: 'Album Name', release: new Date().getFullYear(), isLiked: false}
     // ])
 
-    const handleLike = (id) => {
-        const updatedSongs = songs.map(song => song.id === id ? { ...song, isLiked: !song.isLiked } : song)
-        setSongs(updatedSongs)
-    }
 
     const handlePlay = (song) => {
         
@@ -66,7 +62,7 @@ export function Songs({ songs, setSongs, audioRef, audioPlaying, setAudioPlaying
 
     return (
         <div className={styles.song_container}>
-            <h2 className={styles.title}>Popular Songs</h2>
+            <h2 className={styles.title}>{fav? "Favorited Songs": "Popular Songs"}</h2>
             <ol className={styles.song_list}>    
                 {songs.map((song) => 
                     <li className={styles.song} key={song.id}>

@@ -12,6 +12,7 @@ import { Dashboard } from './components/Dashboard/Dashboard.jsx';
 import Modal from 'react-modal';
 import { AuthProvider } from './AuthProvider.jsx';
 import { LogIn } from './components/Sign Up/LogIn.jsx'
+import { Favorites } from './components/Favorites.jsx'
 
 
 function App() {
@@ -125,8 +126,8 @@ function App() {
                 <Route path='/b' element={
                   <ArtistPage />
                 }/>
-                <Route path='/b' element={
-                  null
+                <Route path='/favorites' element={
+                  <Favorites audioRef={audioRef} audioPlaying={audioPlaying} setAudioPlaying={setAudioPlaying} setTrack={setTrack} trackQueue={trackQueue} setTrackQueue={setTrackQueue}/>
                 }/>
                 <Route 
                   path='/search' 
