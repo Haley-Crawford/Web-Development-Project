@@ -6,7 +6,20 @@ import { SongCard } from './Song Card/SongCard.jsx';
 
 
 
-export function ArtistPage({ artist, songs, setSongs, favoriteSongs, updateFavorites }) {
+export function ArtistPage({ artist, favoriteSongs, setFavoriteSongs }) {
+    console.log(artist)
+    const [currSong, setCurrSong] = useState(null)
+    const [toggleSong, setToggleSong] = useState(false)
+    const [songs, setSongs] = useState([artist[0].tracks])
+
+    const handleToggle = (i) => {
+        if (currSong == i) {
+            setToggleSong(!toggleSong)
+        } else {
+            setToggleSong(true)
+            setCurrSong(i)
+        }
+    }
 
     return (                
         <main className={styles.contentArea}>
@@ -15,14 +28,18 @@ export function ArtistPage({ artist, songs, setSongs, favoriteSongs, updateFavor
                     artist={artist}
                     songs={songs} 
                     setSongs={setSongs}
-                    favoriteSongs={favoriteSongs} 
-                    updateFavorites={updateFavorites}
+                    favoriteSongs={favoriteSongs}
+                    setFavoriteSongs={setFavoriteSongs} 
+                    handleToggle={handleToggle}
                     title='Popular Songs'
                 />
             </section>
-            <section className={styles.songCard} >
-                <SongCard/>
-            </section>
+            {toggleSong && (
+                <section className={styles.songCard} >
+                    <SongCard/>
+                </section>
+            )}
+            
         </main>
     )
 }

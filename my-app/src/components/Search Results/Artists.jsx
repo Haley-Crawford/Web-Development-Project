@@ -3,16 +3,18 @@ import styles from './Artists.module.css'
 import { Globe } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 
-export const Artists = ({ artists, setCurrArtist }) => {
+export const Artists = ({ artists, setFilterWord, setCurrArtist }) => {
 
     const nav = useNavigate()
     if (!Array.isArray(artists)) return null;
 
     const handleClick = (artist) => {
-        console.log(artist)
         setCurrArtist(artist)
+        setFilterWord('artists/tracks')
         nav('/artist')
     }
+
+    if (!Array.isArray(artists)) return null
 
     return (
         <div className={styles.container}>
@@ -21,9 +23,9 @@ export const Artists = ({ artists, setCurrArtist }) => {
             {artists.map((artist) => (
               <div key={artist.id} className={styles.artistCard}>
                 <button onClick={() => {handleClick(artist.name)}}>
-                    <img src={artist.image} alt={artist.name} className={styles.img}/>
+                    <img src={artist.image || 'https://picsum.photos/301/201' } alt={artist.name} className={styles.img}/>
                 </button>
-                <h2>{artist.name.length > 12 ? artist.name.slice(0, 15) + '...' : artist.name}</h2>
+                <h2>{artist.name.length > 12 ? artist.name.slice(0,12) + '...' : artist.name}</h2>
                 <div className={styles.info}>
                     <p>Founded: {artist.joindate ? artist.joindate.slice(0,4) : 'Unknown'}</p>
                     <a href={artist.website} target='_blank' rel='noreferrer' className={styles.artistLink}><Globe/></a>

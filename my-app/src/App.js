@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useRef, useEffect } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { Sidebar } from './components/Sidebar/Sidebar';
 import { TopBar } from './components/Dashboard/TopBar/TopBar'
 import { PlaybackControls } from './components/Dashboard/PlaybackControls/PlaybackControls'
@@ -43,9 +43,15 @@ function App() {
 
 
   const apiSearch = async () => {
-    const url = `https://api.jamendo.com/v3.0/${filterWord}/?client_id=${apiKey}&format=jsonpretty&limit=10&namesearch=${encodeURIComponent(searchInput)}`;
-    
-    try{
+    //let url = `https://api.jamendo.com/v3.0/${filterWord}${currArtist ? '/' + currArtist : ''}/?client_id=${apiKey}&format=jsonpretty${currArtist ? '' : '&limit=10'}&namesearch=${encodeURIComponent(searchInput)}`;
+    let url = `https://api.jamendo.com/v3.0/${filterWord}/`
+
+    if (currArtist) url += `/?client_id=${apiKey}&format=jsonpretty&namesearch=${currArtist.toLowerCase().replace(/\s+/g, '+')}`
+    else url += `?client_id=${apiKey}&format=jsonpretty&limit=10&namesearch=${encodeURIComponent(searchInput)}`
+
+    console.log(url)
+
+    try {
 
       const response = await fetch(url);
       if(!response.ok){
@@ -53,13 +59,22 @@ function App() {
       };
 
       const data = await response.json();
+
       setSearchResults(data.results);
       
 
-    }catch (err){
-      console.log(err);
-    }
+    } catch (err){
+      console.log(err);}
+    // } finally {
+    //   setSearchResults([])
+    // }
   };
+
+  const location = useLocation();
+  useEffect(() => {
+    console.log(filterWord)
+    setIsSearching(true); // reset old data on route change
+  }, [location.pathname, filterWord]);
 
   const toggleChat = () => {
     setChatDisplay(prev => !prev)
@@ -88,9 +103,9 @@ function App() {
 
   }, [isSearching])
 
-  useEffect(() => {
-    setIsSearching(true) 
-  }, [filterWord])
+  // useEffect(() => {
+  //   setIsSearching(true) 
+  // }, [filterWord])
 
   // Load favorite songs from local storage
   useEffect(() => {
@@ -119,7 +134,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <BrowserRouter>
+      {/* <BrowserRouter> */}
         <SignUp
           isOpen={showAuth}
           onClose={() => setShowAuth(false)}
@@ -154,7 +169,11 @@ function App() {
                   />
                 }/>
                 <Route path='/artist' element={
-                  <ArtistPage artist={currArtist}/>
+                  <ArtistPage 
+                    artist={searchResults}
+                    favoriteSongs={favoriteSongs}
+                    setFavoriteSongs={setFavoriteSongs}
+                  />
                 }/>
                 <Route path='/favorites' element={
                   <Favorites audioRef={audioRef} audioPlaying={audioPlaying} setAudioPlaying={setAudioPlaying} setTrack={setTrack} trackQueue={trackQueue} setTrackQueue={setTrackQueue}/>
@@ -172,6 +191,7 @@ function App() {
                       trackQueue={trackQueue}
                       setTrackQueue={setTrackQueue}
                       filterWord={filterWord}
+                      setFilterWord={setFilterWord}
                       isSearching={isSearching}
                       setFavoriteSongs={setFavoriteSongs}
                       setCurrArtist={setCurrArtist}
@@ -211,7 +231,7 @@ function App() {
             />
           </div>
         </div>
-      </BrowserRouter>
+      {/* </BrowserRouter> */}
     </AuthProvider>
   );
 }
